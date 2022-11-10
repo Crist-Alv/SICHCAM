@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "css/themes/all-themes.css",
+    "inputFile": "scss/themes/_all-themes.scss"
+  },
+  {
+    "outputFile": "css/themes/theme-blue.css",
+    "inputFile": "scss/themes/theme-blue.scss"
+  },
+  {
+    "outputFile": "css/style.css",
+    "inputFile": "scss/style.scss"
+  }
+]
