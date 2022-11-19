@@ -124,8 +124,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
     <script src="../js/admin.js"></script>
     <script src="../js/pages/tables/jquery-datatable.js"></script>
 
-    <?php include 'AgregarDModal.php'; ?>
-
     <style type="text/css">
         .envolcentro {
             display: table-cell;

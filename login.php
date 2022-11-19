@@ -1,5 +1,5 @@
-﻿<?php //session_start();
-
+﻿<?php 
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -52,16 +52,16 @@
 
     <script language="javascript">
         function verificar() {
-            /*if (document.getElementById('usuariox').value == "" || document.getElementById('clavex').value == "") {
+            if (document.getElementById('usuariox').value == "" || document.getElementById('clavex').value == "") {
                 alertaError();
-            } else {*/
+            } else {
 
                 document.getElementById('bandera').value = "add";
 
-                document.frmsica.submit();
+                document.sichcam.submit();
 
             }
-        //}
+        }
 
         function alertaError() {
             alertify.error("<h3>Error</h3>" + "<p>Campos sin llenar</p>" + "<img src='images/error.png' width='80' height='80'>").dismissOthers();
@@ -106,7 +106,7 @@
                 <a style="color:blue;"><img src="images/logo.jpg" width="120" height="160"><b>SICHCAM</b></a>
             </div>
             <div class="body">
-                <form role="form" action="" method="post" id="frmsica" name="frmsica">
+                <form role="form" action="" method="post" id="sichcam" name="sichcam">
                     <input type="hidden" name="bandera" id="bandera" />
                     <input type="hidden" name="baccion" id="baccion" />
                     <div class="input-group">
@@ -188,39 +188,29 @@
 
 </html>
 <?php
+include 'Config/Conexion.php';
 if (isset($_REQUEST['bandera'])) {
     $bandera = $_REQUEST['bandera'];
     $usuariox = $_REQUEST['usuariox'];
     $clavex = $_REQUEST['clavex'];
     $clavex = base64_encode($clavex);
 
-    include 'config/conexion.php';
-
     if ($bandera == 'add') {
-        pg_query('BEGIN');
 
-        $query_s2 = pg_query($conexion, "SELECT * FROM usuario where email=trim('$usuariox') and clave=trim('$clavex') and nivel=0 ");
+            $query_s = mysqli_query($conexion, "SELECT * FROM tbl_usuario where correo_User=trim('$usuariox') and pass_User=trim('$clavex')");
 
-        $rows = pg_num_rows($query_s2);
-
-        if ($rows == 0) {
-            $query_s = pg_query($conexion, "SELECT * FROM usuario where email=trim('$usuariox') and clave=trim('$clavex') ");
-
-            while ($fila = pg_fetch_array($query_s)) {
-                $_SESSION['idUsuario'] = $fila[0];
-                $_SESSION['nombresT'] = $fila[1];
-                $_SESSION['passT'] = $fila[2];
-                $_SESSION['emailT'] = $fila[3];
-                $_SESSION['nivelUsuario'] = $fila[4];
-                $_SESSION['apellidosT'] = $fila[5];
-                $_SESSION['sexoT'] = $fila[6];
-                $_SESSION['fechanT'] = $fila[7];
-                $_SESSION['direcT'] = $fila[8];
-
+            while ($fila = mysqli_fetch_array($query_s)) {
+                $_SESSION['id_User'] = $fila[0];
+                $_SESSION['nombre_User'] = $fila[1];
+                $_SESSION['cargo_User'] = $fila[2];
+                $_SESSION['sexo_User'] = $fila[3];
+                $_SESSION['correo_User'] = $fila[4];
+                $_SESSION['rol_User'] = $fila[5];
+                $_SESSION['pass_User'] = $fila[6];
 
                 $_SESSION['autenticado'] = 'yeah';
                 //bitacora 
-                $usuario = $fila[0];
+                /*$usuario = $fila[0];
 
                 ini_set('date.timezone', 'America/El_Salvador');
                 $fecha = date("Y/m/d");
@@ -233,7 +223,7 @@ if (isset($_REQUEST['bandera'])) {
                     pg_query("rollback");
                 } else {
                     pg_query("commit");
-                }
+                }*/
                 //fin bitacora
                 echo "<script language='javascript'>";
                 echo "location.href='index.php';";
@@ -242,13 +232,7 @@ if (isset($_REQUEST['bandera'])) {
            
             echo "<script language='javascript'>";
             echo 'alertaErrorLogin();';
-            echo "location.href='index.php';";
             echo '</script>';
-        } else {
-            echo "<script language='javascript'>";
-            echo 'alertaErrorLogin2();';
-            echo '</script>';
-        }
     }
 }
 ?>

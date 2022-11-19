@@ -99,7 +99,7 @@
 
     <script type="text/javascript" class="init">
         function Salir() {
-            document.location.href = "config/fin.php";			
+            document.location.href = "Config/fin.php";			
         }
     </script>
 </head>
@@ -139,7 +139,7 @@
                         <?php
 
                         if (isset($_SESSION)) {
-                            $sexo = $_SESSION['sexoT'];
+                            $sexo = $_SESSION['sexo_User'];
                             $man = 'images/user.png';
                             $woman = 'images/userWoman.png';
                             $user = 'user-picture';
@@ -155,8 +155,6 @@
                                 }
                             }
                         }
-                        $man = 'images/user.png';
-                        echo '<img src="'.$man.'" alt="" class="" >';
                         ?>
                     </figure>
                 </div>
@@ -164,10 +162,9 @@
                     <li style="color:#fff; cursor:default;">
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
-                            $usu = $_SESSION['nombresT'];
+                            $usu = $_SESSION['nombre_User'];
                             echo "$usu";
                         }
-                        echo "Cristian Alvarado";
                             ?>
                         </span>
                     </li>

@@ -48,36 +48,39 @@
 
     <script language="javascript">
         function verificar() {
-            if (document.getElementById('nombres').value == "" ||
+            if (document.getElementById('nombre').value == "" ||
                 document.getElementById('clave').value == "" ||
                 document.getElementById('claveconf').value == "" ||
-                document.getElementById('email').value == "") {
+                document.getElementById('email').value == "" ||
+                document.getElementById('rol').value == "" ||
+                document.getElementById('sexo').value == "" ||
+                document.getElementById('cargo').value == "") {
                 alertaError();
             } else {
                 if (document.getElementById('clave').value != document.getElementById('claveconf').value) {
-                alertaError2();
-            } else {
-                $(document).ready(function() {
+                    alertaError2();
+                } else {
+                    $(document).ready(function() {
 
-                    $('#enviar').click(function() {
+                        $('#enviar').click(function() {
 
-                        var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+                            var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
 
-                        if ($("#email").val().indexOf('@', 0) == -1 || $("#email").val().indexOf('.', 0) == -1 || caract.test($('#email').val()) == false) {
-                            alertaErrorC();
+                            if ($("#email").val().indexOf('@', 0) == -1 || $("#email").val().indexOf('.', 0) == -1 || caract.test($('#email').val()) == false) {
+                                alertaErrorC();
 
-                        } else {
+                            } else {
 
-                            document.getElementById('bandera').value = "add";
+                                document.getElementById('bandera').value = "add";
 
-                            document.frmsicacecsj.submit();
+                                document.sichcam.submit();
 
-                        }
+                            }
 
-                        //   alert('El email introducido es correcto.');
+                            //   alert('El email introducido es correcto.');
+                        });
                     });
-                });
-            }
+                }
             }
 
         }
@@ -124,46 +127,7 @@
         $(document).ready(function() {
 
             /////////////////validacion nombre 
-            $("#nombres").keypress(function(key) {
-                window.console.log(key.charCode)
-                if ((key.charCode < 97 || key.charCode > 122) //letras mayusculas
-                    &&
-                    (key.charCode < 65 || key.charCode > 90) //letras minusculas
-                    &&
-                    (key.charCode != 8) //retroceso
-                    &&
-                    (key.charCode != 241) //ñ
-                    &&
-                    (key.charCode != 209) //Ñ
-                    &&
-                    (key.charCode != 32) //espacio
-                    &&
-                    (key.charCode != 225) //á
-                    &&
-                    (key.charCode != 233) //é
-                    &&
-                    (key.charCode != 237) //í
-                    &&
-                    (key.charCode != 243) //ó
-                    &&
-                    (key.charCode != 250) //ú
-                    &&
-                    (key.charCode != 193) //Á
-                    &&
-                    (key.charCode != 201) //É
-                    &&
-                    (key.charCode != 205) //Í
-                    &&
-                    (key.charCode != 211) //Ó
-                    &&
-                    (key.charCode != 218) //Ú
-
-                )
-                    return false;
-            });
-
-            ////////////////validacion apellido
-            $("#apellidos").keypress(function(key) {
+            $("#nombre").keypress(function(key) {
                 window.console.log(key.charCode)
                 if ((key.charCode < 97 || key.charCode > 122) //letras mayusculas
                     &&
@@ -213,7 +177,7 @@
                 <a style="color:blue;"><img src="images/logo.jpg" width="120" height="160"><b>SICHCAM</b></a>
             </div>
             <div class="body">
-                <form role="form" action="" method="post" class="form-group" id="frmsicacecsj" name="frmsicacecsj">
+                <form role="form" action="" method="post" class="form-group" id="sichcam" name="sichcam">
                     <input type="hidden" name="bandera" id="bandera">
                     <input type="hidden" name="baccion" id="baccion">
                     <div class="input-group">
@@ -221,19 +185,19 @@
                             <img src="images/iconos/person.svg" />
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombres del Usuario" autocomplete="off" required autofocus>
+                            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre del Usuario" autocomplete="off" required autofocus>
                         </div>
                     </div>
-                    
-                        <div class="form-group">
+
+                    <div class="form-group">
                         <select type="text" name="cargo" id="cargo" class="form-control" placeholder="Cargo" autocomplete="off" required>
                             <option value="" disabled selected>Seleccione el cargo...</option>
-                            <option value=""></option>
-                            <option value=""></option>
+                            <option value="Jefe">Jefe</option>
+                            <option value="Secretaria/o">Secretaria/o</option>
 
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <select type="text" name="sexo" id="sexo" class="form-control" placeholder="Sexo" autocomplete="off" required>
                             <option value="" disabled selected>Seleccione el sexo...</option>
@@ -251,10 +215,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <select type="text" name="sexo" id="sexo" class="form-control" placeholder="Rol" autocomplete="off" required>
+                        <select type="text" name="rol" id="rol" class="form-control" placeholder="rol" autocomplete="off" required>
                             <option value="" disabled selected>Seleccione un rol...</option>
-                            <option value="Masculino">Administrador</option>
-                            <option value="Femenino">Agente</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Agente">Agente</option>
 
                         </select>
                     </div>
@@ -276,7 +240,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-block btn-lg bg-blue waves-effect" name="enviar" id="enviar" onClick="">REGÍSTRARSE</button>
+                    <button type="button" class="btn btn-block btn-lg bg-blue waves-effect" name="enviar" id="enviar" onClick="verificar()">REGÍSTRARSE</button>
 
                     <div class="m-t-25 m-b--5 align-center">
                         <a href="login.php">¿Ya tienes una cuenta?</a>
@@ -324,39 +288,35 @@
 
 </html>
 <?php
-include("config/conexion.php");
+include("Config/Conexion.php");
 if (isset($_REQUEST["bandera"])) {
 
     $bandera = $_REQUEST["bandera"];
-    $nombres = $_REQUEST["nombres"];
-    $nombres = ucwords($nombres);
-    $apellidos = $_REQUEST["apellidos"];
-    $apellidos = ucwords($apellidos);
+    $nombre = $_REQUEST["nombre"];
+    $nombre = ucwords($nombre);
+    $cargo = $_REQUEST["cargo"];
     $clave = $_REQUEST["clave"];
-    $sexo = $_REQUEST["sexo"];
     $email = $_REQUEST["email"];
-    $niv = 2;
+    $rol = $_REQUEST["rol"];
+    $sexo = $_REQUEST["sexo"];
 
     if ($bandera == "add") {
-        pg_query("BEGIN");
 
         $clave = base64_encode($clave);
 
-        $query_s2 = pg_query($conexion, "SELECT * FROM usuario where email='$email' ");
-        $rows = pg_num_rows($query_s2);
+        $query_s2 = mysqli_query($conexion, "SELECT * FROM tbl_usuario where correo_User='$email' ");
+        $rows = mysqli_num_rows($query_s2);
 
         if ($rows == 0) {
 
-            $result = pg_query($conexion, "INSERT INTO usuario(nombre,clave,email,nivel,apellido,sexo) values(trim('$nombres'),'$clave','$email','$niv','$apellidos','$sexo' )");
+            $result = mysqli_query($conexion, "INSERT INTO tbl_usuario(nombre_User, cargo_User, sexo_User, correo_User, rol_User, pass_User) values(trim('$nombre'),'$cargo','$sexo','$email','$rol','$clave')");
 
             if (!$result) {
-                pg_query("rollback");
                 echo "alertaError();";
                 echo "<script language='javascript'>";
                 echo "setTimeout ('r()', 1500);";
                 echo "</script>";
             } else {
-                pg_query("commit");
                 echo "<script language='javascript'>";
                 echo "alertaExito();";
                 echo "</script>";
@@ -372,8 +332,6 @@ if (isset($_REQUEST["bandera"])) {
             echo "alertaErrorRegistro();";
             echo "</script>";
         }
-    } ///////llave que cierra if de bandera add
-
-
+    }
 }
 ?>

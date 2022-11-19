@@ -1,8 +1,8 @@
-﻿<?php /*session_start();
+﻿<?php session_start();
 if ($_SESSION['autenticado'] != 'yeah') {
     header('Location: login.php');
     exit();
-}*/
+}
 include_once './Menu/Inicio.php';
 
 ?>
@@ -16,7 +16,7 @@ include_once './Menu/Inicio.php';
                         <?php
 
                         if (isset($_SESSION)) {
-                            $sexo = $_SESSION['sexoT'];
+                            $sexo = $_SESSION['sexo_User'];
                             if ($sexo == 'Masculino') {
                                 echo 'Bienvenido ';
                             } else {
@@ -28,10 +28,8 @@ include_once './Menu/Inicio.php';
                         ?>
 
                         <small><?php if (isset($_SESSION)) {
-                            $nomb = $_SESSION['nombresT'];
-                            $ape = $_SESSION['apellidosT'];
+                            $nomb = $_SESSION['nombre_User'];
                             echo $nomb;
-                            echo ' '.$ape;
                         }
 
                                 ?></small></h1>

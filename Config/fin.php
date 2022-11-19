@@ -1,32 +1,14 @@
-<?php session_start();
-include 'conexion.php';
-if (isset($_SESSION)) {
-        //bitacora 
-        $usuario = $_SESSION['idUsuario'];
-        ini_set('date.timezone', 'America/El_Salvador');
-        $fecha = date("Y/m/d");
-        $hora = date("h:i:s");
-        $actividad = "Cierre de Sesion";
-        pg_query("BEGIN");
-        $result2 = pg_query($conexion, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha','$usuario')");
-        
-        if (!$result2) {
-            pg_query("rollback");
-        } else {
-            pg_query("commit");
-        } 
-    }
-    //fin bitacora
-    
+<?php 
+session_start();
+//require_once("./Models/BitacoraModel.php");
 
-unset($_SESSION["nombreE"]);
-unset($_SESSION["autenticado"]);
-unset($_SESSION["nivelE"]);
-
+//$bitacora = new BitacoraModel;
+//$bitacora->insertarSalida();
+session_regenerate_id();
+session_unset();
 session_destroy();
 
 echo "<script languaje='javascript'>";
-        echo "location.href='../login.php';";
-           echo "</script>";
-
+echo "location.href='../login.php';";
+echo "</script>";
 ?>
