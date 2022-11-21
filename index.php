@@ -1,6 +1,6 @@
 ﻿<?php session_start();
 if ($_SESSION['autenticado'] != 'yeah') {
-    header('Location: login.php');
+    header('Location: Login/login.php');
     exit();
 }
 include_once './Menu/Inicio.php';

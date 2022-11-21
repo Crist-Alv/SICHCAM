@@ -226,7 +226,7 @@ if (isset($_REQUEST['bandera'])) {
                 }*/
                 //fin bitacora
                 echo "<script language='javascript'>";
-                echo "location.href='index.php';";
+                echo "location.href='../index.php';";
                 echo '</script>';
             }
            

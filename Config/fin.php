@@ -9,6 +9,6 @@ session_unset();
 session_destroy();
 
 echo "<script languaje='javascript'>";
-echo "location.href='../login.php';";
+echo "location.href='../Login/login.php';";
 echo "</script>";
 ?>
