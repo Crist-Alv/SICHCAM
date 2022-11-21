@@ -10,19 +10,19 @@ session_start();
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Inicio de Sesión | SICHCAM</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="../image/x-icon">
 
     <!-- Bootstrap Core Css -->
-    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+    <link href="../plugins/node-waves/waves.css" rel="stylesheet" />
 
     <!-- Animation Css -->
-    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+    <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 
     <meta name="keywords" content="" />
     <script type="application/x-javascript">
@@ -37,7 +37,7 @@ session_start();
 
     <style>
         body {
-            background-image: url(images/fondo3.jpg);
+            background-image: url(../images/fondo3.jpg);
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -64,16 +64,16 @@ session_start();
         }
 
         function alertaError() {
-            alertify.error("<h3>Error</h3>" + "<p>Campos sin llenar</p>" + "<img src='images/error.png' width='80' height='80'>").dismissOthers();
+            alertify.error("<h3>Error</h3>" + "<p>Campos sin llenar</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
         }
 
         function alertaErrorLogin() {
-            alertify.error("<h3>Error</h3>" + "<p>Usuario o contraseña no existen</p>" + "<img src='images/error.png' width='80' height='80'>").dismissOthers();
+            alertify.error("<h3>Error</h3>" + "<p>Usuario o contraseña no existen</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
 
         }
 
         function alertaErrorLogin2() {
-            alertify.error("<h3>Error</h3>" + "<p>No tiene permitido el acceso hasta que el admnistrador lo apruebe</p>" + "<img src='images/error.png' width='80' height='80'>").dismissOthers();
+            alertify.error("<h3>Error</h3>" + "<p>No tiene permitido el acceso hasta que el admnistrador lo apruebe</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
 
         }
     </script>
@@ -93,7 +93,7 @@ session_start();
             <ul class="nav navbar-nav navbar-right">
                 <a href="#" title="Ayuda">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <img class="bg-white" src="images/iconos/help_outline.svg" />
+                        <img class="bg-white" src="../images/iconos/help_outline.svg" />
                     </div>
                 </a>
             </ul>
@@ -103,7 +103,7 @@ session_start();
         <div class="card">
             <div class="logo">
 
-                <a style="color:blue;"><img src="images/logo.jpg" width="120" height="160"><b>SICHCAM</b></a>
+                <a style="color:blue;"><img src="../images/logo.jpg" width="120" height="160"><b>SICHCAM</b></a>
             </div>
             <div class="body">
                 <form role="form" action="" method="post" id="sichcam" name="sichcam">
@@ -111,7 +111,7 @@ session_start();
                     <input type="hidden" name="baccion" id="baccion" />
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <img src="images/iconos/person.svg" />
+                            <img src="../images/iconos/person.svg" />
                         </span>
                         <div class="form-line">
                             <input type="text" class="form-control" name="usuariox" id="usuariox" placeholder="Correo del Usuario..." onkeypress="boton(event)" required autofocus>
@@ -119,7 +119,7 @@ session_start();
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <img src="images/iconos/lock.svg" />
+                            <img src="../images/iconos/lock.svg" />
                         </span>
                         <div class="form-line">
                             <input type="password" class="form-control" name="clavex" id="clavex" placeholder="Contraseña..." onkeypress="boton(event)" autocomplete="off" required>
@@ -147,19 +147,19 @@ session_start();
             </form>
         </div>
         <footer class="footer full-reset">
-            <div class="copyright text-center"><img src="images/minerva2.png" width="40" height="60" />
+            <div class="copyright text-center"><img src="../images/minerva2.png" width="40" height="60" />
                 <h6 style="color:white;">UES-FMP 2022 &copy; Todos Derechos Reservados </h6>
             </div>
         </footer>
     </div>
     <!-- include alertify.css -->
-    <link rel="stylesheet" href="alertas/build/css/alertify.css">
+    <link rel="stylesheet" href="../alertas/build/css/alertify.css">
 
     <!-- include boostrap theme  -->
-    <link rel="stylesheet" href="alertas/build/css/themes/bootstrap.css">
+    <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
 
     <!-- include alertify script -->
-    <script src="alertas/build/alertify.js"></script>
+    <script src="../alertas/build/alertify.js"></script>
 
     <script type="text/javascript">
         //override defaults
@@ -170,25 +170,25 @@ session_start();
     </script>
 
     <!-- Jquery Core Js -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core Js -->
-    <script src="plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.js"></script>
 
     <!-- Waves Effect Plugin Js -->
-    <script src="plugins/node-waves/waves.js"></script>
+    <script src="../plugins/node-waves/waves.js"></script>
 
     <!-- Validation Plugin Js -->
-    <script src="plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="../plugins/jquery-validation/jquery.validate.js"></script>
 
     <!-- Custom Js -->
-    <script src="js/admin.js"></script>
-    <script src="js/pages/examples/sign-in.js"></script>
+    <script src="../js/admin.js"></script>
+    <script src="../js/pages/examples/sign-in.js"></script>
 </body>
 
 </html>
 <?php
-include 'Config/Conexion.php';
+include '../Config/Conexion.php';
 if (isset($_REQUEST['bandera'])) {
     $bandera = $_REQUEST['bandera'];
     $usuariox = $_REQUEST['usuariox'];

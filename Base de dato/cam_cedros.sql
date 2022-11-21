@@ -1,156 +1,102 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2022 a las 06:05:11
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 8.0.9
+/*
+ Navicat Premium Data Transfer
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+ Source Server         : MySQL
+ Source Server Type    : MySQL
+ Source Server Version : 100316
+ Source Host           : localhost:3306
+ Source Schema         : cam_cedros
 
+ Target Server Type    : MySQL
+ Target Server Version : 100316
+ File Encoding         : 65001
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+ Date: 21/11/2022 16:05:10
+*/
 
---
--- Base de datos: `cam_cedros`
---
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Table structure for tbl_agentes
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_agentes`;
+CREATE TABLE `tbl_agentes`  (
+  `id_agente` bigint NOT NULL AUTO_INCREMENT,
+  `nombre_agente` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `apellido_agente` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `dui_agente` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `sexo_agente` tinyint NULL DEFAULT NULL,
+  `codigo_cam _agente` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `telefono_agente` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `direccion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `activo` tinyint NOT NULL,
+  PRIMARY KEY (`id_agente`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
---
--- Estructura de tabla para la tabla `tbl_agentes`
---
+-- ----------------------------
+-- Table structure for tbl_armas
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_armas`;
+CREATE TABLE `tbl_armas`  (
+  `id_arma` bigint NOT NULL AUTO_INCREMENT,
+  `modelo_arma` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id_tipo_arma` bigint NOT NULL,
+  `serie_arma` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `matricula_arma` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_arma`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE `tbl_agentes` (
-  `id_agente` bigint(20) NOT NULL,
-  `nombre_agente` varchar(255) NOT NULL,
-  `apellido_agente` varchar(255) NOT NULL,
-  `dui_agente` varchar(10) NOT NULL,
-  `sexo_agente` tinyint(4) DEFAULT NULL,
-  `codigo_cam _agente` varchar(100) NOT NULL,
-  `telefono_agente` varchar(20) NOT NULL,
-  `direccion` varchar(255) NOT NULL,
-  `activo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- ----------------------------
+-- Table structure for tbl_dias
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_dias`;
+CREATE TABLE `tbl_dias`  (
+  `id_dia` bigint NOT NULL,
+  `nombre_dia` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_dia`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Table structure for tbl_tipos_armas
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_tipos_armas`;
+CREATE TABLE `tbl_tipos_armas`  (
+  `id_tipos_arma` bigint NOT NULL AUTO_INCREMENT,
+  `nombre_tipo_arma` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_tipos_arma`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
---
--- Estructura de tabla para la tabla `tbl_armas`
---
+-- ----------------------------
+-- Table structure for tbl_usuario
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_usuario`;
+CREATE TABLE `tbl_usuario`  (
+  `id_User` int NOT NULL AUTO_INCREMENT,
+  `nombre_User` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `cargo_User` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `sexo_User` varchar(9) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `correo_User` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `rol_User` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `pass_User` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id_User`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE `tbl_armas` (
-  `id_arma` bigint(20) NOT NULL,
-  `modelo_arma` varchar(255) NOT NULL,
-  `id_tipo_arma` bigint(20) NOT NULL,
-  `serie_arma` varchar(100) NOT NULL,
-  `matricula_arma` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- ----------------------------
+-- Records of tbl_usuario
+-- ----------------------------
+INSERT INTO `tbl_usuario` VALUES (1, 'Cristian Alvarado', 'Jefe', 'Masculino', 'cristts2.0@gmail.com', 'Administrador', 'Q3Jpc3RpYW4yLjA=');
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Table structure for tbl_zonas
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_zonas`;
+CREATE TABLE `tbl_zonas`  (
+  `id_zona` bigint NOT NULL AUTO_INCREMENT,
+  `nombre_zona` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `direccion_zona` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `activo` tinyint NOT NULL,
+  PRIMARY KEY (`id_zona`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
---
--- Estructura de tabla para la tabla `tbl_dias`
---
-
-CREATE TABLE `tbl_dias` (
-  `id_dia` bigint(20) NOT NULL,
-  `nombre_dia` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbl_tipos_armas`
---
-
-CREATE TABLE `tbl_tipos_armas` (
-  `id_tipos_arma` bigint(20) NOT NULL,
-  `nombre_tipo_arma` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbl_zonas`
---
-
-CREATE TABLE `tbl_zonas` (
-  `id_zona` bigint(20) NOT NULL,
-  `nombre_zona` varchar(255) DEFAULT NULL,
-  `direccion_zona` text NOT NULL,
-  `activo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `tbl_agentes`
---
-ALTER TABLE `tbl_agentes`
-  ADD PRIMARY KEY (`id_agente`);
-
---
--- Indices de la tabla `tbl_armas`
---
-ALTER TABLE `tbl_armas`
-  ADD PRIMARY KEY (`id_arma`);
-
---
--- Indices de la tabla `tbl_dias`
---
-ALTER TABLE `tbl_dias`
-  ADD PRIMARY KEY (`id_dia`);
-
---
--- Indices de la tabla `tbl_tipos_armas`
---
-ALTER TABLE `tbl_tipos_armas`
-  ADD PRIMARY KEY (`id_tipos_arma`);
-
---
--- Indices de la tabla `tbl_zonas`
---
-ALTER TABLE `tbl_zonas`
-  ADD PRIMARY KEY (`id_zona`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `tbl_agentes`
---
-ALTER TABLE `tbl_agentes`
-  MODIFY `id_agente` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `tbl_armas`
---
-ALTER TABLE `tbl_armas`
-  MODIFY `id_arma` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `tbl_tipos_armas`
---
-ALTER TABLE `tbl_tipos_armas`
-  MODIFY `id_tipos_arma` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `tbl_zonas`
---
-ALTER TABLE `tbl_zonas`
-  MODIFY `id_zona` bigint(20) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+SET FOREIGN_KEY_CHECKS = 1;

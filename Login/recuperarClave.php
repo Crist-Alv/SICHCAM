@@ -6,24 +6,24 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Recupera tu Contraseña</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="../image/x-icon">
 
     <!-- Bootstrap Core Css -->
-    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+    <link href="../plugins/node-waves/waves.css" rel="stylesheet" />
 
     <!-- Animation Css -->
-    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+    <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 
     <style type="text/css">
         body {
 
-            background-image: url(images/fondo3.jpg);
+            background-image: url(../images/fondo3.jpg);
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -57,7 +57,7 @@
 
                         document.getElementById('bandera').value = "add";
 
-                        document.frmsicacecsj.submit();
+                        document.sichcam.submit();
 
                     }
 
@@ -68,24 +68,24 @@
         }
 
         function alertaError() {
-            alertify.error("<h1>Error</h1>" + "<p>No se pudo recuperar intente de nuevo!!!</p>" + "<img src='images/error.png'>").dismissOthers();
+            alertify.error("<h1>Error</h1>" + "<p>No se pudo recuperar intente de nuevo!!!</p>" + "<img src='../images/error.png'>").dismissOthers();
         }
 
         function alertaExito() {
-            alertify.message("<h1>Exito</h1>" + "<p>Se han enviado sus credenciales con exito a su correo</p>" + "<img src='images/bien1.png'>").set({
+            alertify.message("<h1>Exito</h1>" + "<p>Se han enviado sus credenciales con exito a su correo</p>" + "<img src='../images/bien1.png'>").set({
                 transition: 'flipx'
             });
         }
 
 
         function alertaErrorCorreo() {
-            alertify.error("<h1>Error</h1>" + "<p>Este correo no esta vinculado con ninguna cuenta</p>" + "<img src='images/error.png'>").set({
+            alertify.error("<h1>Error</h1>" + "<p>Este correo no esta vinculado con ninguna cuenta</p>" + "<img src='../images/error.png'>").set({
                 transition: 'flipx'
             });
         }
 
         function alertaErrorC() {
-            alertify.error("<h1>Error</h1>" + "<p>Correo Electronico no valido</p>" + "<img src='images/error.png'>").dismissOthers();
+            alertify.error("<h1>Error</h1>" + "<p>Correo Electronico no valido</p>" + "<img src='../images/error.png'>").dismissOthers();
 
 
         }
@@ -104,13 +104,13 @@
     </script>
 
     <!-- include alertify.css -->
-    <link rel="stylesheet" href="alertas/build/css/alertify.css">
+    <link rel="stylesheet" href="../alertas/build/css/alertify.css">
 
     <!-- include boostrap theme  -->
-    <link rel="stylesheet" href="alertas/build/css/themes/bootstrap.css">
+    <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
 
     <!-- include alertify script -->
-    <script src="alertas/build/alertify.js"></script>
+    <script src="../alertas/build/alertify.js"></script>
 
     <script type="text/javascript">
         //override defaults
@@ -124,11 +124,11 @@
 <body class="fp-page">
     <div class="fp-box">
         <div class="logo">
-            <a style="color:cornsilk;"><img src="images/logo.jpg" width="120" height="160"><b>SICHCAM</b></a>
+            <a style="color:cornsilk;"><img src="../images/logo.jpg" width="120" height="160"><b>SICHCAM</b></a>
         </div>
         <div class="card">
             <div class="body">
-                <form role="form" action="" method="post" class="form-group" id="frmsicacecsj" name="frmsicacecsj">
+                <form role="form" action="" method="post" class="form-group" id="sichcam" name="sichcam">
                     <input type="hidden" name="bandera" id="bandera">
                     <input type="hidden" name="baccion" id="baccion">
 
@@ -138,7 +138,7 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <img src="images/iconos/email.svg" />
+                            <img src="../images/iconos/email.svg" />
                         </span>
                         <div class="form-line">
                             <input type="email" onKeypress="if (event.keyCode == 13) event.returnValue = false;" class="form-control" name="email" id="email" placeholder="Correo Electrónico" autocomplete="off" required autofocus>
@@ -153,27 +153,32 @@
                 </form>
             </div>
         </div>
+        <footer class="footer full-reset">
+            <div class="copyright text-center"><img src="../images/minerva2.png" width="40" height="60" />
+                <h6 style="color:white;">UES-FMP 2022 &copy; Todos Derechos Reservados </h6>
+            </div>
+        </footer>
     </div>
 
     <!-- Jquery Core Js -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core Js -->
-    <script src="plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.js"></script>
 
     <!-- Waves Effect Plugin Js -->
-    <script src="plugins/node-waves/waves.js"></script>
+    <script src="../plugins/node-waves/waves.js"></script>
 
     <!-- Validation Plugin Js -->
-    <script src="plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="../plugins/jquery-validation/jquery.validate.js"></script>
 
     <!-- Custom Js -->
-    <script src="js/admin.js"></script>
+    <script src="../js/admin.js"></script>
 </body>
 
 </html>
 <?php
-include("config/conexion.php");
+include("../Config/Conexion.php");
 if (isset($_REQUEST["bandera"])) {
 
     $bandera = $_REQUEST["bandera"];
@@ -225,8 +230,5 @@ if (isset($_REQUEST["bandera"])) {
             }
         }
     } ///////llave que cierra if de bandera add
-
-
 }
-
 ?>

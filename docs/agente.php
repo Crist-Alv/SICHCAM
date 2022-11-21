@@ -1,10 +1,10 @@
-<?php /*session_start();
-$t = $_SESSION['nivelUsuario'];
-$iddatos = $_SESSION['idUsuario'];
-if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
+<?php session_start();
+$t = $_SESSION['rol_User'];
+$iddatos = $_SESSION['id_User'];
+if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     header('Location: ../index.php');
     exit();
-}*/
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -147,49 +147,49 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
         }
     </style>
 
-    <script type="text/javascript" class="init">
-        function Alertabaja(id, nombre, apellido) {
+    <script language="javascript">
+        function verificar() {
+            if (document.getElementById('nombres').value == "" ||
+                document.getElementById('apellidos').value == "" ||
+                document.getElementById('dui').value == "" ||
+                document.getElementById('sexo').value == "" ||
+                document.getElementById('codigo').value == "" ||
+                document.getElementById('tel').value == "" ||
+                document.getElementById('direc').value == "" ||
+                document.getElementById('activo').value == "") {
+                alertaError();
+            } else {
+                $(document).ready(function() {
 
-            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='30' height='30'></center>" + "<center><h1>¿Desea Dar De Baja A?</h1></center>  <center><h2 style='font-style:arial';> " + nombre + " " + apellido + "  </h2></center>",
+                    $('#enviar').click(function() {
 
+                        document.getElementById('bandera').value = "add";
 
+                        document.sichcam.submit();
 
-                function() {
-                    alertify.success('Ok');
-
-                    document.getElementById('bandera').value = "baja";
-                    document.getElementById('baccion').value = id;
-                    document.frmsica.submit();
-
-                },
-
-                function() {
-                    alertify.error('Ha Cancelado Dar De Baja').dismissOthers()
-                }).set('labels', {
-                ok: 'si',
-                cancel: 'no'
-            }).set({
-                transition: 'zoom'
-            });
-
-
+                    });
+                });
+            }
         }
-
-        function r() {
-            location.href = ("docente.php");
-        }
-
 
         function alertaExito() {
-            alertify.message("<h1>Exito</h1>" + "<p>Se dio de baja exitosamente</p>" + "<img src='../images/bien1.png'>").set({
+            alertify.message("<p>Se guardo exitosamente</p>" + "<img src='../images/bien1.png'>").set({
                 transition: 'flipx'
             });
         }
 
         function alertaError() {
-            alertify.error("<h1>Error</h1>" + "<p>No se puedo dar de baja</p>" + "<img src='../images/error.png'>").dismissOthers();
+            alertify.error("<p>No se puedo guardar exitosamente</p>" + "<img src='../images/error.png'>").dismissOthers();
 
 
+        }
+
+        function r() {
+            $(document).ready(function() {
+                var refreshId = setInterval(function() {
+                    $('#feedback-bg-info').load('agente.php'); //actualizas el div automaticamente
+                }, 2000);
+            });
         }
     </script>
 
@@ -237,7 +237,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                         <?php
 
                         if (isset($_SESSION)) {
-                            $sexo = $_SESSION['sexoT'];
+                            $sexo = $_SESSION['sexo_User'];
                             $man = '../images/user.png';
                             $woman = '../images/userWoman.png';
                             $user = 'user-picture';
@@ -260,7 +260,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                     <li style="color:#fff; cursor:default;">
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
-                                $usu = $_SESSION['nombresT'];
+                                $usu = $_SESSION['nombre_User'];
                                 echo "$usu";
                             }
                             ?>
@@ -281,18 +281,18 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                 <ul class="list">
                     <li class="header">MENÚ</li>
                     <li class="active">
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/assignment_ind.svg" />
-                        <span>Gestión de Agentes</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="agente.php">Registro de Agentes</a>
-                        </li>
-                        <li class="active">
-                            <a href="listadoAgentes.php">Listado</a>
-                        </li>
-                    </ul>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/assignment_ind.svg" />
+                            <span>Gestión de Agentes</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="agente.php">Registro de Agentes</a>
+                            </li>
+                            <li class="active">
+                                <a href="listadoAgentes.php">Listado</a>
+                            </li>
+                        </ul>
                     </li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/clipboard.svg" />
@@ -353,7 +353,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                     <ul class="ml-menu">
                         <li class="active">
                             <a href="docs/seguridad.php">Opciones de Seguridad</a>
-                        </li>                       
+                        </li>
                     </ul>
                     <a href="acercade.php">Acerca de</a>
                 </ul>
@@ -387,217 +387,210 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                                 <input type="hidden" name="bandera" id="bandera" />
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
 
-                                <?php
-$fecha_min = date("Y-m-d");
-$fecha_min = date("Y-m-d", strtotime($fecha_min . "- 80 year"));
-$fecha_max = date("Y-m-d");
-$fecha_max = date("Y-m-d", strtotime($fecha_max . "- 18 year"));
-?>
+                                <script>
+                                    function soloLetras(e) {
+                                        key = e.keyCode || e.which;
+                                        tecla = String.fromCharCode(key).toLowerCase();
+                                        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+                                        especiales = [8, 37, 39, 46];
 
-    <script>
-        function soloLetras(e) {
-            key = e.keyCode || e.which;
-            tecla = String.fromCharCode(key).toLowerCase();
-            letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-            especiales = [8, 37, 39, 46];
+                                        tecla_especial = false
+                                        for (var i in especiales) {
+                                            if (key == especiales[i]) {
+                                                tecla_especial = true;
+                                                break;
+                                            }
+                                        }
 
-            tecla_especial = false
-            for (var i in especiales) {
-                if (key == especiales[i]) {
-                    tecla_especial = true;
-                    break;
-                }
-            }
+                                        if (letras.indexOf(tecla) == -1 && !tecla_especial)
+                                            return false;
+                                    }
 
-            if (letras.indexOf(tecla) == -1 && !tecla_especial)
-                return false;
-        }
+                                    function limpia() {
+                                        var val = document.getElementById("miInput").value;
+                                        var tam = val.length;
+                                        for (i = 0; i < tam; i++) {
+                                            if (!isNaN(val[i]))
+                                                document.getElementById("miInput").value = '';
+                                        }
+                                    }
+                                </script>
 
-        function limpia() {
-            var val = document.getElementById("miInput").value;
-            var tam = val.length;
-            for (i = 0; i < tam; i++) {
-                if (!isNaN(val[i]))
-                    document.getElementById("miInput").value = '';
-            }
-        }
-    </script>
-      
-<script type="text/javascript" src="../js/deptoD.js"></script>
+                                <!--Agregar nuevo agente-->
 
-    <!--Agregar nuevo docente Modal -->
-    
-                <div class="modal-body">
-                    <div class="demo-masked-input">
-                        <div class="row clearfix">
-                            <form name="datos" id="datos" action="../docs/AgregarDocente.php" method="post">
-                                <!--1-->
-                                <fieldset>
-                                    <legend>Datos Personales</legend>
-                                    <div class="row form-group col-md-8">
+                                <div class="modal-body">
+                                    <div class="demo-masked-input">
+                                        <div class="row clearfix">
+                                            <div class="body">
+                                                <form role="form" action="" method="post" class="form-group" id="sichcam" name="sichcam">
+                                                    <input type="hidden" name="bandera" id="bandera">
+                                                    <input type="hidden" name="baccion" id="baccion">
+                                                    <!--1-->
+                                                    <fieldset>
+                                                        <legend>Datos Personales</legend>
+                                                        <div class="row form-group col-md-8">
 
-                                        <div class="col-md-4">
-                                            <b>Nombres *</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <img src="../images/iconos/person.svg">
-                                                </span>
-                                                <input type="String" name="nombresd" autocomplete="off" onkeypress="return soloLetras(event)" onblur="limpia()" value="<?= (isset($_POST['nombresd'])) ? $_POST['nombresd'] : ""; ?>" required autofocus>
-                                            </div>
-                                        </div>
+                                                            <div class="col-md-4">
+                                                                <b>Nombres *</b>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <img src="../images/iconos/person.svg">
+                                                                    </span>
+                                                                    <input type="String" name="nombresag" autocomplete="off" onkeypress="return soloLetras(event)" onblur="limpia()" value="<?= (isset($_POST['nombresd'])) ? $_POST['nombresd'] : ""; ?>" required autofocus>
+                                                                </div>
+                                                            </div>
 
-                                        <div class="col-md-4">
-                                            <b>Apellidos *</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <img src="../images/iconos/person.svg">
-                                                </span>
-                                                <input type="String" name="apellidosd" autocomplete="off" onkeypress="return soloLetras(event)" onblur="limpia()" value="<?= (isset($_POST['apellidosd'])) ? $_POST['apellidosd'] : ""; ?>" required autofocus>
-                                            </div>
-                                        </div>
+                                                            <div class="col-md-4">
+                                                                <b>Apellidos *</b>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <img src="../images/iconos/person.svg">
+                                                                    </span>
+                                                                    <input type="String" name="apellidosag" autocomplete="off" onkeypress="return soloLetras(event)" onblur="limpia()" value="<?= (isset($_POST['apellidosd'])) ? $_POST['apellidosd'] : ""; ?>" required autofocus>
+                                                                </div>
+                                                            </div>
 
-                                        <div class="col-md-4">
-                                            <b>Fecha de nacimiento *</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <img src="../images/iconos/date_range.svg">
-                                                </span>
-                                                <div class="form-control input-sm">
-                                                    <input type="date" name="fechanac" autocomplete="off" value="<?= (isset($_POST['fechanac'])) ? $_POST['fechanac'] : ""; ?>">
-                                                </div>
+                                                            <div class="col-md-4">
+                                                                <b>N° de DUI *</b>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <img src="../images/iconos/dn.svg">
+                                                                    </span>
+                                                                    <div class="form-control input-sm">
+                                                                        <input type="String" name="dui" autocomplete="off" onblur="limpia()" value="<?= (isset($_POST['dui'])) ? $_POST['dui'] : ""; ?>">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row form-group col-md-8">
+                                                            <div class="col-md-4">
+                                                                <b>Genero</b>
+                                                                <br>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <img src="../images/iconos/group-24px.svg">
+                                                                    </span>
+                                                                    <input type="radio" name="" id="" class="with-gap radio-col-blue" value="Masculino" checked>
+                                                                    <label for="">Masculino</label>
+
+                                                                    <input type="radio" name="" id="" class="with-gap radio-col-blue" value="Femenino">
+                                                                    <label for="" class="m-l-20">Femenino</label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-2">
+                                                                <b>Tipo de Agente *</b>
+                                                                <div class="input-group">
+                                                                    <select id="" name="" class="form-control show-tick" style="width: 100%;">
+                                                                        <option value="" disabled selected>Seleccione...</option>
+                                                                        <option value="">Jefe</option>
+                                                                        <option value="">Agente</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-md-3">
+                                                                <b>Telefono *</b>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <img src="../images/iconos/phone.svg">
+                                                                    </span>
+                                                                    <input type="String" class="phone-number" placeholder="Ex: 0000-0000" name="tel" autocomplete="off" value="<?= (isset($_POST['tel'])) ? $_POST['tel'] : ""; ?>" required autofocus>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+
+                                                    <fieldset>
+                                                        <div class="col-md-5">
+                                                            <b>Dirección *</b>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <img src="../images/iconos/03.svg">
+                                                                </span>
+                                                                <textarea type="String" name="dir" cols="90" rows="5" style="resize: both;" autocomplete="off" value="<?= (isset($_POST['dir'])) ? $_POST['dir'] : ""; ?>" required autofocus></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
                                             </div>
                                         </div>
                                     </div>
-
-                                <div class="row form-group col-md-8">
-                                    <div class="col-md-4">
-                                        <b>Genero</b>
-                                        <br>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <img src="../images/iconos/group-24px.svg">
-                                            </span>
-                                            <input type="radio" name="" id="" class="with-gap radio-col-blue" value="Masculino" checked>
-                                            <label for="">Masculino</label>
-
-                                            <input type="radio" name="" id="" class="with-gap radio-col-blue" value="Femenino">
-                                            <label for="" class="m-l-20">Femenino</label>
-                                        </div>
+                                    <div class="modal-footer">
+                                        <span>Los campos marcados con * son campos obligatorios</span>
+                                        <button type="submit" name="agregar" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
+                                        <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
                                     </div>
-
-                                    <div class="col-sm-2">
-                                            <b>Tipo de Agente *</b>
-                                            <div class="input-group">
-                                                <select id="" name="" class="form-control show-tick" style="width: 100%;">
-                                                <option value="" disabled selected>Seleccione...</option>
-                                                <option value="">Jefe</option>
-                                                <option value="">Agente</option>    
-                                            </select>
-                                            </div>
-                                        </div>
-                                    
-
-                                        <div class="col-md-3">
-                                            <b>Telefono *</b>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <img src="../images/iconos/phone.svg">
-                                                </span>
-                                                <input type="String" class="phone-number" placeholder="Ex: 0000-0000" name="tel" autocomplete="off" value="<?= (isset($_POST['tel'])) ? $_POST['tel'] : ""; ?>" required autofocus>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset>
-                                    <div class="col-md-5">
-                                        <b>Dirección *</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <img src="../images/iconos/03.svg">
-                                            </span>
-                                            <textarea type="String" name="dir" cols="90" rows="5" style="resize: both;" autocomplete="off" value="<?= (isset($_POST['dir'])) ? $_POST['dir'] : ""; ?>" required autofocus></textarea>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                        </div>
-                    </div>
-                </div>
-                <hr class="sidebar-divider d-none d-md-block">
-                <div class="modal-footer">
-                    <span>Los campos marcados con * son campos obligatorios</span>
-                    <button type="submit" name="agregar" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
-                    <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
-                </div>
-                </form>
-
-    <script>
-        function validarNro(e) {
-            var key;
-            if (window.event) // IE
-            {
-                key = e.keyCode;
-            } else if (e.which) // Netscape/Firefox/Opera
-            {
-                key = e.which;
-            }
-
-            if (key < 48 || key > 57) {
-                if (key == 46 || key == 8) // Detectar . (punto) y backspace (retroceso)
-                {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            return true;
-        }
-       
-        function FormatDateField(xField) {
-            var theText = xField.value;
-            theText = theText.replace(/\//gi, "");
-            if (!(theText.length == 8 || theText.length == 8)) {
-                alert("Fecha inv�lida, debe ser en formato DD/MM/AAAA");
-                xField.focus();
-                return false;
-            }
-            theText = theText.substring(0, 2) + "/" + theText.substring(2, 4) + "/" + theText.substring(4, 8);
-            xField.value = theText;
-        }
-    </script>
-
-    <!-- Bootstrap Colorpicker Js -->
-    <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-
-    <!-- Dropzone Plugin Js -->
-    <script src="../plugins/dropzone/dropzone.js"></script>
-
-    <!-- Input Mask Plugin Js -->
-    <script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
-
-    <!-- include alertify.css -->
-    <link rel="stylesheet" href="../alertas/build/css/alertify.css">
-
-    <!-- include boostrap theme  -->
-    <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
-
-    <!-- include alertify script -->
-    <script src="../alertas/build/alertify.js"></script>
-
-    <script type="text/javascript">
-        //override defaults
-        alertify.defaults.transition = "slide";
-        alertify.defaults.theme.ok = "btn btn-primary";
-        alertify.defaults.theme.cancel = "btn btn-secondary";
-        alertify.defaults.theme.input = "form-control";
-    </script>
-<script src="../js/pages/forms/advanced-form-elements.js"></script>
                             </form>
                         </div>
+                        <script>
+                            function validarNro(e) {
+                                var key;
+                                if (window.event) // IE
+                                {
+                                    key = e.keyCode;
+                                } else if (e.which) // Netscape/Firefox/Opera
+                                {
+                                    key = e.which;
+                                }
+
+                                if (key < 48 || key > 57) {
+                                    if (key == 46 || key == 8) // Detectar . (punto) y backspace (retroceso)
+                                    {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                }
+                                return true;
+                            }
+
+                            function FormatDateField(xField) {
+                                var theText = xField.value;
+                                theText = theText.replace(/\//gi, "");
+                                if (!(theText.length == 8 || theText.length == 8)) {
+                                    alert("Fecha inv�lida, debe ser en formato DD/MM/AAAA");
+                                    xField.focus();
+                                    return false;
+                                }
+                                theText = theText.substring(0, 2) + "/" + theText.substring(2, 4) + "/" + theText.substring(4, 8);
+                                xField.value = theText;
+                            }
+                        </script>
+
+                        <!-- Bootstrap Colorpicker Js -->
+                        <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+
+                        <!-- Dropzone Plugin Js -->
+                        <script src="../plugins/dropzone/dropzone.js"></script>
+
+                        <!-- Input Mask Plugin Js -->
+                        <script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
+
+                        <!-- include alertify.css -->
+                        <link rel="stylesheet" href="../alertas/build/css/alertify.css">
+
+                        <!-- include boostrap theme  -->
+                        <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
+
+                        <!-- include alertify script -->
+                        <script src="../alertas/build/alertify.js"></script>
+
+                        <script type="text/javascript">
+                            //override defaults
+                            alertify.defaults.transition = "slide";
+                            alertify.defaults.theme.ok = "btn btn-primary";
+                            alertify.defaults.theme.cancel = "btn btn-secondary";
+                            alertify.defaults.theme.input = "form-control";
+                        </script>
+                        <script src="../js/pages/forms/advanced-form-elements.js"></script>
+                        </form>
                     </div>
                 </div>
             </div>
-            <!-- #END# Basic Examples -->
+        </div>
+        <!-- #END# Basic Examples -->
         </div>
     </section>
 
@@ -611,7 +604,8 @@ $fecha_max = date("Y-m-d", strtotime($fecha_max . "- 18 year"));
                 <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
-                    </button></h5>
+                    </button>
+                </h5>
             </div>
             <div class="modal-body">
                 <div class="envolcentro">
