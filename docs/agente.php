@@ -152,20 +152,26 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             if (document.getElementById('nombres').value == "" ||
                 document.getElementById('apellidos').value == "" ||
                 document.getElementById('dui').value == "" ||
-                document.getElementById('sexo').value == "" ||
                 document.getElementById('codigo').value == "" ||
                 document.getElementById('tel').value == "" ||
-                document.getElementById('direc').value == "" ||
-                document.getElementById('activo').value == "") {
+                document.getElementById('direc').value == "") {
                 alertaError();
             } else {
                 $(document).ready(function() {
 
                     $('#enviar').click(function() {
 
-                        document.getElementById('bandera').value = "add";
+                        var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
 
-                        document.sichcam.submit();
+                        if ($("#email").val().indexOf('@', 0) == -1 || $("#email").val().indexOf('.', 0) == -1 || caract.test($('#email').val()) == false) {
+                            alertaErrorC();
+
+                        } else {
+
+                            document.getElementById('bandera').value = "add";
+
+                            document.sichcam.submit();
+                        }
 
                     });
                 });
@@ -184,12 +190,8 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
         }
 
-        function r() {
-            $(document).ready(function() {
-                var refreshId = setInterval(function() {
-                    $('#feedback-bg-info').load('agente.php'); //actualizas el div automaticamente
-                }, 2000);
-            });
+        function alertaErrorC() {
+            alertify.error("<h1>Error</h1>" + "<p>Correo Electronico no valido</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
         }
     </script>
 
@@ -199,6 +201,25 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
         }
     </script>
 
+    <script>
+        function soloLetras(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+            especiales = [8, 37, 39, 46];
+
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial)
+                return false;
+        }
+    </script>
 </head>
 
 <body class="theme-blue">
@@ -378,220 +399,151 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     Agentes
                 </h1>
             </div>
-            <!-- Basic Examples -->
+            <!--Agregar nuevo agente-->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="body">
-                            <form class="form-horizontal" action="" method="post" class="form-group-sm" id="frmsica" name="frmsica">
-                                <input type="hidden" name="bandera" id="bandera" />
-                                <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
+                            <div class="demo-masked-input">
+                                <form class="form-group" role="form" action="Funciones/agregarAgente.php" enctype="multipart/form-data" method="post" id="sichcam" name="sichcam">
+                                    <input type="hidden" name="bandera" id="bandera" />
+                                    <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
 
-                                <script>
-                                    function soloLetras(e) {
-                                        key = e.keyCode || e.which;
-                                        tecla = String.fromCharCode(key).toLowerCase();
-                                        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-                                        especiales = [8, 37, 39, 46];
+                                    <fieldset>
+                                        <legend>Datos Personales</legend>
+                                        <div class="row form-group col-md-8">
 
-                                        tecla_especial = false
-                                        for (var i in especiales) {
-                                            if (key == especiales[i]) {
-                                                tecla_especial = true;
-                                                break;
-                                            }
-                                        }
+                                            <div class="col-sm-3" style="width : 158px">
+                                                <b>Codigo de agente *</b>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <img src="../images/iconos/dn.svg">
+                                                    </span>
+                                                    <input type="String" class="codigo-agente-number" style="width : 80px" name="codigo" id="codigo" placeholder="Ex: 0000-0" autocomplete="off" required autofocus>
+                                                </div>
+                                            </div>
 
-                                        if (letras.indexOf(tecla) == -1 && !tecla_especial)
-                                            return false;
-                                    }
+                                            <div class="col-md-3" style="width : 165px">
+                                                <b>N° de DUI *</b>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <img src="../images/iconos/dn.svg">
+                                                    </span>
+                                                    <input type="String" class="dui-number" style="width : 110px" name="dui" id="dui" placeholder="Ex: 0000000-0" autocomplete="off" required>
+                                                </div>
+                                            </div>
 
-                                    function limpia() {
-                                        var val = document.getElementById("miInput").value;
-                                        var tam = val.length;
-                                        for (i = 0; i < tam; i++) {
-                                            if (!isNaN(val[i]))
-                                                document.getElementById("miInput").value = '';
-                                        }
-                                    }
-                                </script>
+                                            <div class="col-md-4" style="width : 220px">
+                                                <b>Nombres *</b>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <img src="../images/iconos/person.svg">
+                                                    </span>
+                                                    <input type="String" name="nombres" id="nombres" autocomplete="off" onkeypress="return soloLetras(event)" required>
+                                                </div>
+                                            </div>
 
-                                <!--Agregar nuevo agente-->
-
-                                <div class="modal-body">
-                                    <div class="demo-masked-input">
-                                        <div class="row clearfix">
-                                            <div class="body">
-                                                <form role="form" action="" method="post" class="form-group" id="sichcam" name="sichcam">
-                                                    <input type="hidden" name="bandera" id="bandera">
-                                                    <input type="hidden" name="baccion" id="baccion">
-                                                    <!--1-->
-                                                    <fieldset>
-                                                        <legend>Datos Personales</legend>
-                                                        <div class="row form-group col-md-8">
-
-                                                            <div class="col-md-4">
-                                                                <b>Nombres *</b>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">
-                                                                        <img src="../images/iconos/person.svg">
-                                                                    </span>
-                                                                    <input type="String" name="nombresag" autocomplete="off" onkeypress="return soloLetras(event)" onblur="limpia()" value="<?= (isset($_POST['nombresd'])) ? $_POST['nombresd'] : ""; ?>" required autofocus>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-4">
-                                                                <b>Apellidos *</b>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">
-                                                                        <img src="../images/iconos/person.svg">
-                                                                    </span>
-                                                                    <input type="String" name="apellidosag" autocomplete="off" onkeypress="return soloLetras(event)" onblur="limpia()" value="<?= (isset($_POST['apellidosd'])) ? $_POST['apellidosd'] : ""; ?>" required autofocus>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-4">
-                                                                <b>N° de DUI *</b>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">
-                                                                        <img src="../images/iconos/dn.svg">
-                                                                    </span>
-                                                                    <div class="form-control input-sm">
-                                                                        <input type="String" name="dui" autocomplete="off" onblur="limpia()" value="<?= (isset($_POST['dui'])) ? $_POST['dui'] : ""; ?>">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row form-group col-md-8">
-                                                            <div class="col-md-4">
-                                                                <b>Genero</b>
-                                                                <br>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">
-                                                                        <img src="../images/iconos/group-24px.svg">
-                                                                    </span>
-                                                                    <input type="radio" name="" id="" class="with-gap radio-col-blue" value="Masculino" checked>
-                                                                    <label for="">Masculino</label>
-
-                                                                    <input type="radio" name="" id="" class="with-gap radio-col-blue" value="Femenino">
-                                                                    <label for="" class="m-l-20">Femenino</label>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-2">
-                                                                <b>Tipo de Agente *</b>
-                                                                <div class="input-group">
-                                                                    <select id="" name="" class="form-control show-tick" style="width: 100%;">
-                                                                        <option value="" disabled selected>Seleccione...</option>
-                                                                        <option value="">Jefe</option>
-                                                                        <option value="">Agente</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div class="col-md-3">
-                                                                <b>Telefono *</b>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">
-                                                                        <img src="../images/iconos/phone.svg">
-                                                                    </span>
-                                                                    <input type="String" class="phone-number" placeholder="Ex: 0000-0000" name="tel" autocomplete="off" value="<?= (isset($_POST['tel'])) ? $_POST['tel'] : ""; ?>" required autofocus>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
-
-                                                    <fieldset>
-                                                        <div class="col-md-5">
-                                                            <b>Dirección *</b>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <img src="../images/iconos/03.svg">
-                                                                </span>
-                                                                <textarea type="String" name="dir" cols="90" rows="5" style="resize: both;" autocomplete="off" value="<?= (isset($_POST['dir'])) ? $_POST['dir'] : ""; ?>" required autofocus></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
+                                            <div class="col-md-4">
+                                                <b>Apellidos *</b>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <img src="../images/iconos/person.svg">
+                                                    </span>
+                                                    <input type="String" name="apellidos" id="apellidos" autocomplete="off" onkeypress="return soloLetras(event)" required>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <div class="row form-group col-md-8">
+                                            <div class="col-md-4">
+                                                <b>Genero</b>
+                                                <br>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <img src="../images/iconos/group-24px.svg">
+                                                    </span>
+                                                    <input type="radio" name="genero" id="r1" class="with-gap radio-col-blue" value="Masculino" checked>
+                                                    <label for="r1">Masculino</label>
+
+                                                    <input type="radio" name="genero" id="r2" class="with-gap radio-col-blue" value="Femenino">
+                                                    <label for="r2">Femenino</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3" style="width : 160px">
+                                                <b>Telefono *</b>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <img src="../images/iconos/phone.svg">
+                                                    </span>
+                                                    <input type="String" class="phone-number" style="width : 110px" placeholder="Ex: 0000-0000" name="tel" id="tel" autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <b>Correo *</b>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <img src="../images/iconos/email.svg" />
+                                                    </span>
+                                                    <input type="String" class="email" style="width : 150px" name="correo" id="correo" autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="col-md-5">
+                                            <b>Dirección *</b>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <img src="../images/iconos/03.svg">
+                                                </span>
+                                                <textarea type="String" name="direc" id="direc" cols="90" rows="5" style="resize: both;" autocomplete="off" required></textarea>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
                                     <div class="modal-footer">
                                         <span>Los campos marcados con * son campos obligatorios</span>
-                                        <button type="submit" name="agregar" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
+                                        <button type="submit" name="enviar" id="enviar" onclick="verificar()" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
                                         <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
                                     </div>
-                            </form>
+
+                                    <!--Elementos Avansados -->
+                                    <script src="../js/pages/forms/advanced-form-elements.js"></script>
+                                    <!-- Bootstrap Colorpicker Js -->
+                                    <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+
+                                    <!-- Dropzone Plugin Js -->
+                                    <script src="../plugins/dropzone/dropzone.js"></script>
+
+                                    <!-- Input Mask Plugin Js -->
+                                    <script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
+
+                                    <!-- include alertify.css -->
+                                    <link rel="stylesheet" href="../alertas/build/css/alertify.css">
+
+                                    <!-- include boostrap theme  -->
+                                    <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
+
+                                    <!-- include alertify script -->
+                                    <script src="../alertas/build/alertify.js"></script>
+
+                                    <script type="text/javascript">
+                                        //override defaults
+                                        alertify.defaults.transition = "slide";
+                                        alertify.defaults.theme.ok = "btn btn-primary";
+                                        alertify.defaults.theme.cancel = "btn btn-secondary";
+                                        alertify.defaults.theme.input = "form-control";
+                                    </script>
+                                </form>
+                            </div>
                         </div>
-                        <script>
-                            function validarNro(e) {
-                                var key;
-                                if (window.event) // IE
-                                {
-                                    key = e.keyCode;
-                                } else if (e.which) // Netscape/Firefox/Opera
-                                {
-                                    key = e.which;
-                                }
-
-                                if (key < 48 || key > 57) {
-                                    if (key == 46 || key == 8) // Detectar . (punto) y backspace (retroceso)
-                                    {
-                                        return true;
-                                    } else {
-                                        return false;
-                                    }
-                                }
-                                return true;
-                            }
-
-                            function FormatDateField(xField) {
-                                var theText = xField.value;
-                                theText = theText.replace(/\//gi, "");
-                                if (!(theText.length == 8 || theText.length == 8)) {
-                                    alert("Fecha inv�lida, debe ser en formato DD/MM/AAAA");
-                                    xField.focus();
-                                    return false;
-                                }
-                                theText = theText.substring(0, 2) + "/" + theText.substring(2, 4) + "/" + theText.substring(4, 8);
-                                xField.value = theText;
-                            }
-                        </script>
-
-                        <!-- Bootstrap Colorpicker Js -->
-                        <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-
-                        <!-- Dropzone Plugin Js -->
-                        <script src="../plugins/dropzone/dropzone.js"></script>
-
-                        <!-- Input Mask Plugin Js -->
-                        <script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
-
-                        <!-- include alertify.css -->
-                        <link rel="stylesheet" href="../alertas/build/css/alertify.css">
-
-                        <!-- include boostrap theme  -->
-                        <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
-
-                        <!-- include alertify script -->
-                        <script src="../alertas/build/alertify.js"></script>
-
-                        <script type="text/javascript">
-                            //override defaults
-                            alertify.defaults.transition = "slide";
-                            alertify.defaults.theme.ok = "btn btn-primary";
-                            alertify.defaults.theme.cancel = "btn btn-secondary";
-                            alertify.defaults.theme.input = "form-control";
-                        </script>
-                        <script src="../js/pages/forms/advanced-form-elements.js"></script>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
         <!-- #END# Basic Examples -->
-        </div>
     </section>
 
 </body>
@@ -623,58 +575,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 </div>
 
 <?php
-/*if (isset($_REQUEST['bandera'])) {
-    $bandera = $_REQUEST['bandera'];
-    $baccion = $_REQUEST['baccion'];
-    $estado = 0;
 
-    include '../config/conexion.php';
-    if ($bandera == 'baja') {
-        pg_query('BEGIN');
-
-        $result = pg_query($conexion, "UPDATE docente SET estado='$estado' where iddocente='$baccion'");
-
-        if (!$result) {
-            pg_query('rollback');
-            echo "<script language='javascript'>";
-            echo 'alertaError();';
-            echo '</script>';
-        } else {
-
-            //bitacora
-            $query_s = pg_query($conexion, "SELECT * from docente where iddocente='$baccion'");
-            while ($fila = pg_fetch_array($query_s)) {
-            $dnombre = $fila[1];
-            $dapellido = $fila[2];
-            }
-            if (isset($_SESSION)) {
-                $usuario = $_SESSION['idUsuario'];
-                ini_set('date.timezone', 'America/El_Salvador');
-                $fecha2 = date("Y/m/d");
-                $hora = date("h:i:s");
-                $actividad = "Dio de Baja al Docente " .$dnombre. " " .$dapellido. "";
-                pg_query("BEGIN");
-                $result2 = pg_query($conexion, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha2','$usuario')");
-
-                if (!$result2) {
-                    pg_query("rollback");
-                } else {
-                    pg_query("commit");
-                }
-            }
-            //fin bitacora
-
-            pg_query('commit');
-
-            echo "<script language='javascript'>";
-            echo 'alertaExito();';
-            echo '</script>';
-            echo "<script language='javascript'>";
-            echo "setTimeout ('r()', 2000);";
-            echo '</script>';
-        }
-    }
-}*/
 ?>
 
 </html>

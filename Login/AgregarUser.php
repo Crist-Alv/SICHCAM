@@ -23,13 +23,9 @@
     }
 
     function alertaErrorRegistro() {
-        alertify.error("<h1>Error</h1>" + "<p>El correo ya estan vinculados con otro usuario</p>" + "<../img src='images/error.png' width='80' height='80'>").set({
+        alertify.error("<h1>Error</h1>" + "<p>El correo ya estan vinculados con otro usuario</p>" + "<img src='../images/error.png' width='80' height='80'>").set({
             transition: 'flipx'
         });
-    }
-
-    function alertaErrorC() {
-        alertify.error("<h1>Error</h1>" + "<p>Correo Electronico no valido</p>" + "<../img src='images/error.png' width='80' height='80'>").dismissOthers();
     }
 
     function r() {
@@ -43,7 +39,6 @@ if (isset($_POST["enviar"])) {
 
     $nombre = $_POST["nombre"];
     $nombre = ucwords($nombre);
-    $cargo = $_POST["cargo"];
     $clave = $_POST["clave"];
     $email = $_POST["email"];
     $rol = $_POST["rol"];
@@ -56,10 +51,12 @@ if (isset($_POST["enviar"])) {
 
     if ($rows == 0) {
 
-        $result = mysqli_query($conexion, "INSERT INTO tbl_usuario(nombre_User, cargo_User, sexo_User, correo_User, rol_User, pass_User) values(trim('$nombre'),'$cargo','$sexo','$email','$rol','$clave')");
+        $result = mysqli_query($conexion, "INSERT INTO tbl_usuario(nombre_User, sexo_User, correo_User, rol_User, pass_User) values(trim('$nombre'),'$sexo','$email','$rol','$clave')");
 
         if (!$result) {
+            echo "<script language='javascript'>";
             echo "alertaError();";
+            echo "</script>";
             echo "<script language='javascript'>";
             echo "setTimeout ('r()', 1500);";
             echo "</script>";

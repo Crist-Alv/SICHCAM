@@ -24,7 +24,8 @@ $(function () {
     $demoMaskedInput.find('.mobile-phone-number').inputmask('9999-99-99', { placeholder: '____-__-__' });
     //Phone Number
     $demoMaskedInput.find('.phone-number').inputmask('9999-9999', { placeholder: '____-____' });
-
+    //Codigo de Agentes
+    $demoMaskedInput.find('.codigo-agente-number').inputmask('9999-9', { placeholder: '___-_' });
     //DUI
     $demoMaskedInput.find('.dui-number').inputmask('9999999-9', { placeholder: '_______-_' });
     //NIT

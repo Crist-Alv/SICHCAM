@@ -80,13 +80,18 @@
                     });
                 }
             }
-            function alertaError() {
-            alertify.error("<h1>Error</h1>" + "<p>Campos sin llenar</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
-        }
 
-        function alertaError2() {
-            alertify.error("<h1>Error</h1>" + "<p>Las contraseña no coinciden</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
-        }
+            function alertaError() {
+                alertify.error("<h1>Error</h1>" + "<p>Campos sin llenar</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+            }
+
+            function alertaError2() {
+                alertify.error("<h1>Error</h1>" + "<p>Las contraseña no coinciden</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+            }
+
+            function alertaErrorC() {
+                alertify.error("<h1>Error</h1>" + "<p>Correo Electronico no valido</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+            }
         }
     </script>
 
@@ -154,15 +159,6 @@
                         <div class="form-line">
                             <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre del Usuario" autocomplete="off" required autofocus>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <select type="text" name="cargo" id="cargo" class="form-control" placeholder="Cargo" autocomplete="off" required>
-                            <option value="" disabled selected>Seleccione el cargo...</option>
-                            <option value="Jefe">Jefe</option>
-                            <option value="Secretaria/o">Secretaria/o</option>
-
-                        </select>
                     </div>
 
                     <div class="form-group">
@@ -252,4 +248,5 @@
         alertify.defaults.theme.input = "form-control";
     </script>
 </body>
+
 </html>
