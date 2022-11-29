@@ -1,10 +1,10 @@
-<?php /*session_start();
-$t = $_SESSION['nivelUsuario'];
-$iddatos = $_SESSION['idUsuario'];
-if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
+<?php session_start();
+$t = $_SESSION['rol_User'];
+$iddatos = $_SESSION['id_User'];
+if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     header('Location: ../index.php');
     exit();
-}*/
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -159,7 +159,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
 
                     document.getElementById('bandera').value = "baja";
                     document.getElementById('baccion').value = id;
-                    document.frmsica.submit();
+                    document.sichcam.submit();
 
                 },
 
@@ -237,7 +237,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                         <?php
 
                         if (isset($_SESSION)) {
-                            $sexo = $_SESSION['sexoT'];
+                            $sexo = $_SESSION['sexo_User'];
                             $man = '../images/user.png';
                             $woman = '../images/userWoman.png';
                             $user = 'user-picture';
@@ -260,7 +260,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                     <li style="color:#fff; cursor:default;">
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
-                                $usu = $_SESSION['nombresT'];
+                                $usu = $_SESSION['nombre_User'];
                                 echo "$usu";
                             }
                             ?>
@@ -384,7 +384,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal" action="" method="post" class="form-group-sm" id="frmsica" name="frmsica">
+                            <form class="form-horizontal" action="" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
 
@@ -403,31 +403,32 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
 
                                         <tbody>
                                             <?php
-                                            //include '../config/conexion.php';
-
-                                            //$query_s = pg_query($conexion, 'SELECT * from docente where estado=1');
-                                            //while ($fila = pg_fetch_array($query_s)) {
+                                            include '../Config/Conexion.php';
+                                            
+                                            $query_s = mysqli_query($conexion, 'SELECT * from tbl_agentes where activo=1');
+                                            while ($fila = mysqli_fetch_array($query_s)) {
                                             ?>
 
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><?php echo $fila["codigo_cam_agente"]; ?></td>
+                                                    <td><?php echo $fila["nombre_agente"]; ?></td>
+                                                    <td><?php echo $fila["apellido_agente"]; ?></td>
                                                     <td>
-                                                        <button type="button" name="verr" value="Verr" class="btn btn-info waves-effect waves-float verr_data" data-toggle="modal" data-target="#ModalVerD_<?php echo $fila['iddocente']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
+
+                                                        <button type="button" name="verr" value="Verr" class="btn btn-info waves-effect waves-float verr_data" data-toggle="modal" data-target="#ModalVerAg_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
                                                     </td>
-                                                    
+                                                    <?php include 'VerDModal.php'; ?>
                                                     <td>
-                                                        <button type="button" name="editt" value="Editt" class="btn btn-warning waves-effect editt_data" data-toggle="modal" data-target="#ModalEdiD_<?php echo $fila['iddocente']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
+                                                        <button type="button" name="editt" value="Editt" class="btn btn-warning waves-effect editt_data" data-toggle="modal" data-target="#ModalEdiD_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
                                                     </td>
                                                    
                                                     <td>
-                                                        <button type="button" name="baja" value="Baja" class="btn btn-danger waves-effect waves-float baja_data" data-toggle="modal" onClick="Alertabaja('<?php echo $fila['iddocente']; ?>','<?php echo $fila['nombresd']; ?>','<?php echo $fila['apellidosd']; ?>')"><img src="../images/iconos/thumb-down.svg" /></button>
+                                                        <button type="button" name="baja" value="Baja" class="btn btn-danger waves-effect waves-float baja_data" data-toggle="modal" onClick="Alertabaja('<?php echo $fila['id_agente']; ?>','<?php echo $fila['nombre_agente']; ?>','<?php echo $fila['apellido_agente']; ?>')"><img src="../images/iconos/thumb-down.svg" /></button>
                                                     </td>
 
                                                 </tr>
                                             <?php
-                                            //}
+                                            }
                                             ?>
                                         </tbody>
                                     </table>

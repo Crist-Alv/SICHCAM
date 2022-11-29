@@ -202,11 +202,11 @@ if (isset($_REQUEST['bandera'])) {
             while ($fila = mysqli_fetch_array($query_s)) {
                 $_SESSION['id_User'] = $fila[0];
                 $_SESSION['nombre_User'] = $fila[1];
-                $_SESSION['cargo_User'] = $fila[2];
-                $_SESSION['sexo_User'] = $fila[3];
-                $_SESSION['correo_User'] = $fila[4];
-                $_SESSION['rol_User'] = $fila[5];
-                $_SESSION['pass_User'] = $fila[6];
+                $_SESSION['sexo_User'] = $fila[2];
+                $_SESSION['correo_User'] = $fila[3];
+                $_SESSION['rol_User'] = $fila[4];
+                $_SESSION['pass_User'] = $fila[5];
+                $_SESSION['estado'] = $fila[6];
 
                 $_SESSION['autenticado'] = 'yeah';
                 //bitacora 

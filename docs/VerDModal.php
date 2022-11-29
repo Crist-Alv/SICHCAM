@@ -1,4 +1,4 @@
-<?php include('../config/conexion.php'); ?>
+<?php include('../Config/Conexion.php'); ?>
 <script>
     function soloLetras(e) {
         key = e.keyCode || e.which;
@@ -35,7 +35,7 @@ $fecha_max = date("Y-m-d", strtotime($fecha_max . "- 18 year"));
 
 ?>
 <!--Modifiar docente Modal -->
-<div class="modal fade" id="ModalVerD_<?php echo $viddoc = $fila[0]; ?>" tabindex="-2" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalVerAg_<?php echo $viddoc = $fila[0]; ?>" tabindex="-2" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-blue">
@@ -48,7 +48,7 @@ $fecha_max = date("Y-m-d", strtotime($fecha_max . "- 18 year"));
                     <form role="form" method="post" class="form-group">
                         <!--1-->
                         <fieldset>
-                            <legend>Datos del Docente</legend>
+                            <legend>Datos del Agente</legend>
                             <div class="row form-group col-md-10">
 
                                 <div class="col-md-4">
@@ -64,134 +64,95 @@ $fecha_max = date("Y-m-d", strtotime($fecha_max . "- 18 year"));
                                 <div class="col-md-4">
                                     <b>Apellidos</b>
                                     <div class="input-group">
-                                    <span class="input-group-addon">
-                                                <img src="../images/iconos/person.svg">
-                                            </span>
-                                       <input type="String" readonly="readonly" value="<?php echo $fila[2]; ?>">
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/person.svg">
+                                        </span>
+                                        <input type="String" readonly="readonly" value="<?php echo $fila[2]; ?>">
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <b>Fecha de nacimiento</b>
+                                    <b>DUI</b>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <img src="../images/iconos/date_range.svg">
+                                            <img src="../images/iconos/dn.svg">
                                         </span>
-                                        <input type="date" readonly="readonly" value="<?php echo $fila[3]; ?>">
+                                        <input type="String" readonly="readonly" value="<?php echo $fila[3]; ?>">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                        <b>Genero</b>
-                                        <br>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <img src="../images/iconos/group-24px.svg">
-                                            </span>                               
-                                <input type="radio" name="gd" id="md" class="with-gap radio-col-blue" value="Masculino" disabled <?php
-                                       $gend = $fila[4];
-                                     if ($gend == "Masculino") {
-                                           echo "checked";
-                                                    }
-                                                    ?>>
-                                <label for="md">Masculino</label>
 
-                                <input type="radio" name="gd" id="fd" class="with-gap radio-col-blue" value="Femenino" disabled <?php
-                                        $gend = $fila[4];
-                                     if ($gend == "Femenino") {
-                                          echo "checked";
-                                               }
-                                              ?>>
-                                <label for="fd" class="m-l-20">Femenino</label>
-
-                            </div>
-                            </div>
-                            <div class="row form-group col-md-10">
                                 <div class="col-md-4">
-                                    <b>Especialidad</b>
+                                    <b>N° de Placa</b>
                                     <div class="input-group">
-                                    <span class="input-group-addon">
-                                                <img src="../images/iconos/group-24px.svg">
-                                            </span>
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/dn.svg">
+                                        </span>
                                         <input type="String" readonly="readonly" value="<?php echo $fila[5]; ?>">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <b>Nacionalidad</b>
+                                    <b>Genero</b>
+                                    <br>
                                     <div class="input-group">
-                                    <span class="input-group-addon">
-                                                <img src="../images/iconos/03.svg">
-                                            </span>
-                                        <input type="String" readonly="readonly" value="<?php echo $fila[6]; ?>">
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/group-24px.svg">
+                                        </span>
+                                        <input type="radio" name="gd" id="md" class="with-gap radio-col-blue" value="Masculino" disabled <?php
+                                                                                                                                            $gend = $fila[4];
+                                                                                                                                            if ($gend == "Masculino") {
+                                                                                                                                                echo "checked";
+                                                                                                                                            }
+                                                                                                                                            ?>>
+                                        <label for="md">Masculino</label>
+
+                                        <input type="radio" name="gd" id="fd" class="with-gap radio-col-blue" value="Femenino" disabled <?php
+                                                                                                                                        $gend = $fila[4];
+                                                                                                                                        if ($gend == "Femenino") {
+                                                                                                                                            echo "checked";
+                                                                                                                                        }
+                                                                                                                                        ?>>
+                                        <label for="fd" class="m-l-20">Femenino</label>
+
                                     </div>
                                 </div>
-                                <div class="col-sm-3 selectContainer">
-                                    <b>Dep. de Nacimiento</b>
-                                    <div class="input-group">
-                                        <select class="form-control show-tick" style="width: 100%;" disabled>
-                                        <?php                                        
-                                        $result_DV = pg_query($conexion, "SELECT iddep, departamento from departamento where iddep=$fila[7]"); 
-                                         while ($rowD = pg_fetch_array($result_DV)) {   
-                                        ?>                                                                  
-                                        <option value="<?php echo $rowD['iddep']; ?>"><?php echo $rowD['departamento']; ?></option>
-                                         <?php
-                                         }
-                                         ?>       
-                                        </select>
-                                    </div>
-                                </div>                                        
-                        </div>
-                    </fieldset>
+                            </div>
 
-                        <fieldset>                            
+
                             <div class="row form-group col-md-10">
-                            <div class="col-md-4">
-                                    <b>Municipio de Nacimiento</b>
-                                    <div class="input-group">
-                                    <select class="form-control show-tick" style="width: 100%;" disabled>                                       
-                                    <?php                                        
-                                        $result_MV = pg_query($conexion, "SELECT * from municipio where idmunicipio=$fila[8]"); 
-                                         while ($rowM = pg_fetch_array($result_MV)) {   
-                                        ?>                                                                  
-                                        <option value="<?php echo $rowM['idmunicipio']; ?>"><?php echo $rowM['municipio']; ?></option>
-                                         <?php
-                                         }
-                                         ?>     
-                                    </select>
-                                    </div>
-                            </div> 
 
                                 <div class="col-md-4">
                                     <b>Teléfono</b>
-                                    <div class="input-group">                                        
-                                        <input type="numeric" readonly="readonly" value="<?php echo $fila[9]; ?>">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/03.svg">
+                                        </span>
+                                        <input type="String" readonly="readonly" value="<?php echo $fila[6]; ?>">
                                     </div>
                                 </div>
-                                
                                 <div class="col-md-4">
                                     <b>Correo</b>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <img src="../images/iconos/email.svg">
                                         </span>
-                                        <input type="email" readonly="readonly" value="<?php echo $fila[10]; ?>">
+                                        <input type="email" readonly="readonly" value="<?php echo $fila[7]; ?>">
                                     </div>
                                 </div>
-                            </div>                    
+                            </div>
                         </fieldset>
 
                         <fieldset>
-                                    <div class="col-md-10">
-                                        <b>Dirección</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <img src="../images/iconos/03.svg">
-                                            </span>
-                                            <textarea type="String" readonly="readonly" cols="90" rows="5" style="resize: both;" autocomplete="off"><?php echo $fila["direccion"]; ?></textarea>
-                                        </div>
-                                    </div>
-                                </fieldset>
+                            <div class="col-md-10">
+                                <b>Dirección</b>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <img src="../images/iconos/03.svg">
+                                    </span>
+                                    <textarea type="String" readonly="readonly" cols="90" rows="5" style="resize: both;" autocomplete="off"><?php echo $fila[8]; ?></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
                 </div>
             </div>
             <hr class="sidebar-divider d-none d-md-block">

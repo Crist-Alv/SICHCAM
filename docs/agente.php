@@ -155,7 +155,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                 document.getElementById('codigo').value == "" ||
                 document.getElementById('tel').value == "" ||
                 document.getElementById('direc').value == "") {
-                alertaError();
+                alertaErrorVacio();
             } else {
                 $(document).ready(function() {
 
@@ -164,7 +164,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                         var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
 
                         if ($("#email").val().indexOf('@', 0) == -1 || $("#email").val().indexOf('.', 0) == -1 || caract.test($('#email').val()) == false) {
-                            alertaErrorC();
+                            alertaErrorC2();
 
                         } else {
 
@@ -178,6 +178,12 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             }
         }
 
+        function alertaExitoVacio() {
+            alertify.error("<p>Llene todos los campos solicitados</p>" + "<img src='../images/bien1.png'>").set({
+                transition: 'flipx'
+            });
+        }
+
         function alertaExito() {
             alertify.message("<p>Se guardo exitosamente</p>" + "<img src='../images/bien1.png'>").set({
                 transition: 'flipx'
@@ -185,13 +191,38 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
         }
 
         function alertaError() {
-            alertify.error("<p>No se puedo guardar exitosamente</p>" + "<img src='../images/error.png'>").dismissOthers();
-
+            alertify.error("<p>No se puedo guardar</p>" + "<img src='../images/error.png'>").set({
+                transition: 'flipx'
+            });
 
         }
 
         function alertaErrorC() {
-            alertify.error("<h1>Error</h1>" + "<p>Correo Electronico no valido</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+            alertify.error("<h1>Error</h1>" + "<p>Correo Electronico ya existe</p>" + "<img src='../images/error.png' width='80' height='80'>").set({
+                transition: 'flipx'
+            });
+        }
+
+        function alertaErrorC2() {
+            alertify.error("<h1>Error</h1>" + "<p>Correo Invalido/p>" + "<img src='../images/error.png' width='80' height='80'>").set({
+                transition: 'flipx'
+            });
+        }
+
+        function alertaErrorCod() {
+            alertify.error("<h1>Error</h1>" + "<p>El N° de placa ya existe</p>" + "<img src='../images/error.png' width='80' height='80'>").set({
+                transition: 'flipx'
+            });
+        }
+
+        function alertaErrorDui() {
+            alertify.error("<h1>Error</h1>" + "<p>El N° de DUI ya existe</p>" + "<img src='../images/error.png' width='80' height='80'>").set({
+                transition: 'flipx'
+            });
+        }
+
+        function r() {
+            location.href = ("agente.php");
         }
     </script>
 
@@ -301,6 +332,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             <div class="menu">
                 <ul class="list">
                     <li class="header">MENÚ</li>
+
                     <li class="active">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <img src="../images/iconos/assignment_ind.svg" />
@@ -315,6 +347,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                             </li>
                         </ul>
                     </li>
+
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/clipboard.svg" />
                         <span>Gestión de Armas</span>
@@ -405,7 +438,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     <div class="card">
                         <div class="body">
                             <div class="demo-masked-input">
-                                <form class="form-group" role="form" action="Funciones/agregarAgente.php" enctype="multipart/form-data" method="post" id="sichcam" name="sichcam">
+                                <form class="form-group" role="form" method="post" id="sichcam" name="sichcam">
                                     <input type="hidden" name="bandera" id="bandera" />
                                     <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
 
@@ -419,7 +452,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                     <span class="input-group-addon">
                                                         <img src="../images/iconos/dn.svg">
                                                     </span>
-                                                    <input type="String" class="codigo-agente-number" style="width : 80px" name="codigo" id="codigo" placeholder="Ex: 0000-0" autocomplete="off" required autofocus>
+                                                    <input type="String" class="codigo-agente-number" style="width : 80px" name="codigo" id="codigo" autocomplete="off" required autofocus>
                                                 </div>
                                             </div>
 
@@ -429,7 +462,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                     <span class="input-group-addon">
                                                         <img src="../images/iconos/dn.svg">
                                                     </span>
-                                                    <input type="String" class="dui-number" style="width : 110px" name="dui" id="dui" placeholder="Ex: 0000000-0" autocomplete="off" required>
+                                                    <input type="String" class="dui-number" style="width : 110px" name="dui" id="dui" autocomplete="off" required>
                                                 </div>
                                             </div>
 
@@ -476,7 +509,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                     <span class="input-group-addon">
                                                         <img src="../images/iconos/phone.svg">
                                                     </span>
-                                                    <input type="String" class="phone-number" style="width : 110px" placeholder="Ex: 0000-0000" name="tel" id="tel" autocomplete="off" required>
+                                                    <input type="String" class="phone-number" style="width : 110px" name="tel" id="tel" autocomplete="off" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -575,7 +608,81 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 </div>
 
 <?php
+include("../Config/Conexion.php");
+if (isset($_REQUEST["enviar"])) {
 
+    $nombres = $_REQUEST["nombres"];
+    $nombres = ucwords($nombres);
+    $apellidos = $_REQUEST["apellidos"];
+    $apellidos = ucwords($apellidos);
+    $dui = $_REQUEST["dui"];
+    $sexo = $_REQUEST["genero"];
+    $codigoag = $_REQUEST["codigo"];
+    $tel = $_REQUEST["tel"];
+    $correo = $_REQUEST["correo"];
+    $direc = $_REQUEST["direc"];
+    $activo = 1;
+
+    $rolUser = "Agente";
+    $estado = 1;
+
+    $clave = $apellidos . rand(0, 100) . rand(0, 500);
+    $clave = base64_encode($clave);
+
+    $query_s2 = mysqli_query($conexion, "SELECT * FROM tbl_agentes where correo_agente='$correo'");
+    $rows = mysqli_num_rows($query_s2);
+
+    $query_s3 = mysqli_query($conexion, "SELECT * FROM tbl_usuario where correo_User='$correo'");
+    $rows2 = mysqli_num_rows($query_s3);
+
+    $query_s4 = mysqli_query($conexion, "SELECT * FROM tbl_agentes where codigo_cam_agente ='$codigoag'");
+    $rows3 = mysqli_num_rows($query_s4);
+
+    $query_s5 = mysqli_query($conexion, "SELECT * FROM tbl_agentes where dui_agente ='$dui'");
+    $rows4 = mysqli_num_rows($query_s5);
+
+    if ($rows4 == 0) {
+        if ($rows3 == 0) {
+            if ($rows == 0 && $rows2 == 0) {
+
+                $result = mysqli_query($conexion, "INSERT INTO tbl_agentes(nombre_agente, apellido_agente, dui_agente, sexo_agente, codigo_cam_agente, telefono_agente, correo_agente, direccion, activo) values(trim('$nombres'),'$apellidos','$dui','$sexo','$codigoag','$tel','$correo','$direc','$activo')");
+
+                if (!$result) {
+                    echo "<script language='javascript'>";
+                    echo "alertaError();";
+                    echo "</script>";
+
+                    echo "<script language='javascript'>";
+                    echo "setTimeout ('r()', 1500);";
+                    echo "</script>";
+                } else {
+                    //Se crea una cuenta de usuario al agente registrado
+                    $result2 = mysqli_query($conexion, "INSERT INTO tbl_usuario(nombre_User, sexo_User, correo_User, rol_User, pass_User, estado) values(trim('$nombres'),'$sexo','$correo','$rolUser','$clave','$estado')");
+
+                    echo "<script language='javascript'>";
+                    echo "alertaExito();";
+                    echo "</script>";
+
+                    echo "<script language='javascript'>";
+                    echo "setTimeout ('r()', 1500);";
+                    echo "</script>";
+                }
+            } else {
+                echo "<script language='javascript'>";
+                echo "alertaErrorC();";
+                echo "</script>";
+            }
+        } else {
+            echo "<script language='javascript'>";
+            echo "alertaErrorCod();";
+            echo "</script>";
+        }
+    } else {
+        echo "<script language='javascript'>";
+        echo "alertaErrorDui();";
+        echo "</script>";
+    }
+}
 ?>
 
 </html>
