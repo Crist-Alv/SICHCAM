@@ -179,7 +179,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             location.href = ("docente.php");
         }
 
-
         function alertaExito() {
             alertify.message("<h1>Exito</h1>" + "<p>Se dio de baja exitosamente</p>" + "<img src='../images/bien1.png'>").set({
                 transition: 'flipx'
@@ -195,7 +194,24 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
     <script type="text/javascript" class="init">
         function Salir() {
-            document.location.href = "../config/fin.php";
+            document.location.href = "../Config/fin.php";
+        }
+    </script>
+
+    <script language="javascript">
+        function alertaExitoM() {
+        alertify.message("<h1>Exito</h1>" + "<p>Los datos se modificaron exitosamente</p>" + "<img src='../images/bien1.png'>").set({
+            transition: 'flipx'
+        });
+    }
+
+    function alertaErrorM() {
+        alertify.error("<h1>Error</h1>" + "<p>No se puedieron modificar con exito</p>" + "<img src='../images/error.png'>").set({
+            transition: 'flipx'
+        });
+    }
+    function r() {
+            location.href = ("listadoAgentes.php");
         }
     </script>
 
@@ -384,7 +400,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal" action="" method="post" class="form-group-sm" id="sichcam" name="sichcam">
+                            <form class="form-horizontal" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
 
@@ -417,11 +433,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
                                                         <button type="button" name="verr" value="Verr" class="btn btn-info waves-effect waves-float verr_data" data-toggle="modal" data-target="#ModalVerAg_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
                                                     </td>
-                                                    <?php include 'VerDModal.php'; ?>
+                                                    <?php include 'VerAgModal.php'; ?>
                                                     <td>
-                                                        <button type="button" name="editt" value="Editt" class="btn btn-warning waves-effect editt_data" data-toggle="modal" data-target="#ModalEdiD_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
+                                                        <button type="button" name="editt" value="Editt" class="btn btn-warning waves-effect editt_data" data-toggle="modal" data-target="#ModalEdiAg_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
                                                     </td>
-                                                   
+                                                    <?php include 'EditarAgModal.php'; ?>
                                                     <td>
                                                         <button type="button" name="baja" value="Baja" class="btn btn-danger waves-effect waves-float baja_data" data-toggle="modal" onClick="Alertabaja('<?php echo $fila['id_agente']; ?>','<?php echo $fila['nombre_agente']; ?>','<?php echo $fila['apellido_agente']; ?>')"><img src="../images/iconos/thumb-down.svg" /></button>
                                                     </td>
@@ -470,7 +486,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 </div>
 
 <?php
-if (isset($_REQUEST['bandera'])) {
+/*if (isset($_REQUEST['bandera'])) {
     $bandera = $_REQUEST['bandera'];
     $baccion = $_REQUEST['baccion'];
     $estado = 0;
@@ -521,7 +537,7 @@ if (isset($_REQUEST['bandera'])) {
             echo '</script>';
         }
     }
-}
+}*/
 ?>
 
 </html>
