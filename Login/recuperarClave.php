@@ -147,8 +147,8 @@
 
                     <button class="btn btn-block btn-lg bg-blue waves-effect" type="submit" id="enviar" name="enviar" onClick="verificar()">RESTABLECER</button>
 
-                    <div class="row m-t-20 m-b--5 align-center">
-                        <a href="registrarse.php">¡Registrarse!</a>
+                    <div class="m-t-25 m-b--5 align-center">
+                        <a href="login.php">Volver al Inicio</a>
                     </div>
                 </form>
             </div>

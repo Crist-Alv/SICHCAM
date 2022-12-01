@@ -1,5 +1,7 @@
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/font-awesome.css">
 <!--Ver Agente Modal -->
-<div class="modal fade" id="ModalVerAg_<?php echo $viddoc = $fila[0]; ?>" tabindex="-2" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalVerUser_<?php echo $viduser = $fila[0]; ?>" tabindex="-2" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-blue">
@@ -26,36 +28,6 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <b>Apellidos</b>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <img src="../images/iconos/person.svg">
-                                        </span>
-                                        <input type="String" readonly="readonly" value="<?php echo $fila[2]; ?>">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <b>DUI</b>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <img src="../images/iconos/dn.svg">
-                                        </span>
-                                        <input type="String" readonly="readonly" value="<?php echo $fila[3]; ?>">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <b>N° de Placa</b>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <img src="../images/iconos/dn.svg">
-                                        </span>
-                                        <input type="String" readonly="readonly" value="<?php echo $fila[5]; ?>">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
                                     <b>Genero</b>
                                     <br>
                                     <div class="input-group">
@@ -63,7 +35,7 @@
                                             <img src="../images/iconos/group-24px.svg">
                                         </span>
                                         <input type="radio" name="gd" id="md" class="with-gap radio-col-blue" value="Masculino" disabled <?php
-                                                                                                                                            $gend = $fila[4];
+                                                                                                                                            $gend = $fila[2];
                                                                                                                                             if ($gend == "Masculino") {
                                                                                                                                                 echo "checked";
                                                                                                                                             }
@@ -71,7 +43,7 @@
                                         <label for="md">Masculino</label>
 
                                         <input type="radio" name="gd" id="fd" class="with-gap radio-col-blue" value="Femenino" disabled <?php
-                                                                                                                                        $gend = $fila[4];
+                                                                                                                                        $gend = $fila[2];
                                                                                                                                         if ($gend == "Femenino") {
                                                                                                                                             echo "checked";
                                                                                                                                         }
@@ -84,36 +56,36 @@
 
 
                             <div class="row form-group col-md-10">
-
-                                <div class="col-md-4">
-                                    <b>Teléfono</b>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <img src="../images/iconos/03.svg">
-                                        </span>
-                                        <input type="String" readonly="readonly" value="<?php echo $fila[6]; ?>">
-                                    </div>
-                                </div>
                                 <div class="col-md-4">
                                     <b>Correo</b>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <img src="../images/iconos/email.svg">
                                         </span>
-                                        <input type="email" readonly="readonly" value="<?php echo $fila[7]; ?>">
+                                        <input type="email" readonly="readonly" value="<?php echo $fila[3]; ?>">
                                     </div>
                                 </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset>
-                            <div class="col-md-10">
-                                <b>Dirección</b>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <img src="../images/iconos/03.svg">
-                                    </span>
-                                    <textarea type="String" readonly="readonly" cols="90" rows="5" style="resize: both;" autocomplete="off"><?php echo $fila[8]; ?></textarea>
+                                <div class="col-md-4">
+                                    <b>Rol</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/face.svg">
+                                        </span>
+                                        <input type="String" readonly="readonly" value="<?php echo $fila[4]; ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <b>Contraseña</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/lock.svg">
+                                        </span>
+                                        <input type="password" id="clavex<?php echo $viduser; ?>" readonly="readonly" value="<?php echo $pass = base64_decode($fila[5]); ?>">
+                                        <div class="col-xs-15">
+                                        <input type="checkbox" id="recr<?php echo $viduser; ?>" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('clavex<?php echo $viduser; ?>').type = this.checked ? 'text' : 'password'">
+                                        <label for="recr<?php echo $viduser; ?>">Mostrar Contraseña</label>
+                                    </div>
+                                    </div>                                    
                                 </div>
                             </div>
                         </fieldset>
@@ -121,7 +93,6 @@
             </div>
             <hr class="sidebar-divider d-none d-md-block">
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary"><img src="../images/iconos/impresora.svg">Imprimir</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><img src="../images/iconos/close.svg">Cerrar</button>
             </div>
             </form>

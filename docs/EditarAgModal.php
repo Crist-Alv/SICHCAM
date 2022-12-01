@@ -19,8 +19,8 @@
 </script>
 
 <!--Modifiar docente Modal -->
-<div class="modal fade" id="ModalEdiAg_<?php echo $fila["id_agente"]; ?>" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="ModalEdiAg_<?php echo $rid; ?>" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="demo-masked-input">
                 <div class="modal-header bg-blue">
@@ -30,12 +30,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form id="edit_form" method="POST" class="form-group datos-doc">
+                        <form name="datos" id="datos" action="FuncionEditAgente.php?rid=<?php echo $rid; ?>" role="form" method="POST" enctype="multipart/form-data" class="form-group">
                             <!--1-->
                             <fieldset>
                                 <legend>Datos del Agente</legend>
                                 <div class="row form-group col-md-12">
-                                    <input type="hidden" name="edid" value="<?php echo $fila["id_agente"]; ?>">
                                     <p>
                                     <div class="col-sm-3" style="width : 158px">
                                         <b>Codigo de agente *</b>
@@ -92,19 +91,19 @@
                                             <span class="input-group-addon">
                                                 <img src="../images/iconos/group-24px.svg">
                                             </span>
-                                            <input type="radio" name="dgenero" id="dr1<?php echo $fila[0]?>" class="with-gap radio-col-blue" value="Masculino" <?php
-                                                                                                                                            if ($fila[4] == "Masculino") {
-                                                                                                                                                echo "checked";
-                                                                                                                                            }
-                                                                                                                                            ?>>
-                                            <label for="dr1<?php echo $fila[0]?>">Masculino</label>
+                                            <input type="radio" name="dgenero" id="dr1<?php echo $rid ?>" class="with-gap radio-col-blue" value="Masculino" <?php
+                                                                                                                                                            if ($fila[4] == "Masculino") {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                            <label for="dr1<?php echo $rid ?>">Masculino</label>
 
-                                            <input type="radio" name="dgenero" id="dr2<?php echo $fila[0]?>" class="with-gap radio-col-blue genero_data" value="Femenino" <?php
-                                                                                                                                                        if ($fila[4] == "Femenino") {
-                                                                                                                                                            echo "checked";
-                                                                                                                                                        }
-                                                                                                                                                        ?>>
-                                            <label for="dr2<?php echo $fila[0]?>">Femenino</label>
+                                            <input type="radio" name="dgenero" id="dr2<?php echo $rid ?>" class="with-gap radio-col-blue genero_data" value="Femenino" <?php
+                                                                                                                                                                        if ($fila[4] == "Femenino") {
+                                                                                                                                                                            echo "checked";
+                                                                                                                                                                        }
+                                                                                                                                                                        ?>>
+                                            <label for="dr2<?php echo $rid ?>">Femenino</label>
                                         </div>
                                     </div>
                                     </p>
@@ -152,18 +151,13 @@
                 <hr class="sidebar-divider d-none d-md-block">
                 <div class="modal-footer">
                     <button type="submit" name="editar" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><img src="../images/iconos/close.svg">Cerrar</button>
+                    <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
                 </div>
 
                 <script src="../js/pages/forms/advanced-form-elements.js"></script>
-                <!-- include alertify.css -->
-                <link rel="stylesheet" href="../alertas/build/css/alertify.css">
 
                 <!-- include boostrap theme  -->
                 <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
-
-                <!-- include alertify script -->
-                <script src="../alertas/build/alertify.js"></script>
 
                 <script type="text/javascript">
                     //override defaults
@@ -177,58 +171,3 @@
         </div>
     </div>
 </div>
-<?php
-include_once('../Config/Conexion.php');
-if (isset($_REQUEST['editar'])) {
-    
-    $id = $_REQUEST['edid'];
-    $nombres = $_REQUEST['ednombres'];
-    $apellidos = $_REQUEST['edapellidos'];
-    $genero = $_REQUEST['dgenero'];
-    $direccion = $_REQUEST['eddir'];
-    $correo = $_REQUEST['edcorreo'];
-    $telefono = $_REQUEST['edtel'];
-    $dui = $_REQUEST['eddui'];
-    $codigo = $_REQUEST['edcod'];
-
-
-    $result = mysqli_query($conexion, "UPDATE tbl_agentes SET nombre_agente = trim('$nombres'), apellido_agente = trim('$apellidos'), dui_agente = trim('$dui'), sexo_agente = trim('$genero'), codigo_cam_agente = trim('$codigo'), telefono_agente = trim('$telefono'), correo_agente = trim('$correo'), direccion = trim('$direccion') WHERE id_agente='$id'");
-
-    if (!$result) {
-        echo "<script language='javascript'>";
-        echo "alertaErrorM();";
-        echo "</script'>";
-
-        echo "<script language='javascript'>";
-        echo "setTimeout ('r()', 1500);";
-        echo "</script>";
-    } else {
-
-         /*/bitacora 
-         if (isset($_SESSION)) {
-            $usuario = $_SESSION['idUsuario'];
-            ini_set('date.timezone', 'America/El_Salvador');
-            $fecha = date("Y/m/d");
-            $hora = date("h:i:s");
-            $actividad = "Modifico al Docente" . $nombresD . "";
-            pg_query("BEGIN");
-            $result2 = pg_query($conexion, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha','$usuario')");
-
-            if (!$result2) {
-                pg_query("rollback");
-            } else {
-                pg_query("commit");
-            }
-        }
-        //fin bitacora*/
-
-        echo "<script language='javascript'>";
-        echo "alertaExitoM();";
-        echo "</script>";
-
-        echo "<script language='javascript'>";
-        echo "setTimeout ('r()', 1500);";
-        echo "</script>";
-    }
-}
-?>

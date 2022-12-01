@@ -188,14 +188,14 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
         }
 
         function alertaErrorM() {
-        alertify.error("<p>No se puedieron modificar con exito</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
-    }
+            alertify.error("<p>No se puedieron modificar con exito</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+        }
 
-    function alertaExitoM() {
-        alertify.message("<p>Los datos se modificaron exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
-            transition: 'flipx'
-        });
-    }
+        function alertaExitoM() {
+            alertify.message("<p>Los datos se modificaron exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
+                transition: 'flipx'
+            });
+        }
     </script>
 
     <script type="text/javascript" class="init">
@@ -284,20 +284,18 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             <div class="menu">
                 <ul class="list">
                     <li class="header">MENÚ</li>
-                    <li class="active">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <img src="../images/iconos/assignment_ind.svg" />
-                            <span>Gestión de Agentes</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li class="active">
-                                <a href="agente.php">Registro de Agentes</a>
-                            </li>
-                            <li class="active">
-                                <a href="listadoAgentes.php">Listado</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <img src="../images/iconos/assignment_ind.svg" />
+                        <span>Gestión de Agentes</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li class="active">
+                            <a href="agente.php">Registro de Agentes</a>
+                        </li>
+                        <li class="active">
+                            <a href="listadoAgentes.php">Listado</a>
+                        </li>
+                    </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/clipboard.svg" />
@@ -338,18 +336,17 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                         </li>
                     </ul>
 
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/horario.svg" />
-                        <span>Gestión de Usuarios</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="docs/RegistroUser.php">Registro de Usuarios</a>
-                        </li>
-                        <li class="active">
-                            <a href="docs/ListadoUser.php">Listado</a>
-                        </li>
-                    </ul>
+                    <li class="active">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/horario.svg" />
+                            <span>Gestión de Usuarios</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="ListadoUser.php">Listado de Usuarios</a>
+                            </li>
+                        </ul>
+                    </li>
 
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/security.svg" />
@@ -357,7 +354,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/seguridad.php">Opciones de Seguridad</a>
+                            <a href="seguridad.php">Opciones de Seguridad</a>
                         </li>
                     </ul>
                     <a href="acercade.php">Acerca de</a>
@@ -391,50 +388,119 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                             <form class="form-horizontal" role="form" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                        <thead>
-                                            <tr>
-                                                <th>N° de Placa</th>
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Ver más</th>
-                                                <th>Editar</th>
-                                                <th>Dar de Baja</th>
-                                            </tr>
-                                        </thead>
 
-                                        <tbody>
-                                            <?php
-                                            include '../Config/Conexion.php';
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                                    <li role="presentation" class="active"><a href="#activo_animation_1" data-toggle="tab">Usuarios Activos</a></li>
+                                    <li role="presentation"><a href="#inactivo_animation_1" data-toggle="tab">Usuarios Inactivos</a></li>                                    
+                                </ul>
 
-                                            $query_s = mysqli_query($conexion, 'SELECT * from tbl_agentes where activo=1');
-                                            while ($fila = mysqli_fetch_array($query_s)) {
-                                            ?>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane animated active" id="activo_animation_1">
+                                        <h3>Usuarios Activos</h3>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tipo de Rol</th>
+                                                        <th>Nombre</th>
+                                                        <th>Correo Electronico</th>
+                                                        <th>Ver más</th>
+                                                        <th>Editar</th>
+                                                        <th>Estado</th>
+                                                    </tr>
+                                                </thead>
 
-                                                <tr>
-                                                    <td><?php echo $fila["codigo_cam_agente"]; ?></td>
-                                                    <td><?php echo $fila["nombre_agente"]; ?></td>
-                                                    <td><?php echo $fila["apellido_agente"]; ?></td>
+                                                <tbody>
+                                                    <?php
+                                                    include '../Config/Conexion.php';
 
-                                                    <td>
-                                                        <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerAg_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
-                                                    </td>
-                                                    <?php include 'VerAgModal.php'; ?>
-                                                    <td>
-                                                        <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiAg_<?php echo $rid = $fila['id_agente']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
-                                                    </td>
-                                                    <?php include 'EditarAgModal.php'; ?>
-                                                    <td>
-                                                        <button type="button" name="baja" value="Baja" class="btn btn-danger waves-effect waves-float baja_data" data-toggle="modal" onClick="Alertabaja('<?php echo $fila['id_agente']; ?>','<?php echo $fila['nombre_agente']; ?>','<?php echo $fila['apellido_agente']; ?>')"><img src="../images/iconos/thumb-down.svg" /></button>
-                                                    </td>
-                                                </tr>
-                                            <?php
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
+                                                    $query_s = mysqli_query($conexion, 'SELECT * from tbl_usuario where estado=1');
+                                                    while ($fila = mysqli_fetch_array($query_s)) {
+                                                    ?>
+
+                                                        <tr>
+                                                            <td><?php echo $fila["rol_User"]; ?></td>
+                                                            <td><?php echo $fila["nombre_User"]; ?></td>
+                                                            <td><?php echo $fila["correo_User"]; ?></td>
+
+                                                            <td>
+                                                                <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerUser_<?php echo $fila['id_User']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
+                                                            </td>
+                                                            <?php include 'VerUserModal.php'; ?>
+                                                            <td>
+                                                                <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiUser_<?php echo $rid = $fila['id_User']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
+                                                            </td>
+                                                            <?php include 'EditarUserModal.php'; ?>
+                                                            <td>
+                                                                <div class="col-sm-3">
+                                                                    <div class="switch">
+                                                                        <label><input type="checkbox" id="user_activo" checked><span class="lever switch-col-light-blue"></span></label>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane animated" id="inactivo_animation_1">
+                                        <h3>Usuarios Inactivos</h3>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tipo de Rol</th>
+                                                        <th>Nombre</th>
+                                                        <th>Correo Electronico</th>
+                                                        <th>Ver más</th>
+                                                        <th>Editar</th>
+                                                        <th>Estado</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <?php
+                                                    include '../Config/Conexion.php';
+
+                                                    $query_s = mysqli_query($conexion, 'SELECT * from tbl_usuario where estado=0');
+                                                    while ($fila = mysqli_fetch_array($query_s)) {
+                                                    ?>
+
+                                                        <tr>
+                                                            <td><?php echo $fila["rol_User"]; ?></td>
+                                                            <td><?php echo $fila["nombre_User"]; ?></td>
+                                                            <td><?php echo $fila["correo_User"]; ?></td>
+
+                                                            <td>
+                                                                <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerUser_<?php echo $fila['id_User']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
+                                                            </td>
+                                                            <?php include 'VerUserModal.php'; ?>
+                                                            <td>
+                                                                <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiUser_<?php echo $rid = $fila['id_User']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
+                                                            </td>
+                                                            <?php include 'EditarUserModal.php'; ?>
+                                                            <td>
+                                                                <div class="col-sm-3">
+                                                                    <div class="switch">
+                                                                        <label><input type="checkbox" id="user_inactivo"><span class="lever switch-col-light-blue"></span></label>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </form>
                         </div>
                     </div>
