@@ -4,6 +4,7 @@ $iddatos = $_SESSION['id_User'];
 if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     header('Location: ../index.php');
     exit();
+    ///prueba 12325454353
 }
 ?>
 <!DOCTYPE html>
@@ -282,6 +283,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
+                <center>
+                        <h5 style="color: orange;" >CAM</h5>
+                  
+                    </center>
+
                     <figure>
 
                         <!--aqui va la foto del usuario -->
