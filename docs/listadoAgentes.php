@@ -344,10 +344,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/RegistroUser.php">Registro de Usuarios</a>
-                        </li>
-                        <li class="active">
-                            <a href="docs/ListadoUser.php">Listado</a>
+                            <a href="ListadoUser.php">Listado de Usuarios</a>
                         </li>
                     </ul>
 
