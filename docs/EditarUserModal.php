@@ -16,6 +16,55 @@
         if (letras.indexOf(tecla) == -1 && !tecla_especial)
             return false;
     }
+
+    ////cambiar contraseña
+    function verificar2() {
+        if (document.getElementById('NPass').value == "" ||
+            document.getElementById('Email').value == "" ||
+            document.getElementById('nomb').value == "" ||
+            document.getElementById('sex').value == "" ||
+            document.getElementById('Email').value == "") {
+
+            alertaError2();
+
+        } else {
+
+            if (document.getElementById('PassAnt').value != "<?php echo $rclave ?>") {
+                alertaError3();
+            } else {
+
+                if (document.getElementById('NPass').value != document.getElementById('NPassConf').value) {
+                    alertaError4();
+                } else {
+
+                    $(document).ready(function() {
+
+                        $('#evcontra').click(function() {
+                            var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+
+                            if ($("#Email").val().indexOf('@', 0) == -1 || $("#Email").val().indexOf('.', 0) == -1 || caract.test($('#Email').val()) == false) {
+                                alertaErrorC();
+
+
+                            } else {
+
+                                document.datos.submit();
+
+                            }
+                        });
+                    });
+
+                }
+
+            }
+
+        }
+
+    }
+
+    function r() {
+        location.href = ("ListadoUser.php");
+    }
 </script>
 
 <!--Modifiar docente Modal -->
@@ -86,27 +135,31 @@
                             </fieldset>
 
                             <fieldset>
-                                <div class="form-group">
-                                    <label for="NPass" class="col-sm-3 control-label">Nueva contraseña</label>
-                                    <div class="col-sm-9">
-                                        <input type="password" id="NPass" name="NPass" autocomplete="off" placeholder="Escriba la nueva contraseña..." required>
-                                    </div>
-                                    <div class="col-xs-7 p-t-6">
-                                        <input type="checkbox" id="urecr1<?php echo $rid; ?>" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('NPass').type = this.checked ? 'text' : 'password'">
-                                        <label for="urecr1<?php echo $rid; ?>">Mostrar Contraseña</label>
+                                <p>
+                                <div class="col-sm-3 selectContainer">
+                                    <b>Rol del Usuario</b>
+                                    <div class="form-group">
+                                        <select type="text" name="rol" id="rol" class="form-control" placeholder="rol" autocomplete="off" required>
+                                            <option value="<?php echo $fila[4]; ?>"><?php echo $fila[4]; ?></option>
+                                            <option value="Agente">Agente</option>
+                                        </select>
                                     </div>
                                 </div>
-                                
-                                    <label for="NPassConf" class="col-sm-3 control-label">Nueva Contraseña (Confirmar)</label>
-                                    <div class="col-sm-9">
-                                        <input type="password" id="NPassConf" name="NPassConf" autocomplete="off" placeholder="Confirmar la nueva contraseña..." required>
-
+                                </p>
+                                <p>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <b>Contraseña</b>
+                                        <div class="col-md-10">
+                                            <input type="password" id="NPass" name="NPass" autocomplete="off" placeholder="Escriba la nueva contraseña..." value="<?php echo $pass = base64_decode($fila[5]); ?>" required>
+                                            <div class="">
+                                                <input type="checkbox" id="urecr1<?php echo $rid; ?>" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('NPass').type = this.checked ? 'text' : 'password'">
+                                                <label for="urecr1<?php echo $rid; ?>">Mostrar Contraseña</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-7 p-t-6">
-                                        <input type="checkbox" id="urecr2<?php echo $rid; ?>" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('NPassConf').type = this.checked ? 'text' : 'password'">
-                                        <label for="urecr2<?php echo $rid; ?>">Mostrar Contraseña</label>
-                                    </div>
-                            
+                                </div>
+                                </p>
                             </fieldset>
                     </div>
                 </div>

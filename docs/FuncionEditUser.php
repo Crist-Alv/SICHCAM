@@ -38,23 +38,29 @@ if (isset($_POST['editar'])) {
 
         $rid = $_GET['rid'];
         $nombres = $_POST['ednombres'];
-        $genero = $_POST['dgenero'];
+        $sexo = $_POST['dgenero'];
         $correo = $_POST['edcorreo'];
-        
+        $rol = $_POST["rol"];
+        $pass = $_POST['NPass'];
+        $pass = base64_encode($pass);
 
+        $query_s2 = mysqli_query($conexion, "SELECT * FROM tbl_usuario where correo_User='$correo' and id_User!='$rid'");
+        $rows = mysqli_num_rows($query_s2);
 
-        $result = mysqli_query($conexion, "UPDATE tbl_usuario SET nombre_User = trim('$nombres'), apellido_agente = trim('$apellidos'), dui_agente = trim('$dui'), sexo_agente = trim('$genero'), codigo_cam_agente = trim('$codigo'), telefono_agente = trim('$telefono'), correo_agente = trim('$correo'), direccion = trim('$direccion') WHERE id_agente='$rid'");
+        if ($rows == 0) {
 
-        if (!$result) {
-            echo "<script language='javascript'>";
-            echo "alertaErrorM();";
-            echo "</script'>";
-            echo "<script language='javascript'>";
-            echo "setTimeout ('r()', 1500);";
-            echo "</script>";
-        } else {
+            $result = mysqli_query($conexion, "UPDATE tbl_usuario SET nombre_User=trim('$nombres'), sexo_User=trim('$sexo'), correo_User=trim('$correo'), rol_User=trim('$rol'), pass_User=trim('$pass') WHERE id_User='$rid'");
 
-            /*/bitacora 
+            if (!$result) {
+                echo "<script language='javascript'>";
+                echo "alertaErrorM();";
+                echo "</script'>";
+                echo "<script language='javascript'>";
+                echo "setTimeout ('r()', 1500);";
+                echo "</script>";
+            } else {
+
+                /*/bitacora 
          if (isset($_SESSION)) {
             $usuario = $_SESSION['idUsuario'];
             ini_set('date.timezone', 'America/El_Salvador');
@@ -72,11 +78,17 @@ if (isset($_POST['editar'])) {
         }
         //fin bitacora*/
 
+                echo "<script language='javascript'>";
+                echo "alertaExitoM();";
+                echo "</script>";
+                echo "<script language='javascript'>";
+                echo "setTimeout ('r()', 1000);";
+                echo "</script>";
+            }
+        } else {
+
             echo "<script language='javascript'>";
-            echo "alertaExitoM();";
-            echo "</script>";
-            echo "<script language='javascript'>";
-            echo "setTimeout ('r()', 1000);";
+            echo "alertaErrorRegistro();";
             echo "</script>";
         }
     }
