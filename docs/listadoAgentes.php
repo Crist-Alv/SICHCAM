@@ -394,10 +394,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                         <thead>
-                                            <tr>
-                                                <th>N° de Placa</th>
+                                            <tr>                                                
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
+                                                <th>Correo</th>
+                                                <th>Teléfono</th>
                                                 <th>Ver más</th>
                                                 <th>Editar</th>
                                                 <th>Dar de Baja</th>
@@ -412,11 +413,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                             while ($fila = mysqli_fetch_array($query_s)) {
                                             ?>
 
-                                                <tr>
-                                                    <td><?php echo $fila["codigo_cam_agente"]; ?></td>
+                                                <tr>                                                    
                                                     <td><?php echo $fila["nombre_agente"]; ?></td>
                                                     <td><?php echo $fila["apellido_agente"]; ?></td>
-
+                                                    <td><?php echo $fila["correo_agente"]; ?></td>
+                                                    <td><?php echo $fila["telefono_agente"]; ?></td>
                                                     <td>
                                                         <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerAg_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
                                                     </td>
