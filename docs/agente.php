@@ -4,6 +4,7 @@ $iddatos = $_SESSION['id_User'];
 if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     header('Location: ../index.php');
     exit();
+    ///prueba
 }
 ?>
 <!DOCTYPE html>
@@ -262,7 +263,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                 </a>
             </div>
             <div class="media-body">
+<<<<<<< HEAD
                 <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAE CEDROS</a>
+=======
+                <a class="navbar-brand" href="../index.php">EL CUERPO DE AGENTES MUNICIPALES</a>
+>>>>>>> d641b3393157a1017c31db5c719416bc32afc72e
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="" title="Ayuda">
