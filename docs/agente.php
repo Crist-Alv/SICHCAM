@@ -263,7 +263,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                 </a>
             </div>
             <div class="media-body">
-                <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAE CEDROS</a>
+                <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="" title="Ayuda">
