@@ -103,7 +103,7 @@ session_start();
         <div class="card">
             <div class="logo">
 
-                <a style="color:blue;"><img src="../images/logo.jpg" width="120" height="160"><b>SICHCAM</b></a>
+                <a style="color:blue;"><img src="../images/logo.png" width="180" height="160"><b>SICHCAM</b></a>
             </div>
             <div class="body">
                 <form role="form" action="" method="post" id="sichcam" name="sichcam">

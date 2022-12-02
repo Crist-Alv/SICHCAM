@@ -1,113 +1,165 @@
-/*
- Navicat Premium Data Transfer
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 02-12-2022 a las 07:49:38
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 8.1.10
 
- Source Server         : MySQL
- Source Server Type    : MySQL
- Source Server Version : 100316
- Source Host           : localhost:3306
- Source Schema         : cam_cedros
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
- Target Server Type    : MySQL
- Target Server Version : 100316
- File Encoding         : 65001
 
- Date: 01/12/2022 20:27:08
-*/
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+--
+-- Base de datos: `cam_cedros`
+--
 
--- ----------------------------
--- Table structure for tbl_agentes
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_agentes`;
-CREATE TABLE `tbl_agentes`  (
-  `id_agente` bigint NOT NULL AUTO_INCREMENT,
-  `nombre_agente` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `apellido_agente` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `dui_agente` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `sexo_agente` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `codigo_cam_agente` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `telefono_agente` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `correo_agente` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `direccion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `activo` tinyint NOT NULL,
-  PRIMARY KEY (`id_agente`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+-- --------------------------------------------------------
 
--- ----------------------------
--- Records of tbl_agentes
--- ----------------------------
-INSERT INTO `tbl_agentes` VALUES (1, 'Carlos Daniel', 'PÃ©rez Sosa', '9898498-4', 'Masculino', '1984-9', '5189-4899', 'dani@gmail.com', 'dsfasdgrgdf', 1);
-INSERT INTO `tbl_agentes` VALUES (3, 'Cristian MoisÃ©s', 'Alvarado Campos', '3575345-3', 'Masculino', '1868-6', '7876-5434', 'cristts2.0@gmail.com', 'ghmj537254', 1);
-INSERT INTO `tbl_agentes` VALUES (21, 'Flor MarÃ­a', 'HernÃ¡ndez LÃ³pez', '4168434-7', 'Femenino', '1453-4', '7845-3287', 'mari@gmail.com', '78fghffdgh', 1);
+--
+-- Estructura de tabla para la tabla `tbl_agentes`
+--
 
--- ----------------------------
--- Table structure for tbl_armas
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_armas`;
-CREATE TABLE `tbl_armas`  (
-  `id_arma` bigint NOT NULL AUTO_INCREMENT,
-  `modelo_arma` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `id_tipo_arma` bigint NOT NULL,
-  `serie_arma` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `matricula_arma` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_arma`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+CREATE TABLE `tbl_agentes` (
+  `id_agente` bigint(20) NOT NULL,
+  `nombre_agente` varchar(255) NOT NULL,
+  `apellido_agente` varchar(255) NOT NULL,
+  `dui_agente` varchar(10) NOT NULL,
+  `sexo_agente` varchar(9) NOT NULL,
+  `codigo_cam_agente` varchar(100) NOT NULL,
+  `telefono_agente` varchar(20) NOT NULL,
+  `correo_agente` varchar(255) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `activo` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- ----------------------------
--- Table structure for tbl_dias
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_dias`;
-CREATE TABLE `tbl_dias`  (
-  `id_dia` bigint NOT NULL,
-  `nombre_dia` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_dia`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+--
+-- Volcado de datos para la tabla `tbl_agentes`
+--
 
--- ----------------------------
--- Table structure for tbl_tipos_armas
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_tipos_armas`;
-CREATE TABLE `tbl_tipos_armas`  (
-  `id_tipos_arma` bigint NOT NULL AUTO_INCREMENT,
-  `nombre_tipo_arma` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_tipos_arma`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+INSERT INTO `tbl_agentes` (`id_agente`, `nombre_agente`, `apellido_agente`, `dui_agente`, `sexo_agente`, `codigo_cam_agente`, `telefono_agente`, `correo_agente`, `direccion`, `activo`) VALUES
+(1, 'Carlos Daniel', 'PÃ©rez Sosa', '9898498-4', 'Masculino', '1984-9', '5189-4899', 'dani@gmail.com', 'dsfasdgrgdf', 1),
+(3, 'Cristian MoisÃ©s', 'Alvarado Campos', '3575345-3', 'Masculino', '1868-6', '7876-5434', 'cristts2.0@gmail.com', 'ghmj537254', 1),
+(21, 'Flor MarÃ­a', 'HernÃ¡ndez LÃ³pez', '4168434-7', 'Femenino', '1453-4', '7845-3287', 'mari@gmail.com', '78fghffdgh', 1),
+(22, 'Javier Orlando', 'Delgado Mónico', '1234567-8', 'Masculino', '1234-5', '7898-5456', 'jayvi95@gmail.com', 'Cedros', 1);
 
--- ----------------------------
--- Table structure for tbl_usuario
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_usuario`;
-CREATE TABLE `tbl_usuario`  (
-  `id_User` int NOT NULL AUTO_INCREMENT,
-  `nombre_User` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `sexo_User` varchar(9) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `correo_User` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `rol_User` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `pass_User` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `estado` int NOT NULL,
-  PRIMARY KEY (`id_User`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+-- --------------------------------------------------------
 
--- ----------------------------
--- Records of tbl_usuario
--- ----------------------------
-INSERT INTO `tbl_usuario` VALUES (1, 'Cristian Alvarado', 'Masculino', 'cristts2.0@gmail.com', 'Administrador', 'Q3Jpc3RpYW4yLjA=', 1);
-INSERT INTO `tbl_usuario` VALUES (5, 'Pedro', 'Masculino', 'pedro@gmail.com', 'Agente', 'cGVkcm8xMjM=', 0);
-INSERT INTO `tbl_usuario` VALUES (6, 'Carlos Daniel', 'Masculino', 'dani@gmail.com', 'Agente', 'UMOpcmV6IFNvc2ExODM4NQ==', 1);
-INSERT INTO `tbl_usuario` VALUES (26, 'Flor MarÃ­a', 'Femenino', 'mari@gmail.com', 'Agente', 'SGVybsOhbmRleiBQw6lyZXoyMzExMg==', 1);
+--
+-- Estructura de tabla para la tabla `tbl_armas`
+--
 
--- ----------------------------
--- Table structure for tbl_zonas
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_zonas`;
-CREATE TABLE `tbl_zonas`  (
-  `id_zona` bigint NOT NULL AUTO_INCREMENT,
-  `nombre_zona` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `direccion_zona` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `activo` tinyint NOT NULL,
-  PRIMARY KEY (`id_zona`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+CREATE TABLE `tbl_armas` (
+  `id_arma` bigint(20) NOT NULL,
+  `modelo_arma` varchar(255) NOT NULL,
+  `serie_arma` varchar(100) NOT NULL,
+  `matricula_arma` varchar(100) NOT NULL,
+  `descripcion_arma` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
-SET FOREIGN_KEY_CHECKS = 1;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_usuario`
+--
+
+CREATE TABLE `tbl_usuario` (
+  `id_User` int(11) NOT NULL,
+  `nombre_User` varchar(255) NOT NULL,
+  `sexo_User` varchar(9) NOT NULL,
+  `correo_User` varchar(255) NOT NULL,
+  `rol_User` varchar(50) NOT NULL,
+  `pass_User` varchar(255) NOT NULL,
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Volcado de datos para la tabla `tbl_usuario`
+--
+
+INSERT INTO `tbl_usuario` (`id_User`, `nombre_User`, `sexo_User`, `correo_User`, `rol_User`, `pass_User`, `estado`) VALUES
+(1, 'Cristian Alvarado', 'Masculino', 'cristts2.0@gmail.com', 'Administrador', 'Q3Jpc3RpYW4yLjA=', 1),
+(5, 'Pedro', 'Masculino', 'pedro@gmail.com', 'Agente', 'cGVkcm8xMjM=', 0),
+(6, 'Carlos Daniel', 'Masculino', 'dani@gmail.com', 'Agente', 'UMOpcmV6IFNvc2ExODM4NQ==', 1),
+(26, 'Flor MarÃ­a', 'Femenino', 'mari@gmail.com', 'Agente', 'SGVybsOhbmRleiBQw6lyZXoyMzExMg==', 1),
+(27, 'Javier Orlando', 'Masculino', 'jayvi95@gmail.com', 'Administrador', 'MTIzNDU=', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_zonas`
+--
+
+CREATE TABLE `tbl_zonas` (
+  `id_zona` bigint(20) NOT NULL,
+  `nombre_zona` varchar(255) DEFAULT NULL,
+  `direccion_zona` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `tbl_agentes`
+--
+ALTER TABLE `tbl_agentes`
+  ADD PRIMARY KEY (`id_agente`) USING BTREE;
+
+--
+-- Indices de la tabla `tbl_armas`
+--
+ALTER TABLE `tbl_armas`
+  ADD PRIMARY KEY (`id_arma`) USING BTREE;
+
+--
+-- Indices de la tabla `tbl_usuario`
+--
+ALTER TABLE `tbl_usuario`
+  ADD PRIMARY KEY (`id_User`) USING BTREE;
+
+--
+-- Indices de la tabla `tbl_zonas`
+--
+ALTER TABLE `tbl_zonas`
+  ADD PRIMARY KEY (`id_zona`) USING BTREE;
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_agentes`
+--
+ALTER TABLE `tbl_agentes`
+  MODIFY `id_agente` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_armas`
+--
+ALTER TABLE `tbl_armas`
+  MODIFY `id_arma` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_usuario`
+--
+ALTER TABLE `tbl_usuario`
+  MODIFY `id_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_zonas`
+--
+ALTER TABLE `tbl_zonas`
+  MODIFY `id_zona` bigint(20) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
