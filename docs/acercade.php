@@ -3,6 +3,7 @@ if ($_SESSION['autenticado'] != 'yeah') {
     header('Location: ../login.php');
     exit();
 }*/
+//hola
 ?>
 <!DOCTYPE html>
 <html>
