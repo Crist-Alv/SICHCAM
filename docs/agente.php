@@ -259,7 +259,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     <nav class="navbar">
         <div class="media">
             <div class="media-left media-middle">
-                <img class="media-object" src="../images/logo.jpg" width="40" height="50">
+                <img class="media-object" src="../images/logo.png" width="60" height="50">
                 </a>
             </div>
             <div class="media-body">
@@ -283,10 +283,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                <center>
-                        <h5 style="color: orange;" >CAM</h5>
-                  
-                    </center>
 
                     <figure>
 
@@ -319,13 +315,13 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
                                 $usu = $_SESSION['nombre_User'];
-                                echo "$usu";
+                                echo "<h5'>CAM: $usu</h5>";
                             }
                             ?>
                         </span>
                     </li>
                     <div class="btn-group user-helper-dropdown">
-                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="../images/iconos/keyboard_arrow_down.svg" />
+                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 36px;" src="../images/iconos/keyboard_arrow_down.svg" />
                         <ul class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target="#ModalCerrar"><img src="../images/iconos/input.svg" />Cerrar Sesión</a></li>
                             <li><a href="perfil.php"><img src="../images/iconos/settings.svg" />Configuración de Cuenta</a></li>
@@ -418,7 +414,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
-                <img src="../images/minerva2.png" width="30" height="50" />
+                <img src="../images/minerva2.png" width="40" height="50" />
                 <div class="copyright">
                     <span>UES-FMP 2022 &copy; Todos Derechos Reservados</span>
                 </div>
@@ -450,7 +446,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                         <div class="row form-group col-md-8">
 
                                             <div class="col-sm-3" style="width : 158px">
-                                                <b>Codigo de agente *</b>
+                                                <b>Codigo de agente</b>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <img src="../images/iconos/dn.svg">
@@ -491,12 +487,12 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                         </div>
 
                                         <div class="row form-group col-md-8">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3 " style="width : 160px">
                                                 <b>Genero</b>
                                                 <br>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        <img src="../images/iconos/group-24px.svg">
+                                                        <img src="../images/iconos/genero.svg">
                                                     </span>
                                                     <input type="radio" name="genero" id="r1" class="with-gap radio-col-blue" value="Masculino" checked>
                                                     <label for="r1">Masculino</label>

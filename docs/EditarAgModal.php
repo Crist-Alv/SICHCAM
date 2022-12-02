@@ -34,7 +34,7 @@
                             <!--1-->
                             <fieldset>
                                 <legend>Datos del Agente</legend>
-                                <div class="row form-group col-md-12">
+                                <div class="row form-group col-md-10">
                                     <p>
                                     <div class="col-sm-3" style="width : 158px">
                                         <b>Codigo de agente *</b>
@@ -60,76 +60,77 @@
                                     </p>
 
                                     <p>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <b>Nombres</b>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <img src="../images/iconos/person.svg">
                                             </span>
-                                            <input type="String" onkeypress="return soloLetras(event)" onblur="limpia()" id="ednombres" name="ednombres" autocomplete="off" value="<?php echo $fila[1]; ?>" required autofocus>
+                                            <input type="String" onkeypress="return soloLetras(event)" onblur="limpia()" style="width : 150px" id="ednombres" name="ednombres" autocomplete="off" value="<?php echo $fila[1]; ?>" required autofocus>
                                         </div>
                                     </div>
                                     </p>
 
                                     <p>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <b>Apellidos</b>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <img src="../images/iconos/person.svg">
                                             </span>
-                                            <input type="String" onkeypress="return soloLetras(event)" onblur="limpia()" id="edapellidos" name="edapellidos" autocomplete="off" value="<?php echo $fila[2]; ?>" required autofocus>
+                                            <input type="String" onkeypress="return soloLetras(event)" onblur="limpia()" style="width : 150px" id="edapellidos" name="edapellidos" autocomplete="off" value="<?php echo $fila[2]; ?>" required autofocus>
                                         </div>
                                     </div>
                                     </p>
+                            </fieldset>
+                            <fieldset>
+                                <p>
+                                <div class="col-md-3">
+                                    <b>Genero</b>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/genero.svg">
+                                        </span>
+                                        <input type="radio" name="dgenero" id="dr1<?php echo $rid ?>" class="with-gap radio-col-blue" value="Masculino" <?php
+                                                                                                                                                        if ($fila[4] == "Masculino") {
+                                                                                                                                                            echo "checked";
+                                                                                                                                                        }
+                                                                                                                                                        ?>>
+                                        <label for="dr1<?php echo $rid ?>">Masculino</label>
 
-                                    <p>
-                                    <div class="col-md-4">
-                                        <b>Genero</b>
-                                        <br>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <img src="../images/iconos/group-24px.svg">
-                                            </span>
-                                            <input type="radio" name="dgenero" id="dr1<?php echo $rid ?>" class="with-gap radio-col-blue" value="Masculino" <?php
-                                                                                                                                                            if ($fila[4] == "Masculino") {
-                                                                                                                                                                echo "checked";
-                                                                                                                                                            }
-                                                                                                                                                            ?>>
-                                            <label for="dr1<?php echo $rid ?>">Masculino</label>
+                                        <input type="radio" name="dgenero" id="dr2<?php echo $rid ?>" class="with-gap radio-col-blue genero_data" value="Femenino" <?php
+                                                                                                                                                                    if ($fila[4] == "Femenino") {
+                                                                                                                                                                        echo "checked";
+                                                                                                                                                                    }
+                                                                                                                                                                    ?>>
+                                        <label for="dr2<?php echo $rid ?>">Femenino</label>
+                                    </div>
+                                </div>
+                                </p>
 
-                                            <input type="radio" name="dgenero" id="dr2<?php echo $rid ?>" class="with-gap radio-col-blue genero_data" value="Femenino" <?php
-                                                                                                                                                                        if ($fila[4] == "Femenino") {
-                                                                                                                                                                            echo "checked";
-                                                                                                                                                                        }
-                                                                                                                                                                        ?>>
-                                            <label for="dr2<?php echo $rid ?>">Femenino</label>
-                                        </div>
+                                <p>
+                                <div class="col-md-3">
+                                    <b>Teléfono</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/phone.svg">
+                                        </span>
+                                        <input type="String" class="phone-number" style="width : 120px" id="edtel" name="edtel" autocomplete="off" value="<?php echo $fila[6]; ?>" placeholder="Ex: 9999-9999" title="Un numero de telefono valido consta de cuatro digitos seguidos de un guion y cuatro digitos mas." required autofocus>
                                     </div>
-                                    </p>
-
-                                    <p>
-                                    <div class="col-md-4">
-                                        <b>Teléfono</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <img src="../images/iconos/phone.svg">
-                                            </span>
-                                            <input type="String" class="phone-number" id="edtel" name="edtel" autocomplete="off" value="<?php echo $fila[6]; ?>" placeholder="Ex: 9999-9999" title="Un numero de telefono valido consta de cuatro digitos seguidos de un guion y cuatro digitos mas." required autofocus>
-                                        </div>
+                                </div>
+                                </p>
+                                <p>
+                                <div class="col-md-3">
+                                    <b>Correo</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/email.svg">
+                                        </span>
+                                        <input type="String" class="email" id="edcorreo" name="edcorreo" autocomplete="off" value="<?php echo $fila[7]; ?>" required autofocus placeholder="Ex: example@example.com">
                                     </div>
-                                    </p>
-                                    <p>
-                                    <div class="col-md-4">
-                                        <b>Correo</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <img src="../images/iconos/email.svg">
-                                            </span>
-                                            <input type="String" class="email" id="edcorreo" name="edcorreo" autocomplete="off" value="<?php echo $fila[7]; ?>" required autofocus placeholder="Ex: example@example.com">
-                                        </div>
-                                    </div>
-                                    </p>
+                                </div>
+                                </p>
 
                             </fieldset>
 
