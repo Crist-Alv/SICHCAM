@@ -210,11 +210,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     <nav class="navbar">
         <div class="media">
             <div class="media-left media-middle">
-                <img class="media-object" src="../images/logo.jpg" width="40" height="50">
+                <img class="media-object" src="../images/logo.png" width="60" height="50">
                 </a>
             </div>
             <div class="media-body">
-                <a class="navbar-brand" href="../index.php">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES</a>
+                <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="" title="Ayuda">
@@ -234,6 +234,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
+
                     <figure>
 
                         <!--aqui va la foto del usuario -->
@@ -265,13 +266,13 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
                                 $usu = $_SESSION['nombre_User'];
-                                echo "$usu";
+                                echo "<h5'>CAM: $usu</h5>";
                             }
                             ?>
                         </span>
                     </li>
                     <div class="btn-group user-helper-dropdown">
-                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="../images/iconos/keyboard_arrow_down.svg" />
+                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 36px;" src="../images/iconos/keyboard_arrow_down.svg" />
                         <ul class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target="#ModalCerrar"><img src="../images/iconos/input.svg" />Cerrar Sesión</a></li>
                             <li><a href="perfil.php"><img src="../images/iconos/settings.svg" />Configuración de Cuenta</a></li>
@@ -344,10 +345,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/RegistroUser.php">Registro de Usuarios</a>
-                        </li>
-                        <li class="active">
-                            <a href="docs/ListadoUser.php">Listado</a>
+                            <a href="ListadoUser.php">Listado de Usuarios</a>
                         </li>
                     </ul>
 
@@ -394,10 +392,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                         <thead>
-                                            <tr>
-                                                <th>N° de Placa</th>
+                                            <tr>                                                
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
+                                                <th>Correo</th>
+                                                <th>Teléfono</th>
                                                 <th>Ver más</th>
                                                 <th>Editar</th>
                                                 <th>Dar de Baja</th>
@@ -412,11 +411,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                             while ($fila = mysqli_fetch_array($query_s)) {
                                             ?>
 
-                                                <tr>
-                                                    <td><?php echo $fila["codigo_cam_agente"]; ?></td>
+                                                <tr>                                                    
                                                     <td><?php echo $fila["nombre_agente"]; ?></td>
                                                     <td><?php echo $fila["apellido_agente"]; ?></td>
-
+                                                    <td><?php echo $fila["correo_agente"]; ?></td>
+                                                    <td><?php echo $fila["telefono_agente"]; ?></td>
                                                     <td>
                                                         <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerAg_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
                                                     </td>

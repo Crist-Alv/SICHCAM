@@ -89,7 +89,7 @@
                                     <b>Teléfono</b>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <img src="../images/iconos/03.svg">
+                                            <img src="../images/iconos/phone.svg">
                                         </span>
                                         <input type="String" readonly="readonly" value="<?php echo $fila[6]; ?>">
                                     </div>

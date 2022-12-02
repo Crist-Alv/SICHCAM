@@ -124,7 +124,7 @@
 <body class="fp-page">
     <div class="fp-box">
         <div class="logo">
-            <a style="color:cornsilk;"><img src="../images/logo.jpg" width="120" height="160"><b>SICHCAM</b></a>
+            <a style="color:cornsilk;"><img src="../images/logo.png" width="180" height="160"><b>SICHCAM</b></a>
         </div>
         <div class="card">
             <div class="body">

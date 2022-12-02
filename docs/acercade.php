@@ -1,8 +1,8 @@
-﻿<?php /*session_start();
+﻿<?php session_start();
 if ($_SESSION['autenticado'] != 'yeah') {
     header('Location: ../login.php');
     exit();
-}*/
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -79,10 +79,11 @@ if ($_SESSION['autenticado'] != 'yeah') {
     <nav class="navbar">
         <div class="media">
             <div class="media-left media-middle">
-                <img class="media-object" src="../images/logo.jpg" width="40" height="50">
+                <img class="media-object" src="../images/logo.png" width="60" height="50">
+                </a>
             </div>
             <div class="media-body">
-                <a class="navbar-brand" href="../index.php">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES</a>
+                <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="" title="Ayuda">
@@ -102,6 +103,7 @@ if ($_SESSION['autenticado'] != 'yeah') {
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
+
                     <figure>
 
                         <!--aqui va la foto del usuario -->
@@ -109,7 +111,7 @@ if ($_SESSION['autenticado'] != 'yeah') {
                         <?php
 
                         if (isset($_SESSION)) {
-                            $sexo = $_SESSION['sexoT'];
+                            $sexo = $_SESSION['sexo_User'];
                             $man = '../images/user.png';
                             $woman = '../images/userWoman.png';
                             $user = 'user-picture';
@@ -132,14 +134,14 @@ if ($_SESSION['autenticado'] != 'yeah') {
                     <li style="color:#fff; cursor:default;">
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
-                                $usu = $_SESSION['nombresT'];
-                                echo "$usu";
+                                $usu = $_SESSION['nombre_User'];
+                                echo "<h5'>CAM: $usu</h5>";
                             }
                             ?>
                         </span>
                     </li>
                     <div class="btn-group user-helper-dropdown">
-                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="../images/iconos/keyboard_arrow_down.svg" />
+                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 36px;" src="../images/iconos/keyboard_arrow_down.svg" />
                         <ul class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target="#ModalCerrar"><img src="../images/iconos/input.svg" />Cerrar Sesión</a></li>
                             <li><a href="perfil.php"><img src="../images/iconos/settings.svg" />Configuración de Cuenta</a></li>
@@ -228,7 +230,7 @@ if ($_SESSION['autenticado'] != 'yeah') {
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
-                <img src="../images/minerva2.png" width="30" height="50" />
+                <img src="../images/minerva2.png" width="40" height="50" />
                 <div class="copyright">
                     <span>UES-FMP 2019 &copy; Todos Derechos Reservados</span>
                 </div>

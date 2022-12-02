@@ -109,13 +109,14 @@
     <nav class="navbar">
         <div class="media">
             <div class="media-left media-middle">
-                <img class="media-object" src="images/logo.jpg" width="40" height="50">
+                <img class="media-object" src="images/logo.png" width="60" height="50">
+                </a>
             </div>
             <div class="media-body">
-                <a class="navbar-brand">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES</a>
+                <a class="navbar-brand" href="index.php">ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="#" title="Ayuda">
+                        <a href="" title="Ayuda">
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <img class="bg-white" src="images/iconos/help_outline.svg" />
                             </div>
@@ -132,6 +133,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
+
                     <figure>
 
                         <!--aqui va la foto del usuario -->
@@ -163,13 +165,13 @@
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
                                 $usu = $_SESSION['nombre_User'];
-                                echo "$usu";
+                                echo "<h5'>CAM: $usu</h5>";
                             }
                             ?>
                         </span>
                     </li>
                     <div class="btn-group user-helper-dropdown">
-                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="images/iconos/keyboard_arrow_down.svg" />
+                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 36px;" src="images/iconos/keyboard_arrow_down.svg" />
                         <ul class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target="#ModalCerrar"><img src="images/iconos/input.svg" />Cerrar Sesión</a></li>
                             <li><a href="docs/perfil.php"><img src="images/iconos/settings.svg" />Configuración de Cuenta</a></li>
@@ -259,7 +261,7 @@
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
-                <img src="images/minerva2.png" width="30" height="50" />
+                <img src="images/minerva2.png" width="40" height="50" />
                 <div class="copyright">
                     <span>UES-FMP 2022 &copy; Todos Derechos Reservados</span>
                 </div>

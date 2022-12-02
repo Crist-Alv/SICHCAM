@@ -41,13 +41,16 @@ include_once './Menu/Inicio.php';
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="images/imag-escuela/img1.jpg" width="1000px" alt="" />
+                    <img src="images/imag-cedros/img1.jpg" width="1000px" alt="" />
                 </div>
                 <div class="item">
-                    <img src="images/imag-escuela/img2.jpg" width="1000px" alt="" />
+                    <img src="images/imag-cedros/img2.jpg" width="1000px" alt="" />
                 </div>
                 <div class="item">
-                    <img src="images/imag-escuela/img3.jpg" width="1000px" alt="" />
+                    <img src="images/imag-cedros/img3.jpg" width="1000px" alt="" />
+                </div>
+                <div class="item">
+                    <img src="images/imag-cedros/img4.jpg" width="1000px" alt="" />
                 </div>
             </div>
 
