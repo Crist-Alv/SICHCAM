@@ -127,8 +127,8 @@ while ($fila = mysqli_fetch_array($query_s)) {
         }
 
         function verificar() {
-            if (document.getElementById('nomb').value == "" ||                
-                document.getElementById('sex').value == "" ||               
+            if (document.getElementById('nomb').value == "" ||
+                document.getElementById('sex').value == "" ||
                 document.getElementById('Email').value == "") {
 
                 alertaError2();
@@ -402,7 +402,7 @@ while ($fila = mysqli_fetch_array($query_s)) {
                                 if (isset($_SESSION)) {
                                     $nivel = $_SESSION["rol_User"];
                                     echo '<p>' . $nivel . '</p>';
-                                }                                
+                                }
                                 ?>
                             </div>
                         </div>
@@ -430,7 +430,7 @@ while ($fila = mysqli_fetch_array($query_s)) {
                                                         <input type="text" class="form-control" id="nomb" name="nomb" autocomplete="off" placeholder="Escribir su nombre..." value="<?php echo $rnombre; ?>" required>
                                                     </div>
                                                 </div>
-                                            </div>                                            
+                                            </div>
                                             <div class="form-group">
                                                 <label for="Email" class="col-sm-2 control-label">Email</label>
                                                 <div class="col-sm-10">
@@ -438,7 +438,7 @@ while ($fila = mysqli_fetch_array($query_s)) {
                                                         <input type="email" class="form-control" id="Email" name="Email" autocomplete="off" placeholder="Escribir su correo Electrónico..." value="<?php echo $rcorreo; ?>" required>
                                                     </div>
                                                 </div>
-                                            </div>                                           
+                                            </div>
 
                                             <div class="form-group">
                                                 <label for="Sex" class="col-sm-2 control-label">Genero</label>
@@ -455,11 +455,11 @@ while ($fila = mysqli_fetch_array($query_s)) {
                                                         ?>
                                                     </select>
                                                 </div>
-                                            </div>                                            
+                                            </div>
 
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="button" id="evpersonal" name="evpersonal" class="btn btn-success waves-effect" onClick="verificar()">Guardar Cambios</button>
+                                                    <button type="button" id="evpersonal" name="evpersonal" class="btn btn-success waves-effect" onclick="verificar()">Guardar Cambios</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -473,11 +473,10 @@ while ($fila = mysqli_fetch_array($query_s)) {
                                                 <div class="col-sm-9">
                                                     <div class="form-line">
                                                         <input type="password" class="form-control" id="PassAnt" name="PassAnt" autocomplete="off" placeholder="Escribir la contraseña anterior...." required>
-                                                    </div>
-                                                    <br>
-                                                    <div class="col-xs-7 p-t-6">
-                                                        <input type="checkbox" id="recr" class="filled-in chk-col-geed" onchange="document.getElementById('PassAnt').type = this.checked ? 'text' : 'password'">
-                                                        <label for="recr">Mostrar Contraseña</label>
+                                                        <div class="col-xs-7 p-t-6">
+                                                            <input type="checkbox" id="recr" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('PassAnt').type = this.checked ? 'text' : 'password'">
+                                                            <label for="recr">Mostrar Contraseña</label>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -487,6 +486,10 @@ while ($fila = mysqli_fetch_array($query_s)) {
                                                 <div class="col-sm-9">
                                                     <div class="form-line">
                                                         <input type="password" class="form-control" id="NPass" name="NPass" autocomplete="off" placeholder="Escriba la nueva contraseña..." required>
+                                                        <div class="col-xs-7 p-t-6">
+                                                            <input type="checkbox" id="recr1<?php echo $id; ?>" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('NPass').type = this.checked ? 'text' : 'password'">
+                                                            <label for="recr1<?php echo $id; ?>">Mostrar Contraseña</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -495,13 +498,17 @@ while ($fila = mysqli_fetch_array($query_s)) {
                                                 <div class="col-sm-9">
                                                     <div class="form-line">
                                                         <input type="password" class="form-control" id="NPassConf" name="NPassConf" autocomplete="off" placeholder="Confirmar la nueva contraseña..." required>
+                                                        <div class="col-xs-7 p-t-6">
+                                                            <input type="checkbox" id="recr2<?php echo $id; ?>" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('NPassConf').type = this.checked ? 'text' : 'password'">
+                                                            <label for="recr2<?php echo $id; ?>">Mostrar Contraseña</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <div class="col-sm-offset-3 col-sm-9">
-                                                    <button type="button" id="evcontra" name="evcontra" class="btn btn-success waves-effect" onClick="verificar2()">Guardar cambios</button>
+                                                    <button type="button" id="evcontra" name="evcontra" class="btn btn-success waves-effect" onclick="verificar2()">Guardar cambios</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -582,8 +589,8 @@ if (isset($_REQUEST["bandera"])) {
 
             $result = mysqli_query($conexion, "UPDATE tbl_usuario SET nombre_User=trim('$nombres'), sexo_User=trim('$sexo'), correo_User=trim('$email') WHERE id_User='$baccion'");
 
-            if (!$result) {            
-                echo "<script language='javascript'>";    
+            if (!$result) {
+                echo "<script language='javascript'>";
                 echo 'alertaError();';
                 echo '</script>';
                 echo "<script language='javascript'>";
