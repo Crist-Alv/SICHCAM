@@ -1,8 +1,4 @@
-﻿<?php 
-session_start();
-?>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -134,8 +130,8 @@ session_start();
                             <button type="button" class="btn btn-block bg-blue waves-effect" onClick="verificar()">Iniciar Sesión</button>
                         </div>
                     </div>
-                    <div class="row m-t-15 m-b--20">                        
-                        <div class="col-xs-6 align-right">
+                    <div class="row m-t-10">                        
+                        <div class="col-xs-15 align-center">
                             <a href="recuperarClave.php">¿Olvidastes tu Contraseña?</a>
                         </div>
                     </div>

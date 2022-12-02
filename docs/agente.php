@@ -449,7 +449,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                     <span class="input-group-addon">
                                                         <img src="../images/iconos/dn.svg">
                                                     </span>
-                                                    <input type="String" class="codigo-agente-number" style="width : 80px" name="codigo" id="codigo" autocomplete="off" required autofocus>
+                                                    <input type="String" style="width : 80px" name="codigo" id="codigo" autocomplete="off" autofocus>
                                                 </div>
                                             </div>
 
