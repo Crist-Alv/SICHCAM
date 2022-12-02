@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form name="datos" id="datos" action="FuncionEditAgente.php?rid=<?php echo $rid; ?>" role="form" method="POST" enctype="multipart/form-data" class="form-group">
+                        <form name="datos" id="datos" action="FuncionEditUser.php?rid=<?php echo $rid; ?>" role="form" method="POST" enctype="multipart/form-data" class="form-group">
                             <!--1-->
                             <fieldset>
                                 <legend>Datos del Agente</legend>
