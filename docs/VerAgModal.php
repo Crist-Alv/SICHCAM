@@ -60,7 +60,7 @@
                                     <br>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <img src="../images/iconos/group-24px.svg">
+                                            <img src="../images/iconos/genero.svg">
                                         </span>
                                         <input type="radio" name="gd" id="md" class="with-gap radio-col-blue" value="Masculino" disabled <?php
                                                                                                                                             $gend = $fila[4];

@@ -324,7 +324,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/materia.svg" />
+                        <img src="../images/iconos/mundo.svg" width="25px" />
                         <span>Gestión de Zonas</span>
                     </a>
                     <ul class="ml-menu">
@@ -338,7 +338,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
                     <li class="active">
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <img src="../images/iconos/horario.svg" />
+                            <img src="../images/iconos/class.svg" />
                             <span>Gestión de Usuarios</span>
                         </a>
                         <ul class="ml-menu">
@@ -391,8 +391,8 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                                    <li role="presentation" class="active"><a href="#activo_animation_1" data-toggle="tab">Usuarios Activos</a></li>
-                                    <li role="presentation"><a href="#inactivo_animation_1" data-toggle="tab">Usuarios Inactivos</a></li>                                    
+                                    <li role="presentation" class="active"><a href="#activo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Activos</a></li>
+                                    <li role="presentation"><a href="#inactivo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Inactivos</a></li>
                                 </ul>
 
                                 <!-- Tab panes -->

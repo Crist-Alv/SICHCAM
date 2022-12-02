@@ -188,14 +188,14 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
         }
 
         function alertaErrorM() {
-        alertify.error("<p>No se puedieron modificar con exito</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
-    }
+            alertify.error("<p>No se puedieron modificar con exito</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+        }
 
-    function alertaExitoM() {
-        alertify.message("<p>Los datos se modificaron exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
-            transition: 'flipx'
-        });
-    }
+        function alertaExitoM() {
+            alertify.message("<p>Los datos se modificaron exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
+                transition: 'flipx'
+            });
+        }
     </script>
 
     <script type="text/javascript" class="init">
@@ -326,7 +326,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/materia.svg" />
+                        <img src="../images/iconos/mundo.svg" width="25px" />
                         <span>Gestión de Zonas</span>
                     </a>
                     <ul class="ml-menu">
@@ -339,7 +339,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/horario.svg" />
+                        <img src="../images/iconos/class.svg" />
                         <span>Gestión de Usuarios</span>
                     </a>
                     <ul class="ml-menu">

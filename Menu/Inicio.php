@@ -26,9 +26,9 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="css/themes/all-themes.css" rel="stylesheet" />
-    
+
     <!--Para el horario-->
-        <!-- Favicon-->
+    <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Bootstrap Core Css -->
@@ -66,12 +66,12 @@
 
     <!-- Custom Css -->
     <link href="css/style.css" rel="stylesheet">
-  
+
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="css/themes/all-themes.css" rel="stylesheet" />
 
 
-    
+
     <!-- ************-->
 
     <style type="text/css">
@@ -99,7 +99,7 @@
 
     <script type="text/javascript" class="init">
         function Salir() {
-            document.location.href = "Config/fin.php";			
+            document.location.href = "Config/fin.php";
         }
     </script>
 </head>
@@ -112,7 +112,7 @@
                 <img class="media-object" src="images/logo.jpg" width="40" height="50">
             </div>
             <div class="media-body">
-            <a class="navbar-brand">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES</a>
+                <a class="navbar-brand">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="#" title="Ayuda">
@@ -147,10 +147,10 @@
                             $style = 'max-width: 110px;';
                             if (isset($_SESSION)) {
                                 if ($sexo == 'Masculino') {
-                                    echo '<img src="'.$man.'" alt="'.$user.'" class="'.$class.'" >';
+                                    echo '<img src="' . $man . '" alt="' . $user . '" class="' . $class . '" >';
                                 } else {
                                     if ($sexo == 'Femenino') {
-                                        echo '<img src="'.$woman.'" alt="'.$user.'" class="'.$class.'" >';
+                                        echo '<img src="' . $woman . '" alt="' . $user . '" class="' . $class . '" >';
                                     }
                                 }
                             }
@@ -162,9 +162,9 @@
                     <li style="color:#fff; cursor:default;">
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
-                            $usu = $_SESSION['nombre_User'];
-                            echo "$usu";
-                        }
+                                $usu = $_SESSION['nombre_User'];
+                                echo "$usu";
+                            }
                             ?>
                         </span>
                     </li>
@@ -222,7 +222,7 @@
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="images/iconos/materia.svg" />
+                        <img src="images/iconos/mundo.svg" width="25px" />
                         <span>Gestión de Zonas</span>
                     </a>
                     <ul class="ml-menu">
@@ -235,7 +235,7 @@
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="images/iconos/horario.svg" />
+                        <img src="images/iconos/class.svg" />
                         <span>Gestión de Usuarios</span>
                     </a>
                     <ul class="ml-menu">
@@ -251,7 +251,7 @@
                     <ul class="ml-menu">
                         <li class="active">
                             <a href="docs/seguridad.php">Opciones de Seguridad</a>
-                        </li>                       
+                        </li>
                     </ul>
                     <a href="docs/acercade.php">Acerca de</a>
                 </ul>

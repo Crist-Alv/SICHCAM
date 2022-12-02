@@ -1,24 +1,21 @@
-﻿<?php /*session_start();
-$id = $_SESSION["idUsuario"];
+﻿<?php session_start();
+$id = $_SESSION["id_User"];
 if ($_SESSION['autenticado'] != 'yeah') {
     header('Location: ../login.php');
     exit();
-}*/
+}
 ?>
 
 <?php
-/*include "../config/conexion.php";
-$query_s = pg_query($conexion, "select * from usuario where idusuario='$id'");
-while ($fila = pg_fetch_array($query_s)) {
+include "../config/conexion.php";
+$query_s = mysqli_query($conexion, "SELECT * from tbl_usuario where id_User='$id'");
+while ($fila = mysqli_fetch_array($query_s)) {
     $rnombre = $fila[1];
-    $rapellido = $fila[5];
-    $rfecha = $fila[7];
-    $rsexo = $fila[6];
-    $rclave = $fila[2];
+    $rsexo = $fila[2];
+    $rclave = $fila[5];
     $rclave = base64_decode($rclave);
-    $rdireccion = $fila[8];
     $rcorreo = $fila[3];
-}*/
+}
 ?>
 
 <!DOCTYPE html>
@@ -130,11 +127,8 @@ while ($fila = pg_fetch_array($query_s)) {
         }
 
         function verificar() {
-            if (document.getElementById('nomb').value == "" ||
-                document.getElementById('apell').value == "" ||
-                document.getElementById('fechan').value == "" ||
-                document.getElementById('sex').value == "" ||
-                document.getElementById('direc').value == "" ||
+            if (document.getElementById('nomb').value == "" ||                
+                document.getElementById('sex').value == "" ||               
                 document.getElementById('Email').value == "") {
 
                 alertaError2();
@@ -224,7 +218,7 @@ while ($fila = pg_fetch_array($query_s)) {
     <!-- Top Bar -->
     <nav class="navbar">
         <div class="media">
-        <div class="media-left media-middle">
+            <div class="media-left media-middle">
                 <img class="media-object" src="../images/logo.jpg" width="40" height="50">
                 </a>
             </div>
@@ -256,7 +250,7 @@ while ($fila = pg_fetch_array($query_s)) {
                         <?php
 
                         if (isset($_SESSION)) {
-                            $sexo = $_SESSION['sexoT'];
+                            $sexo = $_SESSION['sexo_User'];
                             $man = '../images/user.png';
                             $woman = '../images/userWoman.png';
                             $user = 'user-picture';
@@ -272,8 +266,6 @@ while ($fila = pg_fetch_array($query_s)) {
                                 }
                             }
                         }
-                        $man = 'images/user.png';
-                        echo '<img src="'.$man.'" alt="" class="" >';
                         ?>
                     </figure>
                 </div>
@@ -281,7 +273,7 @@ while ($fila = pg_fetch_array($query_s)) {
                     <li style="color:#fff; cursor:default;">
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
-                                $usu = $_SESSION['nombresT'];
+                                $usu = $_SESSION['nombre_User'];
                                 echo "$usu";
                             }
                             ?>
@@ -300,7 +292,7 @@ while ($fila = pg_fetch_array($query_s)) {
             <div class="menu">
                 <ul class="list">
                     <li class="header">MENÚ</li>
-                    
+
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/assignment_ind.svg" />
                         <span>Gestión de Agentes</span>
@@ -313,7 +305,7 @@ while ($fila = pg_fetch_array($query_s)) {
                             <a href="listadoAgentes.php">Listado</a>
                         </li>
                     </ul>
-                    
+
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/clipboard.svg" />
                         <span>Gestión de Armas</span>
@@ -333,36 +325,33 @@ while ($fila = pg_fetch_array($query_s)) {
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/RegistroHorario.php">Registro de Horarios</a>
+                            <a href="RegistroHorario.php">Registro de Horarios</a>
                         </li>
                         <li class="active">
-                            <a href="docs/VerHorario.php">Ver Horarios</a>
+                            <a href="VerHorario.php">Ver Horarios</a>
                         </li>
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/materia.svg" />
+                        <img src="../images/iconos/mundo.svg" width="25px" />
                         <span>Gestión de Zonas</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/zona.php">Registro de Zonas</a>
+                            <a href="zona.php">Registro de Zonas</a>
                         </li>
                         <li class="active">
-                            <a href="docs/Listadozona.php">Listado</a>
+                            <a href="Listadozona.php">Listado</a>
                         </li>
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/horario.svg" />
+                        <img src="../images/iconos/class.svg" />
                         <span>Gestión de Usuarios</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/RegistroUser.php">Registro de Usuarios</a>
-                        </li>
-                        <li class="active">
-                            <a href="docs/ListadoUser.php">Listado</a>
+                            <a href="ListadoUser.php">Listado de Usuarios</a>
                         </li>
                     </ul>
 
@@ -372,8 +361,8 @@ while ($fila = pg_fetch_array($query_s)) {
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/seguridad.php">Opciones de Seguridad</a>
-                        </li>                       
+                            <a href="seguridad.php">Opciones de Seguridad</a>
+                        </li>
                     </ul>
                     <a href="acercade.php">Acerca de</a>
                 </ul>
@@ -404,28 +393,16 @@ while ($fila = pg_fetch_array($query_s)) {
                             <div class="content-area">
                                 <h3>
                                     <?php if (isset($_SESSION)) {
-                                        $nomb = $_SESSION["nombresT"];
-                                        $ape = $_SESSION["apellidosT"];
+                                        $nomb = $_SESSION["nombre_User"];
                                         echo $nomb;
-                                        echo " " . $ape;
                                     }
                                     ?>
                                 </h3>
                                 <?php
                                 if (isset($_SESSION)) {
-                                    $nivel = $_SESSION["nivelUsuario"];
-                                    if (isset($_SESSION)) {
-                                        if ($nivel == 1) {
-                                            echo '<p>Administrador</p>';
-                                        } else {
-                                            if ($nivel == 2) {
-                                                echo '<p>Usuario</p>';
-                                            }
-                                        }
-                                    }
-                                }
-                                echo "<p>Cristian Alvarado</p>";
-                                echo '<p>Administrador</p>';
+                                    $nivel = $_SESSION["rol_User"];
+                                    echo '<p>' . $nivel . '</p>';
+                                }                                
                                 ?>
                             </div>
                         </div>
@@ -450,35 +427,18 @@ while ($fila = pg_fetch_array($query_s)) {
                                                 <label for="nomb" class="col-sm-2 control-label">Nombres</label>
                                                 <div class="col-sm-10">
                                                     <div class="form-line">
-                                                        <input type="text" class="form-control" id="nomb" name="nomb" autocomplete="off" placeholder="Escribir su nombre..." value="" required>
+                                                        <input type="text" class="form-control" id="nomb" name="nomb" autocomplete="off" placeholder="Escribir su nombre..." value="<?php echo $rnombre; ?>" required>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="apell" class="col-sm-2 control-label">Apellidos</label>
-                                                <div class="col-sm-10">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" id="apell" name="apell" autocomplete="off" placeholder="Escribir su apellido..." value="" required>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </div>                                            
                                             <div class="form-group">
                                                 <label for="Email" class="col-sm-2 control-label">Email</label>
                                                 <div class="col-sm-10">
                                                     <div class="form-line">
-                                                        <input type="email" class="form-control" id="Email" name="Email" autocomplete="off" placeholder="Escribir su correo Electrónico..." value="" required>
+                                                        <input type="email" class="form-control" id="Email" name="Email" autocomplete="off" placeholder="Escribir su correo Electrónico..." value="<?php echo $rcorreo; ?>" required>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="Fecha" class="col-sm-3 control-label">Fecha de Nacimiento</label>
-                                                <div class="col-sm-3">
-
-                                                    <input type="date" id="fechan" name="fechan" value="" required>
-
-                                                </div>
-                                            </div>
+                                            </div>                                           
 
                                             <div class="form-group">
                                                 <label for="Sex" class="col-sm-2 control-label">Genero</label>
@@ -495,14 +455,7 @@ while ($fila = pg_fetch_array($query_s)) {
                                                         ?>
                                                     </select>
                                                 </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="Direc" class="col-sm-2 control-label">Dirección</label>
-                                                <div class="col-sm-2">
-                                                    <textarea type="String" cols="75" rows="5" style="resize: both;" id="direc" name="direc" autocomplete="off" placeholder="Escribir su dirección..."></textarea>
-                                                </div>
-                                            </div>
+                                            </div>                                            
 
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
@@ -523,11 +476,11 @@ while ($fila = pg_fetch_array($query_s)) {
                                                     </div>
                                                     <br>
                                                     <div class="col-xs-7 p-t-6">
-                                                    <input type="checkbox" id="recr" class="filled-in chk-col-geed" onchange="document.getElementById('PassAnt').type = this.checked ? 'text' : 'password'">
-                                                    <label for="recr">Mostrar Contraseña</label>
+                                                        <input type="checkbox" id="recr" class="filled-in chk-col-geed" onchange="document.getElementById('PassAnt').type = this.checked ? 'text' : 'password'">
+                                                        <label for="recr">Mostrar Contraseña</label>
+                                                    </div>
                                                 </div>
-                                                </div>
-                                                
+
                                             </div>
                                             <div class="form-group">
                                                 <label for="NPass" class="col-sm-3 control-label">Nueva contraseña</label>
@@ -543,7 +496,7 @@ while ($fila = pg_fetch_array($query_s)) {
                                                     <div class="form-line">
                                                         <input type="password" class="form-control" id="NPassConf" name="NPassConf" autocomplete="off" placeholder="Confirmar la nueva contraseña..." required>
                                                     </div>
-                                                </div>                                                
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
@@ -593,7 +546,8 @@ while ($fila = pg_fetch_array($query_s)) {
                 <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
-                    </button></h5>
+                    </button>
+                </h5>
             </div>
             <div class="modal-body">
                 <div class="envolcentro">
@@ -615,41 +569,30 @@ if (isset($_REQUEST["bandera"])) {
     $bandera = $_REQUEST["bandera"];
     $baccion = $_REQUEST["baccion"];
 
-    include_once('../config/conexion.php');
+    include_once('../Config/Conexion.php');
     if ($bandera == 'personal') {
         $nombres = $_REQUEST['nomb'];
-        $apellidos = $_REQUEST['apell'];
-        $direccion = $_REQUEST['direc'];
         $email = $_REQUEST['Email'];
         $sexo = $_REQUEST['sex'];
-        $fechan = $_REQUEST['fechan'];
 
-        pg_query('BEGIN');
+        $query_s2 = mysqli_query($conexion, "SELECT * FROM tbl_usuario where correo_User='$email' and id_User!='$baccion'");
+        $rows = mysqli_num_rows($query_s2);
 
-        $query_s2 = pg_query($conexion, "SELECT * FROM usuario where email='$email' and idusuario!='$baccion'");
-        $rows = pg_num_rows($query_s2);
+        if ($rows == 0) {
 
-        $query_s3 = pg_query($conexion, "SELECT * FROM usuario where email='$email' and idusuario!='$baccion' ");
-        $rows2 = pg_num_rows($query_s3);
+            $result = mysqli_query($conexion, "UPDATE tbl_usuario SET nombre_User=trim('$nombres'), sexo_User=trim('$sexo'), correo_User=trim('$email') WHERE id_User='$baccion'");
 
-        if ($rows == 0 && $rows2 == 0) {
-
-            $result = pg_query($conexion, "UPDATE usuario SET nombre=trim('$nombres'), email=trim('$email'), apellido=trim('$apellidos'), sexo=trim('$sexo'), fechan='$fechan', direccion=trim('$direccion') WHERE idusuario='$baccion'");
-
-            if (!$result) {
-                pg_query('rollback');
+            if (!$result) {            
+                echo "<script language='javascript'>";    
                 echo 'alertaError();';
+                echo '</script>';
                 echo "<script language='javascript'>";
                 echo "setTimeout ('r()', 1500);";
                 echo '</script>';
             } else {
-                pg_query('commit');
-                $_SESSION["nombresT"] = $nombres;
-                $_SESSION["emailT"] = $email;
-                $_SESSION["apellidosT"] = $apellidos;
-                $_SESSION["sexoT"] = $sexo;
-                $_SESSION["fechanT"] = $fechan;
-                $_SESSION["direcT"] = $direccion;
+                $_SESSION["nombre_User"] = $nombres;
+                $_SESSION["correo_User"] = $email;
+                $_SESSION["sexo_User"] = $sexo;
                 echo "<script language='javascript'>";
                 echo 'alertaExito();';
                 echo '</script>';
@@ -666,29 +609,25 @@ if (isset($_REQUEST["bandera"])) {
     }
 }
 
-    if (isset($_REQUEST["bandera2"])) {
-        $bandera2 = $_REQUEST["bandera2"];
-        $baccion2 = $_REQUEST["baccion2"];
-    
-        include_once('../config/conexion.php');
+if (isset($_REQUEST["bandera2"])) {
+    $bandera2 = $_REQUEST["bandera2"];
+    $baccion2 = $_REQUEST["baccion2"];
+
+    include_once('../Config/Conexion.php');
 
     if ($bandera2 == 'contra') {
         $pass = $_REQUEST['NPass'];
 
         $pass = base64_encode($pass);
 
-        pg_query('BEGIN');
-
-        $result = pg_query($conexion, "UPDATE usuario SET clave=trim('$pass') WHERE idusuario='$baccion2'");
+        $result = mysqli_query($conexion, "UPDATE tbl_usuario SET pass_User=trim('$pass') WHERE id_User='$baccion2'");
 
         if (!$result) {
-            pg_query('rollback');
             echo 'alertaError();';
             echo "<script language='javascript'>";
             echo "setTimeout ('r()', 1500);";
             echo '</script>';
         } else {
-            pg_query('commit');
             echo "<script language='javascript'>";
             echo 'alertaExito();';
             echo '</script>';

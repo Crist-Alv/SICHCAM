@@ -78,11 +78,11 @@ if ($_SESSION['autenticado'] != 'yeah') {
     <!-- Top Bar -->
     <nav class="navbar">
         <div class="media">
-        <div class="media-left media-middle">
+            <div class="media-left media-middle">
                 <img class="media-object" src="../images/logo.jpg" width="40" height="50">
             </div>
             <div class="media-body">
-            <a class="navbar-brand" href="../index.php">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES</a>
+                <a class="navbar-brand" href="../index.php">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="" title="Ayuda">
@@ -192,7 +192,7 @@ if ($_SESSION['autenticado'] != 'yeah') {
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/materia.svg" />
+                        <img src="../images/iconos/mundo.svg" width="25px" />
                         <span>Gestión de Zonas</span>
                     </a>
                     <ul class="ml-menu">
@@ -205,15 +205,12 @@ if ($_SESSION['autenticado'] != 'yeah') {
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/horario.svg" />
+                        <img src="../images/iconos/class.svg" />
                         <span>Gestión de Usuarios</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/RegistroUser.php">Registro de Usuarios</a>
-                        </li>
-                        <li class="active">
-                            <a href="docs/ListadoUser.php">Listado</a>
+                            <a href="docs/ListadoUser.php">Listado de Usuarios</a>
                         </li>
                     </ul>
 
@@ -224,7 +221,7 @@ if ($_SESSION['autenticado'] != 'yeah') {
                     <ul class="ml-menu">
                         <li class="active">
                             <a href="docs/seguridad.php">Opciones de Seguridad</a>
-                        </li>                       
+                        </li>
                     </ul>
                 </ul>
             </div>
@@ -249,28 +246,28 @@ if ($_SESSION['autenticado'] != 'yeah') {
                 </h1>
             </div>
             <center>
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 clearfix jsdemo-notification-button">
-                    <h6 class="m-0 font-weight-bold text-primary"></h6>
-                    <!-- Button trigger modal -->
-                    
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 clearfix jsdemo-notification-button">
+                        <h6 class="m-0 font-weight-bold text-primary"></h6>
+                        <!-- Button trigger modal -->
+
                         <div class="col-md-10" aria-label="text-center">
                             <h3 style="color: darkblue">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES (SICHCAM)</h3><br>
                             <p>
-                            <img src="../images/logo.jpg" width="250" height="300">
+                                <img src="../images/logo.jpg" width="250" height="300">
                             </p>
                             <br>
                             <p>
                             <h4 style="color: black">DESCRIPCIÓN DE LA INSTITUCIÓN:</h4>
                             </p>
                             <p>
-                           ----------
+                                ----------
                             </p>
                             <p>
-                            ---------
+                                ---------
                             </p>
                             <p>
-                          --------
+                                --------
                             </p><br>
                             <p>
                             <h4 style="color: black">Desarrolladores:</h4>
@@ -291,9 +288,9 @@ if ($_SESSION['autenticado'] != 'yeah') {
                                 <img src="../images/grupo.jpg" width="500" height="300">
                             </p>
                         </div>
-                    
+
+                    </div>
                 </div>
-            </div>
             </center>
         </div>
     </section>
@@ -352,7 +349,8 @@ if ($_SESSION['autenticado'] != 'yeah') {
                 <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
-                    </button></h5>
+                    </button>
+                </h5>
             </div>
             <div class="modal-body">
                 <div class="envolcentro">
