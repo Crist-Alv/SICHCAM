@@ -141,6 +141,7 @@
                                     <div class="form-group">
                                         <select type="text" name="rol" id="rol" class="form-control" placeholder="rol" autocomplete="off" required>
                                             <option value="<?php echo $fila[4]; ?>"><?php echo $fila[4]; ?></option>
+                                            <option value="Administrador">Administrador</option>
                                             <option value="Agente">Agente</option>
                                         </select>
                                     </div>
@@ -151,9 +152,9 @@
                                     <div class="form-group">
                                         <b>Contraseña</b>
                                         <div class="col-md-10">
-                                            <input type="password" id="NPass" name="NPass" autocomplete="off" placeholder="Escriba la nueva contraseña..." value="<?php echo $pass = base64_decode($fila[5]); ?>" required>
+                                            <input type="password" id="NPass<?php echo $rid; ?>" name="NPass" autocomplete="off" placeholder="Escriba la nueva contraseña..." value="<?php echo $pass = base64_decode($fila[5]); ?>" required>
                                             <div class="">
-                                                <input type="checkbox" id="urecr1<?php echo $rid; ?>" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('NPass').type = this.checked ? 'text' : 'password'">
+                                                <input type="checkbox" id="urecr1<?php echo $rid; ?>" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('NPass<?php echo $rid; ?>').type = this.checked ? 'text' : 'password'">
                                                 <label for="urecr1<?php echo $rid; ?>">Mostrar Contraseña</label>
                                             </div>
                                         </div>
@@ -165,7 +166,7 @@
                 </div>
                 <hr class="sidebar-divider d-none d-md-block">
                 <div class="modal-footer">
-                    <button type="submit" name="editar" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
+                    <button type="submit" name="editar" class="btn btn-primary waves-effect" onclick="verificar2()"><img src="../images/iconos/save.svg">Guardar</button>
                     <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
                 </div>
 

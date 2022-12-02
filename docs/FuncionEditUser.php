@@ -10,7 +10,7 @@
     }
 
     function r() {
-        location.href = ("listadoAgentes.php");
+        location.href = ("ListadoUser.php");
     }
 </script>
 <!-- include alertify.css -->
