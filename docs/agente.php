@@ -262,7 +262,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                 </a>
             </div>
             <div class="media-body">
-                <a class="navbar-brand" href="../index.php">EL CUERPO DE AGENTES MUNICIPALES</a>
+                <a class="navbar-brand" href="../index.php">EL CUERPO DE FLAVIO GAY</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="" title="Ayuda">
