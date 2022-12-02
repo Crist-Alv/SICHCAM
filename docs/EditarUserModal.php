@@ -165,7 +165,7 @@
                 </div>
                 <hr class="sidebar-divider d-none d-md-block">
                 <div class="modal-footer">
-                    <button type="submit" name="editar" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
+                    <button type="submit" name="editar" class="btn btn-primary waves-effect" onclick="verificar2()"><img src="../images/iconos/save.svg">Guardar</button>
                     <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
                 </div>
 
