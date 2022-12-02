@@ -263,7 +263,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                 </a>
             </div>
             <div class="media-body">
-                <a class="navbar-brand" href="../index.php">EL CUERPO DE AGENTES MUNICIPALES</a>
+                <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAE CEDROS</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="" title="Ayuda">
@@ -283,6 +283,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
+                <center>
+                        <h5 style="color: orange;" >CAM</h5>
+                  
+                    </center>
+
                     <figure>
 
                         <!--aqui va la foto del usuario -->
