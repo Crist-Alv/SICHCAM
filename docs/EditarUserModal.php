@@ -138,7 +138,10 @@
                                 <p>
                                 <div class="col-sm-3 selectContainer">
                                     <b>Rol del Usuario</b>
-                                    <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/face.svg">
+                                        </span>
                                         <select type="text" name="rol" id="rol" class="form-control" placeholder="rol" autocomplete="off" required>
                                             <option value="<?php echo $fila[4]; ?>"><?php echo $fila[4]; ?></option>
                                             <option value="Administrador">Administrador</option>
@@ -149,15 +152,17 @@
                                 </p>
                                 <p>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <b>Contraseña</b>
-                                        <div class="col-md-10">
-                                            <input type="password" id="NPass<?php echo $rid; ?>" name="NPass" autocomplete="off" placeholder="Escriba la nueva contraseña..." value="<?php echo $pass = base64_decode($fila[5]); ?>" required>
-                                            <div class="">
-                                                <input type="checkbox" id="urecr1<?php echo $rid; ?>" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('NPass<?php echo $rid; ?>').type = this.checked ? 'text' : 'password'">
-                                                <label for="urecr1<?php echo $rid; ?>">Mostrar Contraseña</label>
-                                            </div>
+                                    <b>Contraseña</b>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <img src="../images/iconos/lock.svg">
+                                        </span>
+                                        <input type="password" id="NPass<?php echo $rid; ?>" name="NPass" autocomplete="off" placeholder="Escriba la nueva contraseña..." value="<?php echo $pass = base64_decode($fila[5]); ?>" required>
+                                        <div class="col-xs-15">
+                                            <input type="checkbox" id="urecr1<?php echo $rid; ?>" class="fa fa-fw fa-eye password-icon show-password" onchange="document.getElementById('NPass<?php echo $rid; ?>').type = this.checked ? 'text' : 'password'">
+                                            <label for="urecr1<?php echo $rid; ?>">Mostrar Contraseña</label>
                                         </div>
+
                                     </div>
                                 </div>
                                 </p>
