@@ -148,44 +148,13 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     </style>
 
     <script type="text/javascript" class="init">
-        function Alertabaja(id, nombre, apellido) {
+        var miCheckbox = document.getElementById('user_activo');
 
-            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='30' height='30'></center>" + "<center><h1>¿Desea Dar De Baja A?</h1></center>  <center><h2 style='font-style:arial';> " + nombre + " " + apellido + "  </h2></center>",
-
-
-
-                function() {
-                    alertify.success('Ok');
-
-                    document.getElementById('bandera').value = "baja";
-                    document.getElementById('baccion').value = id;
-                    document.sichcam.submit();
-
-                },
-
-                function() {
-                    alertify.error('Ha Cancelado Dar De Baja').dismissOthers()
-                }).set('labels', {
-                ok: 'si',
-                cancel: 'no'
-            }).set({
-                transition: 'zoom'
-            });
-
-        }
-
-
-        function alertaExito() {
-            alertify.message("<h1>Exito</h1>" + "<p>Se dio de baja exitosamente</p>" + "<img src='../images/bien1.png'>").set({
-                transition: 'flipx'
-            });
-        }
-
-        function alertaError() {
-            alertify.error("<h1>Error</h1>" + "<p>No se puedo dar de baja</p>" + "<img src='../images/error.png'>").dismissOthers();
-
-
-        }
+        miCheckbox.addEventListener("change", function() {
+            document.getElementById('bandera').value = "baja";
+            document.getElementById('baccion').value = miCheckbox;
+            document.sichcam.submit();
+        });
 
         function alertaErrorM() {
             alertify.error("<p>No se puedieron modificar con exito</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
@@ -381,9 +350,9 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                Listado de Agentes
-                            </h2>
+                            <h3 style="color: blue;">
+                                Listado de Usuarios
+                            </h3>
                         </div>
                         <div class="body">
                             <form class="form-horizontal" role="form" method="post" class="form-group-sm" id="sichcam" name="sichcam">
@@ -394,12 +363,18 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                 <ul class="nav nav-tabs tab-nav-right" role="tablist">
                                     <li role="presentation" class="active"><a href="#activo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Activos</a></li>
                                     <li role="presentation"><a href="#inactivo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Inactivos</a></li>
+                                    <?php include 'AgregarUserModal.php'; ?>
+                                    <ul class="header-dropdown m-r--5">
+                                        <button type="button" class="btn btn-primary waves-effect waves-float" style="float: right;" data-toggle="modal" data-target="#AgregarUserModal"><img src="../images/iconos/registrar.svg" alt="x" />
+                                            Registrar Nuevo Usuario
+                                        </button>
+                                    </ul>
                                 </ul>
 
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane animated active" id="activo_animation_1">
-                                        <h3>Usuarios Activos</h3>
+                                        <h3 style="color: green;" >Usuarios Activos</h3>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                                 <thead>
@@ -437,7 +412,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                             <td>
                                                                 <div class="col-sm-3">
                                                                     <div class="switch">
-                                                                        <label><input type="checkbox" id="user_activo" checked><span class="lever switch-col-light-blue"></span></label>
+                                                                        <label><input type="checkbox" name="user_activo" id="user_activo" value="" checked><span class="lever switch-col-light-blue"></span></label>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -450,7 +425,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane animated" id="inactivo_animation_1">
-                                        <h3>Usuarios Inactivos</h3>
+                                        <h3 style="color: red;">Usuarios Inactivos</h3>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                                 <thead>
@@ -540,25 +515,22 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 </div>
 
 <?php
-/*if (isset($_REQUEST['bandera'])) {
+if (isset($_REQUEST['bandera'])) {
     $bandera = $_REQUEST['bandera'];
     $baccion = $_REQUEST['baccion'];
-    $estado = 0;
 
-    include '../config/conexion.php';
+    include '../Config/conexion.php';
     if ($bandera == 'baja') {
-        pg_query('BEGIN');
 
-        $result = pg_query($conexion, "UPDATE docente SET estado='$estado' where iddocente='$baccion'");
+        $result = mysqli_query($conexion, "UPDATE tbl_usuario SET estado = '0' where id_User='$baccion'");
 
         if (!$result) {
-            pg_query('rollback');
             echo "<script language='javascript'>";
-            echo 'alertaError();';
+            echo "setTimeout ('r()', 1500);";
             echo '</script>';
         } else {
 
-            //bitacora
+            /*/bitacora
             $query_s = pg_query($conexion, "SELECT * from docente where iddocente='$baccion'");
             while ($fila = pg_fetch_array($query_s)) {
             $dnombre = $fila[1];
@@ -579,19 +551,13 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     pg_query("commit");
                 }
             }
-            //fin bitacora
-
-            pg_query('commit');
-
+            //fin bitacora*/
             echo "<script language='javascript'>";
-            echo 'alertaExito();';
-            echo '</script>';
-            echo "<script language='javascript'>";
-            echo "setTimeout ('r()', 2000);";
+            echo "setTimeout ('r()', 1500);";
             echo '</script>';
         }
     }
-}*/
+}
 ?>
 
 </html>
