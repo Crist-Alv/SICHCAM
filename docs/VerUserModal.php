@@ -14,7 +14,7 @@
                     <form role="form" method="post" class="form-group">
                         <!--1-->
                         <fieldset>
-                            <legend>Datos del Agente</legend>
+                            <legend>Datos del Usuario</legend>
                             <div class="row form-group col-md-10">
 
                                 <div class="col-md-4">
