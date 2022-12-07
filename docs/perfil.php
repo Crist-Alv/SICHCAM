@@ -219,7 +219,7 @@ while ($fila = mysqli_fetch_array($query_s)) {
     <nav class="navbar">
         <div class="media">
             <div class="media-left media-middle">
-                <img class="media-object" src="../images/logo.jpg" width="40" height="50">
+                <img class="media-object" src="../images/logo.png" width="60" height="50">
                 </a>
             </div>
             <div class="media-body">
@@ -370,7 +370,7 @@ while ($fila = mysqli_fetch_array($query_s)) {
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
-                <img src="../images/minerva2.png" width="30" height="50" />
+                <img src="../images/minerva2.png" width="40" height="50" />
                 <div class="copyright">
                     <span>UES-FMP 2019 &copy; Todos Derechos Reservados</span>
                 </div>
@@ -388,7 +388,7 @@ while ($fila = mysqli_fetch_array($query_s)) {
                         <div class="profile-header">&nbsp;</div>
                         <div class="profile-body">
                             <div class="image-area">
-                                <img src="../images/logo.jpg" width="130" height="130" />
+                                <img src="../images/logo.png" width="150" height="150" />
                             </div>
                             <div class="content-area">
                                 <h3>

@@ -124,6 +124,8 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     <script src="../js/admin.js"></script>
     <script src="../js/pages/tables/jquery-datatable.js"></script>
 
+    <?php include 'AgregarUserModal.php'; ?>
+    
     <style type="text/css">
         .envolcentro {
             display: table-cell;
@@ -147,7 +149,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
         }
     </style>
 
-    <script type="text/javascript" class="init">
+    <!-- <script type="text/javascript" class="init">
         var miCheckbox = document.getElementById('user_activo');
 
         miCheckbox.addEventListener("change", function() {
@@ -165,7 +167,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                 transition: 'flipx'
             });
         }
-    </script>
+    </script> -->
 
     <script type="text/javascript" class="init">
         function Salir() {
@@ -363,7 +365,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                 <ul class="nav nav-tabs tab-nav-right" role="tablist">
                                     <li role="presentation" class="active"><a href="#activo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Activos</a></li>
                                     <li role="presentation"><a href="#inactivo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Inactivos</a></li>
-                                    <?php include 'AgregarUserModal.php'; ?>
                                     <ul class="header-dropdown m-r--5">
                                         <button type="button" class="btn btn-primary waves-effect waves-float" style="float: right;" data-toggle="modal" data-target="#AgregarUserModal"><img src="../images/iconos/registrar.svg" alt="x" />
                                             Registrar Nuevo Usuario
@@ -476,7 +477,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -515,7 +515,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 </div>
 
 <?php
-if (isset($_REQUEST['bandera'])) {
+/*if (isset($_REQUEST['bandera'])) {
     $bandera = $_REQUEST['bandera'];
     $baccion = $_REQUEST['baccion'];
 
@@ -530,7 +530,7 @@ if (isset($_REQUEST['bandera'])) {
             echo '</script>';
         } else {
 
-            /*/bitacora
+            /bitacora
             $query_s = pg_query($conexion, "SELECT * from docente where iddocente='$baccion'");
             while ($fila = pg_fetch_array($query_s)) {
             $dnombre = $fila[1];
@@ -551,13 +551,13 @@ if (isset($_REQUEST['bandera'])) {
                     pg_query("commit");
                 }
             }
-            //fin bitacora*/
+            //fin bitacora
             echo "<script language='javascript'>";
             echo "setTimeout ('r()', 1500);";
             echo '</script>';
         }
     }
-}
+}*/
 ?>
 
 </html>
