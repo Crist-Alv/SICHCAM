@@ -256,7 +256,7 @@ if ($_SESSION['autenticado'] != 'yeah') {
                         <div class="col-md-10" aria-label="text-center">
                             <h3 style="color: darkblue">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES (SICHCAM)</h3><br>
                             <p>
-                                <img src="../images/logo.jpg" width="250" height="300">
+                                <img src="../images/logo.png" width="200" height="200">
                             </p>
                             <br>
                             <p>
