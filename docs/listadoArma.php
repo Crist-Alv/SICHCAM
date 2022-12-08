@@ -1,10 +1,10 @@
-<?php /*session_start();
-$t = $_SESSION['nivelUsuario'];
-$iddatos = $_SESSION['idUsuario'];
-if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
+<?php session_start();
+$t = $_SESSION['rol_User'];
+$iddatos = $_SESSION['id_User'];
+if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     header('Location: ../index.php');
     exit();
-}*/
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,32 +83,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
     <!-- Waves Effect Plugin Js -->
     <script src="../plugins/node-waves/waves.js"></script>
 
-    <!-- Bootstrap Colorpicker Js -->
-    <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-
-    <!-- Dropzone Plugin Js -->
-    <script src="../plugins/dropzone/dropzone.js"></script>
-
-    <!-- Input Mask Plugin Js -->
-    <script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
-
-    <!-- include alertify.css -->
-    <link rel="stylesheet" href="../alertas/build/css/alertify.css">
-
-    <!-- include boostrap theme  -->
-    <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
-
-    <!-- include alertify script -->
-    <script src="../alertas/build/alertify.js"></script>
-
-    <script type="text/javascript">
-        //override defaults
-        alertify.defaults.transition = "slide";
-        alertify.defaults.theme.ok = "btn btn-primary";
-        alertify.defaults.theme.cancel = "btn btn-secondary";
-        alertify.defaults.theme.input = "form-control";
-    </script>
-
     <!-- Jquery DataTable Plugin Js -->
     <script src="../plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
@@ -148,23 +122,23 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
     </style>
 
     <script type="text/javascript" class="init">
-        function Alertabaja(id, nombre, apellido) {
+        function AlertaElim(id, nombre) {
 
-            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='30' height='30'></center>" + "<center><h1>¿Desea Dar De Baja A?</h1></center>  <center><h2 style='font-style:arial';> " + nombre + " " + apellido + "  </h2></center>",
+            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='100' height='100'></center>" + "<center><h3>¿Desea Eliminar el Arma?</h3></center>  <center><h4> Modelo: " + nombre + " </h4></center>",
 
 
 
                 function() {
                     alertify.success('Ok');
 
-                    document.getElementById('bandera').value = "baja";
+                    document.getElementById('bandera').value = "elim";
                     document.getElementById('baccion').value = id;
-                    document.frmsica.submit();
+                    document.sichcam.submit();
 
                 },
 
                 function() {
-                    alertify.error('Ha Cancelado Dar De Baja').dismissOthers()
+                    alertify.error('Ha Cancelado el Eliminar').dismissOthers()
                 }).set('labels', {
                 ok: 'si',
                 cancel: 'no'
@@ -176,18 +150,18 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
         }
 
         function r() {
-            location.href = ("docente.php");
+            location.href = ("listadoArma.php");
         }
 
 
         function alertaExito() {
-            alertify.message("<h1>Exito</h1>" + "<p>Se dio de baja exitosamente</p>" + "<img src='../images/bien1.png'>").set({
+            alertify.message("<h1>Exito</h1>" + "<p>Se elimino exitosamente</p>" + "<img src='../images/bien1.png'>").set({
                 transition: 'flipx'
             });
         }
 
         function alertaError() {
-            alertify.error("<h1>Error</h1>" + "<p>No se puedo dar de baja</p>" + "<img src='../images/error.png'>").dismissOthers();
+            alertify.error("<h1>Error</h1>" + "<p>No se puedo eliminar con exito</p>" + "<img src='../images/error.png'>").dismissOthers();
 
 
         }
@@ -195,7 +169,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
 
     <script type="text/javascript" class="init">
         function Salir() {
-            document.location.href = "../config/fin.php";
+            document.location.href = "../Config/fin.php";
         }
     </script>
 
@@ -206,11 +180,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
     <nav class="navbar">
         <div class="media">
             <div class="media-left media-middle">
-                <img class="media-object" src="../images/logo.jpg" width="40" height="50">
+                <img class="media-object" src="../images/logo.png" width="60" height="50">
                 </a>
             </div>
             <div class="media-body">
-                <a class="navbar-brand" href="../index.php">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES</a>
+                <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="" title="Ayuda">
@@ -237,7 +211,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                         <?php
 
                         if (isset($_SESSION)) {
-                            $sexo = $_SESSION['sexoT'];
+                            $sexo = $_SESSION['sexo_User'];
                             $man = '../images/user.png';
                             $woman = '../images/userWoman.png';
                             $user = 'user-picture';
@@ -260,14 +234,14 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                     <li style="color:#fff; cursor:default;">
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
-                                $usu = $_SESSION['nombresT'];
-                                echo "$usu";
+                                $usu = $_SESSION['nombre_User'];
+                                echo "<h5'>CAM: $usu</h5>";
                             }
                             ?>
                         </span>
                     </li>
                     <div class="btn-group user-helper-dropdown">
-                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="../images/iconos/keyboard_arrow_down.svg" />
+                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 36px;" src="../images/iconos/keyboard_arrow_down.svg" />
                         <ul class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target="#ModalCerrar"><img src="../images/iconos/input.svg" />Cerrar Sesión</a></li>
                             <li><a href="perfil.php"><img src="../images/iconos/settings.svg" />Configuración de Cuenta</a></li>
@@ -280,7 +254,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
             <div class="menu">
                 <ul class="list">
                     <li class="header">MENÚ</li>
-                    
+
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/assignment_ind.svg" />
                         <span>Gestión de Agentes</span>
@@ -293,20 +267,20 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                             <a href="listadoAgentes.php">Listado</a>
                         </li>
                     </ul>
-                    
+
                     <li class="active">
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/clipboard.svg" />
-                        <span>Gestión de Armas</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="arma.php">Registro de Armas</a>
-                        </li>
-                        <li class="active">
-                            <a href="ListadoArma.php">Listado</a>
-                        </li>
-                    </ul>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/clipboard.svg" />
+                            <span>Gestión de Armas</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="arma.php">Registro de Armas</a>
+                            </li>
+                            <li class="active">
+                                <a href="ListadoArma.php">Listado</a>
+                            </li>
+                        </ul>
                     </li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/horario.svg" />
@@ -354,7 +328,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                     <ul class="ml-menu">
                         <li class="active">
                             <a href="docs/seguridad.php">Opciones de Seguridad</a>
-                        </li>                       
+                        </li>
                     </ul>
                     <a href="acercade.php">Acerca de</a>
                 </ul>
@@ -384,7 +358,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                             </h2>
                         </div>
                         <div class="body">
-                            <form class="form-horizontal" action="" method="post" class="form-group-sm" id="frmsica" name="frmsica">
+                            <form class="form-horizontal" action="" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
 
@@ -393,9 +367,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                                         <thead>
                                             <tr>
                                                 <th>N° de Serie</th>
-                                                <th>Tipo</th>
                                                 <th>Modelo</th>
-                                                <th>Calibre</th>
                                                 <th>Ver más</th>
                                                 <th>Editar</th>
                                                 <th>Eliminiar</th>
@@ -404,36 +376,58 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
 
                                         <tbody>
                                             <?php
-                                            //include '../config/conexion.php';
+                                            include '../Config/Conexion.php';
 
-                                            //$query_s = pg_query($conexion, 'SELECT * from docente where estado=1');
-                                            //while ($fila = pg_fetch_array($query_s)) {
+                                            $query_s = mysqli_query($conexion, 'SELECT * from tbl_armas');
+                                            while ($fila = mysqli_fetch_array($query_s)) {
                                             ?>
 
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><?php echo $fila["serie_arma"]; ?></td>
+                                                    <td><?php echo $fila["modelo_arma"]; ?></td>
                                                     <td>
-                                                        <button type="button" name="verr" value="Verr" class="btn btn-info waves-effect waves-float verr_data" data-toggle="modal" data-target="#ModalVerD_<?php echo $fila['iddocente']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
+                                                        <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerAr_<?php echo $fila['id_arma']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
                                                     </td>
-                                                    
+                                                    <?php include 'VerArModal.php'; ?>
                                                     <td>
-                                                        <button type="button" name="editt" value="Editt" class="btn btn-warning waves-effect editt_data" data-toggle="modal" data-target="#ModalEdiD_<?php echo $fila['iddocente']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
+                                                        <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiAr_<?php echo $rid = $fila['id_arma']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
                                                     </td>
-                                                   
+                                                    <?php include 'EditarArModal.php'; ?>
                                                     <td>
-                                                        <button type="button" name="baja" value="Baja" class="btn btn-danger waves-effect waves-float baja_data" data-toggle="modal" onClick="Alertabaja('<?php echo $fila['iddocente']; ?>','<?php echo $fila['nombresd']; ?>','<?php echo $fila['apellidosd']; ?>')"><img src="../images/iconos/thumb-down.svg" /></button>
+                                                        <button type="button" name="elim" value="Elim" class="btn btn-danger waves-effect waves-float baja_data" onClick="AlertaElim('<?php echo $fila['id_arma']; ?>','<?php echo $fila['modelo_arma']; ?>')"><img src="../images/iconos/basura.svg" width="20px" /></button>
                                                     </td>
-
                                                 </tr>
                                             <?php
-                                            //}
+                                            }
                                             ?>
                                         </tbody>
                                     </table>
                                 </div>
+                                <!-- Bootstrap Colorpicker Js -->
+                                <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+
+                                <!-- Dropzone Plugin Js -->
+                                <script src="../plugins/dropzone/dropzone.js"></script>
+
+                                <!-- Input Mask Plugin Js -->
+                                <script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
+
+                                <!-- include alertify.css -->
+                                <link rel="stylesheet" href="../alertas/build/css/alertify.css">
+
+                                <!-- include boostrap theme  -->
+                                <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
+
+                                <!-- include alertify script -->
+                                <script src="../alertas/build/alertify.js"></script>
+
+                                <script type="text/javascript">
+                                    //override defaults
+                                    alertify.defaults.transition = "slide";
+                                    alertify.defaults.theme.ok = "btn btn-primary";
+                                    alertify.defaults.theme.cancel = "btn btn-secondary";
+                                    alertify.defaults.theme.input = "form-control";
+                                </script>
                             </form>
                         </div>
                     </div>
@@ -453,7 +447,8 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                 <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
-                    </button></h5>
+                    </button>
+                </h5>
             </div>
             <div class="modal-body">
                 <div class="envolcentro">
@@ -474,33 +469,30 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
 if (isset($_REQUEST['bandera'])) {
     $bandera = $_REQUEST['bandera'];
     $baccion = $_REQUEST['baccion'];
-    $estado = 0;
 
-    include '../config/conexion.php';
-    if ($bandera == 'baja') {
-        pg_query('BEGIN');
+    include '../Config/conexion.php';
+    if ($bandera == 'elim') {
 
-        $result = pg_query($conexion, "UPDATE docente SET estado='$estado' where iddocente='$baccion'");
+        $result = mysqli_query($conexion, "DELETE from tbl_armas where id_arma='$baccion'");
 
         if (!$result) {
-            pg_query('rollback');
             echo "<script language='javascript'>";
             echo 'alertaError();';
             echo '</script>';
         } else {
 
-            //bitacora
+            /*/bitacora
             $query_s = pg_query($conexion, "SELECT * from docente where iddocente='$baccion'");
             while ($fila = pg_fetch_array($query_s)) {
-            $dnombre = $fila[1];
-            $dapellido = $fila[2];
+                $dnombre = $fila[1];
+                $dapellido = $fila[2];
             }
             if (isset($_SESSION)) {
                 $usuario = $_SESSION['idUsuario'];
                 ini_set('date.timezone', 'America/El_Salvador');
                 $fecha2 = date("Y/m/d");
                 $hora = date("h:i:s");
-                $actividad = "Dio de Baja al Docente " .$dnombre. " " .$dapellido. "";
+                $actividad = "Dio de Baja al Docente " . $dnombre . " " . $dapellido . "";
                 pg_query("BEGIN");
                 $result2 = pg_query($conexion, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha2','$usuario')");
 
@@ -510,15 +502,13 @@ if (isset($_REQUEST['bandera'])) {
                     pg_query("commit");
                 }
             }
-            //fin bitacora
-
-            pg_query('commit');
+            //fin bitacora*/
 
             echo "<script language='javascript'>";
             echo 'alertaExito();';
             echo '</script>';
             echo "<script language='javascript'>";
-            echo "setTimeout ('r()', 2000);";
+            echo "setTimeout ('r()', 1500);";
             echo '</script>';
         }
     }

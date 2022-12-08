@@ -1,10 +1,10 @@
-<?php /*session_start();
-$t = $_SESSION['nivelUsuario'];
-$iddatos = $_SESSION['idUsuario'];
-if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
+<?php session_start();
+$t = $_SESSION['rol_User'];
+$iddatos = $_SESSION['id_User'];
+if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     header('Location: ../index.php');
     exit();
-}*/
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -124,8 +124,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
     <script src="../js/admin.js"></script>
     <script src="../js/pages/tables/jquery-datatable.js"></script>
 
-    <?php include 'AgregarDModal.php'; ?>
-
     <style type="text/css">
         .envolcentro {
             display: table-cell;
@@ -149,55 +147,54 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
         }
     </style>
 
-    <script type="text/javascript" class="init">
-        function Alertabaja(id, nombre, apellido) {
+<script language="javascript">
+        function verificar() {
+            if (document.getElementById('nserie').value == "" ||
+                document.getElementById('matricula').value == "" ||
+                document.getElementById('modelo').value == "" ||
+                document.getElementById('descarma').value == "") {
+                alertaErrorVacio();
+            } else {
+                $(document).ready(function() {
 
-            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='30' height='30'></center>" + "<center><h1>¿Desea Dar De Baja A?</h1></center>  <center><h2 style='font-style:arial';> " + nombre + " " + apellido + "  </h2></center>",
+                    $('#enviar').click(function() {
 
+                            document.getElementById('bandera').value = "add";
 
+                            document.sichcam.submit();                    
 
-                function() {
-                    alertify.success('Ok');
+                    });
+                });
+            }
+        }
 
-                    document.getElementById('bandera').value = "baja";
-                    document.getElementById('baccion').value = id;
-                    document.frmsica.submit();
-
-                },
-
-                function() {
-                    alertify.error('Ha Cancelado Dar De Baja').dismissOthers()
-                }).set('labels', {
-                ok: 'si',
-                cancel: 'no'
-            }).set({
-                transition: 'zoom'
+        function alertaExitoVacio() {
+            alertify.error("<p>Llene todos los campos solicitados</p>" + "<img src='../images/bien1.png'>").set({
+                transition: 'flipx'
             });
-
-
         }
-
-        function r() {
-            location.href = ("docente.php");
-        }
-
 
         function alertaExito() {
-            alertify.message("<h1>Exito</h1>" + "<p>Se dio de baja exitosamente</p>" + "<img src='../images/bien1.png'>").set({
+            alertify.message("<p>Se guardo exitosamente</p>" + "<img src='../images/bien1.png'>").set({
                 transition: 'flipx'
             });
         }
 
         function alertaError() {
-            alertify.error("<h1>Error</h1>" + "<p>No se puedo dar de baja</p>" + "<img src='../images/error.png'>").dismissOthers();
+            alertify.error("<p>No se puedo guardar</p>" + "<img src='../images/error.png'>").set({
+                transition: 'flipx'
+            });
 
+        }
 
+        function r() {
+            location.href = ("arma.php");
         }
     </script>
 
     <script type="text/javascript" class="init">
         function Salir() {
-            document.location.href = "../config/fin.php";
+            document.location.href = "../Config/fin.php";
         }
     </script>
 
@@ -208,11 +205,11 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
     <nav class="navbar">
         <div class="media">
             <div class="media-left media-middle">
-                <img class="media-object" src="../images/logo.jpg" width="40" height="50">
+                <img class="media-object" src="../images/logo.png" width="60" height="50">
                 </a>
             </div>
             <div class="media-body">
-                <a class="navbar-brand" href="../index.php">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES</a>
+                <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="" title="Ayuda">
@@ -239,7 +236,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                         <?php
 
                         if (isset($_SESSION)) {
-                            $sexo = $_SESSION['sexoT'];
+                            $sexo = $_SESSION['sexo_User'];
                             $man = '../images/user.png';
                             $woman = '../images/userWoman.png';
                             $user = 'user-picture';
@@ -262,14 +259,14 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                     <li style="color:#fff; cursor:default;">
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
-                                $usu = $_SESSION['nombresT'];
-                                echo "$usu";
+                                $usu = $_SESSION['nombre_User'];
+                                echo "<h5'>CAM: $usu</h5>";
                             }
                             ?>
                         </span>
                     </li>
                     <div class="btn-group user-helper-dropdown">
-                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="../images/iconos/keyboard_arrow_down.svg" />
+                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 36px;" src="../images/iconos/keyboard_arrow_down.svg" />
                         <ul class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target="#ModalCerrar"><img src="../images/iconos/input.svg" />Cerrar Sesión</a></li>
                             <li><a href="perfil.php"><img src="../images/iconos/settings.svg" />Configuración de Cuenta</a></li>
@@ -282,7 +279,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
             <div class="menu">
                 <ul class="list">
                     <li class="header">MENÚ</li>
-                    
+
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/assignment_ind.svg" />
                         <span>Gestión de Agentes</span>
@@ -296,18 +293,18 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                         </li>
                     </ul>
                     <li class="active">
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/clipboard.svg" />
-                        <span>Gestión de Armas</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="arma.php">Registro de Armas</a>
-                        </li>
-                        <li class="active">
-                            <a href="ListadoArma.php">Listado</a>
-                        </li>
-                    </ul>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/clipboard.svg" />
+                            <span>Gestión de Armas</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="arma.php">Registro de Armas</a>
+                            </li>
+                            <li class="active">
+                                <a href="ListadoArma.php">Listado</a>
+                            </li>
+                        </ul>
                     </li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/horario.svg" />
@@ -336,7 +333,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                    <img src="../images/iconos/mundo.svg" width="25px"/>
+                        <img src="../images/iconos/mundo.svg" width="25px" />
                         <span>Gestión de Usuarios</span>
                     </a>
                     <ul class="ml-menu">
@@ -344,7 +341,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                             <a href="ListadoUser.php">Listado de Usuarios</a>
                         </li>
                     </ul>
-                    
+
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/security.svg" />
                         <span>Seguridad</span>
@@ -352,7 +349,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                     <ul class="ml-menu">
                         <li class="active">
                             <a href="docs/seguridad.php">Opciones de Seguridad</a>
-                        </li>                       
+                        </li>
                     </ul>
                     <a href="acercade.php">Acerca de</a>
                 </ul>
@@ -360,7 +357,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
-                <img src="../images/minerva2.png" width="30" height="50" />
+                <img src="../images/minerva2.png" width="40" height="50" />
                 <div class="copyright">
                     <span>UES-FMP 2022 &copy; Todos Derechos Reservados</span>
                 </div>
@@ -382,164 +379,87 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != 1) {
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="body">
-                            <form class="form-horizontal" action="" method="post" class="form-group-sm" id="frmsica" name="frmsica">
+                            <form class="form-horizontal" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
 
-                                <?php
-$fecha_min = date("Y-m-d");
-$fecha_min = date("Y-m-d", strtotime($fecha_min . "- 80 year"));
-$fecha_max = date("Y-m-d");
-$fecha_max = date("Y-m-d", strtotime($fecha_max . "- 18 year"));
-?>
-
-    <script>
-        function soloLetras(e) {
-            key = e.keyCode || e.which;
-            tecla = String.fromCharCode(key).toLowerCase();
-            letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-            especiales = [8, 37, 39, 46];
-
-            tecla_especial = false
-            for (var i in especiales) {
-                if (key == especiales[i]) {
-                    tecla_especial = true;
-                    break;
-                }
-            }
-
-            if (letras.indexOf(tecla) == -1 && !tecla_especial)
-                return false;
-        }
-
-        function limpia() {
-            var val = document.getElementById("miInput").value;
-            var tam = val.length;
-            for (i = 0; i < tam; i++) {
-                if (!isNaN(val[i]))
-                    document.getElementById("miInput").value = '';
-            }
-        }
-    </script>
-      
-<script type="text/javascript" src="../js/deptoD.js"></script>
-
-    <!--Agregar nuevo docente Modal -->
-    
-                <div class="modal-body">
-                    <div class="demo-masked-input">
-                        <div class="row clearfix">
-                            <form name="datos" id="datos" action="../docs/AgregarDocente.php" method="post">
-                                <!--1-->
                                 <fieldset>
                                     <legend>Datos Técnicos</legend>
                                     <div class="row form-group col-md-8">
-
                                         <div class="col-md-4">
                                             <b>N° de Serie *</b>
                                             <div class="input-group">
-                                                
-                                                <input type="String" name="nombresd" autocomplete="off" onkeypress="return soloLetras(event)" onblur="limpia()" value="<?= (isset($_POST['nombresd'])) ? $_POST['nombresd'] : ""; ?>" required autofocus>
+                                            <span class="input-group-addon">
+                                                <img src="../images/iconos/lectura-de-codigo-de-barras.svg" width="25" height="25">
+                                            </span>
+                                                <input type="String" name="nserie" id="nserie" autocomplete="off" required autofocus>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <b>Tipo *</b>
+                                            <b>Matricula *</b>
                                             <div class="input-group">
-                                               
-                                                <input type="String" name="apellidosd" autocomplete="off" onkeypress="return soloLetras(event)" onblur="limpia()" value="<?= (isset($_POST['apellidosd'])) ? $_POST['apellidosd'] : ""; ?>" required autofocus>
+                                            <span class="input-group-addon">
+                                                <img src="../images/iconos/documento-firmado.svg" width="25" height="25">
+                                            </span>
+                                                <input type="String" name="matricula" id="matricula" autocomplete="off" required autofocus>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <b>Modelo *</b>
                                             <div class="input-group">
-                    
-                                                <input type="String" name="apellidosd" autocomplete="off" onkeypress="return soloLetras(event)" onblur="limpia()" value="<?= (isset($_POST['apellidosd'])) ? $_POST['apellidosd'] : ""; ?>" required autofocus>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <b>Calibre *</b>
-                                            <div class="input-group">
-                                                
-                                                <input type="String" class="String" name="tel" autocomplete="off" value="<?= (isset($_POST['tel'])) ? $_POST['tel'] : ""; ?>" required autofocus>
+                                            <span class="input-group-addon">
+                                                <img src="../images/iconos/documento-firmado.svg" width="25" height="25">
+                                            </span>
+                                                <input type="String" name="modelo" id="modelo" autocomplete="off" required autofocus>
                                             </div>
                                         </div>
                                     </div>
-                                        
                                 </fieldset>
-                        </div>
-                    </div>
-                </div>
-                <hr class="sidebar-divider d-none d-md-block">
-                <div class="modal-footer">
-                    <span>Los campos marcados con * son campos obligatorios</span>
-                    <button type="submit" name="agregar" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
-                    <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
-                </div>
-                </form>
+                                <fieldset>
+                                    <div class="col-md-5">
+                                        <b>Descripción *</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <img src="../images/iconos/comentario-alt.svg" width="25" height="25">
+                                            </span>
+                                            <textarea type="String" name="descarma" id="descarma" cols="90" rows="5" style="resize: both;" autocomplete="off" required></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="modal-footer">
+                                    <span>Los campos marcados con * son campos obligatorios</span>
+                                    <button type="submit" name="enviar" onclick="verificar()" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
+                                    <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
+                                </div>
 
-    <script>
-        function validarNro(e) {
-            var key;
-            if (window.event) // IE
-            {
-                key = e.keyCode;
-            } else if (e.which) // Netscape/Firefox/Opera
-            {
-                key = e.which;
-            }
+                                <!-- Bootstrap Colorpicker Js -->
+                                <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
 
-            if (key < 48 || key > 57) {
-                if (key == 46 || key == 8) // Detectar . (punto) y backspace (retroceso)
-                {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            return true;
-        }
-       
-        function FormatDateField(xField) {
-            var theText = xField.value;
-            theText = theText.replace(/\//gi, "");
-            if (!(theText.length == 8 || theText.length == 8)) {
-                alert("Fecha inv�lida, debe ser en formato DD/MM/AAAA");
-                xField.focus();
-                return false;
-            }
-            theText = theText.substring(0, 2) + "/" + theText.substring(2, 4) + "/" + theText.substring(4, 8);
-            xField.value = theText;
-        }
-    </script>
+                                <!-- Dropzone Plugin Js -->
+                                <script src="../plugins/dropzone/dropzone.js"></script>
 
-    <!-- Bootstrap Colorpicker Js -->
-    <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+                                <!-- Input Mask Plugin Js -->
+                                <script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
 
-    <!-- Dropzone Plugin Js -->
-    <script src="../plugins/dropzone/dropzone.js"></script>
+                                <!-- include alertify.css -->
+                                <link rel="stylesheet" href="../alertas/build/css/alertify.css">
 
-    <!-- Input Mask Plugin Js -->
-    <script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
+                                <!-- include boostrap theme  -->
+                                <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
 
-    <!-- include alertify.css -->
-    <link rel="stylesheet" href="../alertas/build/css/alertify.css">
+                                <!-- include alertify script -->
+                                <script src="../alertas/build/alertify.js"></script>
 
-    <!-- include boostrap theme  -->
-    <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
-
-    <!-- include alertify script -->
-    <script src="../alertas/build/alertify.js"></script>
-
-    <script type="text/javascript">
-        //override defaults
-        alertify.defaults.transition = "slide";
-        alertify.defaults.theme.ok = "btn btn-primary";
-        alertify.defaults.theme.cancel = "btn btn-secondary";
-        alertify.defaults.theme.input = "form-control";
-    </script>
-<script src="../js/pages/forms/advanced-form-elements.js"></script>
+                                <script type="text/javascript">
+                                    //override defaults
+                                    alertify.defaults.transition = "slide";
+                                    alertify.defaults.theme.ok = "btn btn-primary";
+                                    alertify.defaults.theme.cancel = "btn btn-secondary";
+                                    alertify.defaults.theme.input = "form-control";
+                                </script>
+                                <script src="../js/pages/forms/advanced-form-elements.js"></script>
                             </form>
                         </div>
                     </div>
@@ -559,7 +479,8 @@ $fecha_max = date("Y-m-d", strtotime($fecha_max . "- 18 year"));
                 <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
-                    </button></h5>
+                    </button>
+                </h5>
             </div>
             <div class="modal-body">
                 <div class="envolcentro">
@@ -575,6 +496,36 @@ $fecha_max = date("Y-m-d", strtotime($fecha_max . "- 18 year"));
         </div>
     </div>
 </div>
+<?php
+include("../Config/Conexion.php");
+if (isset($_REQUEST["enviar"])) {
+
+    $nserie = $_REQUEST["nserie"];   
+    $matricula = $_REQUEST["matricula"];
+    $modelo = $_REQUEST["modelo"];
+    $descarma = $_REQUEST["descarma"];
+
+                $result = mysqli_query($conexion, "INSERT INTO tbl_armas(modelo_arma, serie_arma, matricula_arma, descripcion_arma) values(trim('$modelo'),'$nserie','$matricula','$descarma')");
+
+                if (!$result) {
+                    echo "<script language='javascript'>";
+                    echo "alertaError();";
+                    echo "</script>";
+
+                    echo "<script language='javascript'>";
+                    echo "setTimeout ('r()', 1500);";
+                    echo "</script>";
+                } else {
+                    echo "<script language='javascript'>";
+                    echo "alertaExito();";
+                    echo "</script>";
+
+                    echo "<script language='javascript'>";
+                    echo "setTimeout ('r()', 1500);";
+                    echo "</script>";
+                }
+}
+?>
 
 <?php
 /*if (isset($_REQUEST['bandera'])) {

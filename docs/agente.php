@@ -4,7 +4,6 @@ $iddatos = $_SESSION['id_User'];
 if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     header('Location: ../index.php');
     exit();
-    ///prueba 12325454353
 }
 ?>
 <!DOCTYPE html>
@@ -229,7 +228,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
     <script type="text/javascript" class="init">
         function Salir() {
-            document.location.href = "../config/fin.php";
+            document.location.href = "../Config/fin.php";
         }
     </script>
 

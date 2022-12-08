@@ -18,7 +18,7 @@
     }
 </script>
 
-<!--Modifiar docente Modal -->
+<!--Modifiar Agente Modal -->
 <div class="modal fade" id="ModalEdiAg_<?php echo $rid; ?>" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
