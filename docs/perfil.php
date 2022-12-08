@@ -338,9 +338,6 @@ while ($fila = mysqli_fetch_array($query_s)) {
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="zona.php">Registro de Zonas</a>
-                        </li>
-                        <li class="active">
                             <a href="Listadozona.php">Listado</a>
                         </li>
                     </ul>
