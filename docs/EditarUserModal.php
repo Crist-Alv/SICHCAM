@@ -16,55 +16,6 @@
         if (letras.indexOf(tecla) == -1 && !tecla_especial)
             return false;
     }
-
-    ////cambiar contraseña
-    function verificar2() {
-        if (document.getElementById('NPass').value == "" ||
-            document.getElementById('Email').value == "" ||
-            document.getElementById('nomb').value == "" ||
-            document.getElementById('sex').value == "" ||
-            document.getElementById('Email').value == "") {
-
-            alertaError2();
-
-        } else {
-
-            if (document.getElementById('PassAnt').value != "<?php echo $rclave ?>") {
-                alertaError3();
-            } else {
-
-                if (document.getElementById('NPass').value != document.getElementById('NPassConf').value) {
-                    alertaError4();
-                } else {
-
-                    $(document).ready(function() {
-
-                        $('#evcontra').click(function() {
-                            var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
-
-                            if ($("#Email").val().indexOf('@', 0) == -1 || $("#Email").val().indexOf('.', 0) == -1 || caract.test($('#Email').val()) == false) {
-                                alertaErrorC();
-
-
-                            } else {
-
-                                document.datos.submit();
-
-                            }
-                        });
-                    });
-
-                }
-
-            }
-
-        }
-
-    }
-
-    function r() {
-        location.href = ("ListadoUser.php");
-    }
 </script>
 
 <!--Modifiar docente Modal -->
@@ -79,7 +30,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form name="datos" id="datos" action="FuncionEditUser.php?rid=<?php echo $rid; ?>" role="form" method="POST" enctype="multipart/form-data" class="form-group">
+                        <form name="datos2" id="datos2" action="FuncionEditUser.php?rid=<?php echo $rid; ?>" role="form" method="POST" enctype="multipart/form-data" class="form-group">
                             <!--1-->
                             <fieldset>
                                 <legend>Datos del Agente</legend>
@@ -171,7 +122,7 @@
                 </div>
                 <hr class="sidebar-divider d-none d-md-block">
                 <div class="modal-footer">
-                    <button type="submit" name="editar" class="btn btn-primary waves-effect" onclick="verificar2()"><img src="../images/iconos/save.svg">Guardar</button>
+                    <button type="submit" name="editar" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
                     <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
                 </div>
 

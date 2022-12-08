@@ -121,49 +121,47 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
         }
     </style>
 
-    <script type="text/javascript" class="init">
-        function AlertaElim(id, nombre) {
+<script language="javascript">
+        function verificar() {
+            if (
+                document.getElementById('nomzona').value == "" ||
+                document.getElementById('desczona').value == "") {
+                alertaErrorVacio();
+            } else {
+                $(document).ready(function() {
 
-            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='100' height='100'></center>" + "<center><h3>¿Desea Eliminar el Arma?</h3></center>  <center><h4> Modelo: " + nombre + " </h4></center>",
+                    $('#enviar').click(function() {
 
+                            document.getElementById('bandera').value = "add";
 
+                            document.sichcam.submit();                    
 
-                function() {
-                    alertify.success('Ok');
+                    });
+                });
+            }
+        }
 
-                    document.getElementById('bandera').value = "elim";
-                    document.getElementById('baccion').value = id;
-                    document.sichcam.submit();
-
-                },
-
-                function() {
-                    alertify.error('Ha Cancelado el Eliminar').dismissOthers()
-                }).set('labels', {
-                ok: 'si',
-                cancel: 'no'
-            }).set({
-                transition: 'zoom'
+        function alertaExitoVacio() {
+            alertify.error("<p>Llene todos los campos solicitados</p>" + "<img src='../images/bien1.png'>").set({
+                transition: 'flipx'
             });
-
-
         }
-
-        function r() {
-            location.href = ("listadoArma.php");
-        }
-
 
         function alertaExito() {
-            alertify.message("<h1>Exito</h1>" + "<p>Se elimino exitosamente</p>" + "<img src='../images/bien1.png'>").set({
+            alertify.message("<p>Se guardo exitosamente</p>" + "<img src='../images/bien1.png'>").set({
                 transition: 'flipx'
             });
         }
 
         function alertaError() {
-            alertify.error("<h1>Error</h1>" + "<p>No se puedo eliminar con exito</p>" + "<img src='../images/error.png'>").dismissOthers();
+            alertify.error("<p>No se puedo guardar</p>" + "<img src='../images/error.png'>").set({
+                transition: 'flipx'
+            });
 
+        }
 
+        function r() {
+            location.href = ("Listadozona.php");
         }
     </script>
 
@@ -268,7 +266,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                         </li>
                     </ul>
 
-                    <li class="active">
+                    
                         <a href="javascript:void(0);" class="menu-toggle">
                             <img src="../images/iconos/clipboard.svg" />
                             <span>Gestión de Armas</span>
@@ -281,37 +279,42 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                 <a href="ListadoArma.php">Listado</a>
                             </li>
                         </ul>
-                    </li>
+                    
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/horario.svg" />
                         <span>Gestión de Horarios</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="RegistroHorario.php">Registro de Horarios</a>
+                            <a href="docs/RegistroHorario.php">Registro de Horarios</a>
                         </li>
                         <li class="active">
-                            <a href="VerHorario.php">Ver Horarios</a>
+                            <a href="docs/VerHorario.php">Ver Horarios</a>
                         </li>
                     </ul>
 
+                    <li class="active">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/mundo.svg" width="25px"/>
                         <span>Gestión de Zonas</span>
                     </a>
-                    <ul class="ml-menu">
+                    <ul class="ml-menu">                        
                         <li class="active">
-                            <a href="Listadozona.php">Listado</a>
+                            <a href="docs/Listadozona.php">Listado</a>
                         </li>
                     </ul>
+                    </li>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/class.svg" />
+                        <img src="../images/iconos/horario.svg" />
                         <span>Gestión de Usuarios</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="ListadoUser.php">Listado de Usuarios</a>
+                            <a href="docs/RegistroUser.php">Registro de Usuarios</a>
+                        </li>
+                        <li class="active">
+                            <a href="docs/ListadoUser.php">Listado</a>
                         </li>
                     </ul>
 
@@ -321,7 +324,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="seguridad.php">Opciones de Seguridad</a>
+                            <a href="docs/seguridad.php">Opciones de Seguridad</a>
                         </li>
                     </ul>
                     <a href="acercade.php">Acerca de</a>
@@ -342,15 +345,53 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
     <section class="content">
         <div class="container-fluid">
+        <div class="block-header">
+                <h1>
+                    Zonas
+                </h1>
+            </div>
             <!-- Basic Examples -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                Listado de Armas
-                            </h2>
+                <div class="card">
+                        <div class="body">
+                            <form class="form-horizontal" method="post" class="form-group-sm" id="sichcam" name="sichcam">
+                                <input type="hidden" name="bandera" id="bandera" />
+                                <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
+
+                                <fieldset>
+                                    <legend>Registro de Zona</legend>
+                                    <div class="row form-group col-md-8">
+                                        <div class="col-md-4">
+                                            <b>Nombre de la Zona *</b>
+                                            <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <img src="../images/iconos/marcador-de-mapa.svg" width="25" height="25">
+                                            </span>
+                                                <input type="String" name="nomzona" id="nomzona" autocomplete="off" required autofocus>
+                                            </div>
+                                        </div>                        
+                               
+                                    <div class="col-md-5">
+                                        <b>Dirección *</b>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <img src="../images/iconos/marcador-del-mapa.svg" width="25" height="25">
+                                            </span>
+                                            <textarea type="String" name="desczona" id="desczona" cols="60" rows="4" style="resize: both;" autocomplete="off" required></textarea>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </fieldset>
+                                <div class="modal-footer">
+                                    <span>Los campos marcados con * son campos obligatorios</span>
+                                    <button type="submit" name="enviar" onclick="verificar()" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
+                                    <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
+                                </div>                                
+                            </form>
                         </div>
+                    </div> 
+                <div class="card">                        
                         <div class="body">
                             <form class="form-horizontal" action="" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
@@ -360,11 +401,9 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                         <thead>
                                             <tr>
-                                                <th>N° de Serie</th>
-                                                <th>Modelo</th>
-                                                <th>Ver más</th>
+                                                <th>Nombre de la Zona</th>
+                                                <th>Dirección</th>                                                
                                                 <th>Editar</th>
-                                                <th>Eliminiar</th>
                                             </tr>
                                         </thead>
 
@@ -372,24 +411,18 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                             <?php
                                             include '../Config/Conexion.php';
 
-                                            $query_s = mysqli_query($conexion, 'SELECT * from tbl_armas');
+                                            $query_s = mysqli_query($conexion, 'SELECT * from tbl_zonas');
                                             while ($fila = mysqli_fetch_array($query_s)) {
                                             ?>
 
                                                 <tr>
-                                                    <td><?php echo $fila["serie_arma"]; ?></td>
-                                                    <td><?php echo $fila["modelo_arma"]; ?></td>
+                                                    <td><?php echo $fila["nombre_zona"]; ?></td>
+                                                    <td><?php echo $fila["direccion_zona"]; ?></td> 
+                                                    <?php include 'EditarZonaModal.php'; ?>                                                  
                                                     <td>
-                                                        <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerAr_<?php echo $fila['id_arma']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
+                                                        <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiZona_<?php echo $ridzona = $fila['id_zona']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
                                                     </td>
-                                                    <?php include 'VerArModal.php'; ?>
-                                                    <td>
-                                                        <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiAr_<?php echo $rid = $fila['id_arma']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
-                                                    </td>
-                                                    <?php include 'EditarArModal.php'; ?>
-                                                    <td>
-                                                        <button type="button" name="elim" value="Elim" class="btn btn-danger waves-effect waves-float baja_data" onClick="AlertaElim('<?php echo $fila['id_arma']; ?>','<?php echo $fila['modelo_arma']; ?>')"><img src="../images/iconos/basura.svg" width="20px" /></button>
-                                                    </td>
+                                                    <?php include 'EditarZonaModal.php'; ?>                                                    
                                                 </tr>
                                             <?php
                                             }
@@ -460,52 +493,31 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 </div>
 
 <?php
-if (isset($_REQUEST['bandera'])) {
-    $bandera = $_REQUEST['bandera'];
-    $baccion = $_REQUEST['baccion'];
+include("../Config/Conexion.php");
+if (isset($_REQUEST["enviar"])) {
 
-    include '../Config/conexion.php';
-    if ($bandera == 'elim') {
+    $nomzona = $_REQUEST["nomzona"];
+    $desczona = $_REQUEST["desczona"];
 
-        $result = mysqli_query($conexion, "DELETE from tbl_armas where id_arma='$baccion'");
+                $result = mysqli_query($conexion, "INSERT INTO tbl_zonas(nombre_zona, direccion_zona) values(trim('$nomzona'),'$desczona')");
 
-        if (!$result) {
-            echo "<script language='javascript'>";
-            echo 'alertaError();';
-            echo '</script>';
-        } else {
+                if (!$result) {
+                    echo "<script language='javascript'>";
+                    echo "alertaError();";
+                    echo "</script>";
 
-            /*/bitacora
-            $query_s = pg_query($conexion, "SELECT * from docente where iddocente='$baccion'");
-            while ($fila = pg_fetch_array($query_s)) {
-                $dnombre = $fila[1];
-                $dapellido = $fila[2];
-            }
-            if (isset($_SESSION)) {
-                $usuario = $_SESSION['idUsuario'];
-                ini_set('date.timezone', 'America/El_Salvador');
-                $fecha2 = date("Y/m/d");
-                $hora = date("h:i:s");
-                $actividad = "Dio de Baja al Docente " . $dnombre . " " . $dapellido . "";
-                pg_query("BEGIN");
-                $result2 = pg_query($conexion, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha2','$usuario')");
-
-                if (!$result2) {
-                    pg_query("rollback");
+                    echo "<script language='javascript'>";
+                    echo "setTimeout ('r()', 1500);";
+                    echo "</script>";
                 } else {
-                    pg_query("commit");
-                }
-            }
-            //fin bitacora*/
+                    echo "<script language='javascript'>";
+                    echo "alertaExito();";
+                    echo "</script>";
 
-            echo "<script language='javascript'>";
-            echo 'alertaExito();';
-            echo '</script>';
-            echo "<script language='javascript'>";
-            echo "setTimeout ('r()', 1500);";
-            echo '</script>';
-        }
-    }
+                    echo "<script language='javascript'>";
+                    echo "setTimeout ('r()', 1500);";
+                    echo "</script>";
+                }
 }
 ?>
 
