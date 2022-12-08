@@ -4,7 +4,6 @@ $iddatos = $_SESSION['id_User'];
 if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     header('Location: ../index.php');
     exit();
-    ///prueba 12325454353
 }
 ?>
 <!DOCTYPE html>
@@ -229,7 +228,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
     <script type="text/javascript" class="init">
         function Salir() {
-            document.location.href = "../config/fin.php";
+            document.location.href = "../Config/fin.php";
         }
     </script>
 
@@ -369,10 +368,10 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/RegistroHorario.php">Registro de Horarios</a>
+                            <a href="RegistroHorario.php">Registro de Horarios</a>
                         </li>
                         <li class="active">
-                            <a href="docs/VerHorario.php">Ver Horarios</a>
+                            <a href="VerHorario.php">Ver Horarios</a>
                         </li>
                     </ul>
 
@@ -382,10 +381,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/zona.php">Registro de Zonas</a>
-                        </li>
-                        <li class="active">
-                            <a href="docs/Listadozona.php">Listado</a>
+                            <a href="Listadozona.php">Listado</a>
                         </li>
                     </ul>
 
@@ -405,7 +401,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/seguridad.php">Opciones de Seguridad</a>
+                            <a href="seguridad.php">Opciones de Seguridad</a>
                         </li>
                     </ul>
                     <a href="acercade.php">Acerca de</a>

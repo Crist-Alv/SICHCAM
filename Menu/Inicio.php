@@ -227,10 +227,7 @@
                         <img src="images/iconos/mundo.svg" width="25px" />
                         <span>Gestión de Zonas</span>
                     </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="docs/zona.php">Registro de Zonas</a>
-                        </li>
+                    <ul class="ml-menu">                        
                         <li class="active">
                             <a href="docs/Listadozona.php">Listado</a>
                         </li>
