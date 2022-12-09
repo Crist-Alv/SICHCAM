@@ -1,187 +1,29 @@
 ﻿<?php session_start();
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
-if ($_SESSION['autenticado'] != 'yeah') {
-    header('Location: ../login.php');
+$t = $_SESSION['rol_User'];
+$iddatos = $_SESSION['id_User'];
+if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
+    header('Location: ../index.php');
     exit();
 }
-date_default_timezone_set('America/El_Salvador');
-?>
-<?php
-// scrypt for backup and restore postgres database
-///tomamos la fecha actual
-$fecha = strftime('%d/%m/%Y %H:%M:%S', time());
+///////////////////////////////
 
-function dl_file($file)
-{
-    if (!is_file($file)) {
-        die('<b>404 File not found!</b>');
+/*/bitacora 
+if (isset($_SESSION)) {
+    $usuario = $_SESSION['idUsuario'];
+    ini_set('date.timezone', 'America/El_Salvador');
+    $fecha2 = date("Y/m/d");
+    $hora = date("h:i:s");
+    $actividad = "Realizo un Backup";
+    pg_query("BEGIN");
+    $result2 = pg_query($dbconn, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha2','$usuario')");
+
+    if (!$result2) {
+        pg_query("rollback");
+    } else {
+        pg_query("commit");
     }
-    $len = filesize($file);
-    $filename = basename($file);
-    $file_extension = strtolower(substr(strrchr($filename, '.'), 1));
-    $ctype = 'application/force-download';
-    header('Pragma: public');
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    header('Cache-Control: public');
-    header('Content-Description: File Transfer');
-    header("Content-Type: $ctype");
-    $header = 'Content-Disposition: attachment; filename=' . $filename . ';';
-    header($header);
-    header('Content-Transfer-Encoding: binary');
-    header('Content-Length: ' . $len);
-    @readfile($file);
-    exit;
 }
-
-$action = $_POST['bandera'];
-$ficheiro = $_FILES['path']['name'];
-switch ($action) {
-    case 'Importar Respaldo':
-        $dbname = 'sicacecsj'; //database name
-        $dbconn = pg_pconnect("host=localhost port=5432 dbname=$dbname 
-user=postgres password=root"); //connectionstring
-        if (!$dbconn) {
-            echo "Can't connect.\n";
-            exit;
-        }
-        $back = fopen($ficheiro, 'r');
-        $contents = fread($back, filesize($ficheiro));
-        $res = pg_query(utf8_encode($contents));
-        // echo "Upload Ok";
-
-        echo "<script language='javascript'>";
-
-        //  echo "alertaExito();";////////////////////////////////////////////////////aqui
-        echo 'alertaExito();';
-        // echo "alert('base restaurada')";
-        echo '</script>';
-        fclose($back);
-        break;
-    case 'Exportar Respaldo':
-        $dbname = 'sicacecsj'; //database name
-        $dbconn = pg_pconnect("host=localhost port=5432 dbname=$dbname 
-user=postgres password=root"); //connectionstring
-        if (!$dbconn) {
-            echo "Can't connect.\n";
-            exit;
-        }
-        $back = fopen("$dbname.sql", 'w');
-        $res = pg_query(" select relname as tablename
-                    from pg_class where relkind in ('r')
-                    and relname not like 'pg_%' and relname not like 
-'sql_%' order by tablename");
-
-        $res9 = pg_query(" select relname as tablename
-                    from pg_class where relkind in ('r')
-                    and relname not like 'pg_%' and relname not like 
-'sql_%' order by tablename");
-
-        $str = '';
-        while ($row = pg_fetch_row($res)) {
-            $table = $row[0];
-            $str .= "\n--\n";
-            $str .= "-- Estrutura da tabela '$table'";
-            $str .= "\n--\n";
-            $str .= "\nTRUNCATE $table CASCADE;";
-
-            $res1 = pg_query("SELECT pg_index.indisprimary,
-            pg_catalog.pg_get_indexdef(pg_index.indexrelid)
-        FROM pg_catalog.pg_class c, pg_catalog.pg_class c2,
-            pg_catalog.pg_index AS pg_index
-        WHERE c.relname = '$table'
-            AND c.oid = pg_index.indrelid
-            AND pg_index.indexrelid = c2.oid
-            AND pg_index.indisprimary");
-            while ($r = pg_fetch_row($res1)) {
-                $str .= "\n\n--\n";
-                $str .= "-- Creating index for '$table'";
-                $str .= "\n--\n\n";
-                $t = str_replace('CREATE UNIQUE INDEX', '', $r[1]);
-                $t = str_replace('USING btree', '|', $t);
-                // Next Line Can be improved!!!
-                $t = str_replace('ON', '|', $t);
-                $Temparray = explode('|', $t);
-            }
-        }
-        //////////////////////////////////////////////////
-        while ($row9 = pg_fetch_row($res9)) {
-            $table = $row9[0];
-            $str .= "\n--\n";
-            $str .= "-- Estrutura da tabela '$table'";
-            $str .= "\n--\n";
-
-            $res3 = pg_query("SELECT * FROM $table");
-            while ($r = pg_fetch_row($res3)) {
-                $sql = "INSERT INTO $table VALUES ('";
-                $sql .= utf8_decode(implode("','", $r));
-                $sql .= "');";
-                $str = str_replace("''", 'NULL', $str);
-                $str .= $sql;
-                $str .= "\n";
-            }
-            ///////////////////////////////
-
-            $res1 = pg_query("SELECT pg_index.indisprimary,
-            pg_catalog.pg_get_indexdef(pg_index.indexrelid)
-        FROM pg_catalog.pg_class c, pg_catalog.pg_class c2,
-            pg_catalog.pg_index AS pg_index
-        WHERE c.relname = '$table'
-            AND c.oid = pg_index.indrelid
-            AND pg_index.indexrelid = c2.oid
-            AND pg_index.indisprimary");
-            while ($r = pg_fetch_row($res1)) {
-                $str .= "\n\n--\n";
-                $str .= "-- Creating index for '$table'";
-                $str .= "\n--\n\n";
-                $t = str_replace('CREATE UNIQUE INDEX', '', $r[1]);
-                $t = str_replace('USING btree', '|', $t);
-                // Next Line Can be improved!!!
-                $t = str_replace('ON', '|', $t);
-                $Temparray = explode('|', $t);
-            }
-        }
-
-        $res = pg_query(" SELECT
-  cl.relname AS tabela,ct.conname,
-   pg_get_constraintdef(ct.oid)
-   FROM pg_catalog.pg_attribute a
-   JOIN pg_catalog.pg_class cl ON (a.attrelid = cl.oid AND cl.relkind = 'r')
-   JOIN pg_catalog.pg_namespace n ON (n.oid = cl.relnamespace)
-   JOIN pg_catalog.pg_constraint ct ON (a.attrelid = ct.conrelid AND
-   ct.confrelid != 0 AND ct.conkey[1] = a.attnum)
-   JOIN pg_catalog.pg_class clf ON (ct.confrelid = clf.oid AND 
-clf.relkind = 'r')
-   JOIN pg_catalog.pg_namespace nf ON (nf.oid = clf.relnamespace)
-   JOIN pg_catalog.pg_attribute af ON (af.attrelid = ct.confrelid AND
-   af.attnum = ct.confkey[1]) order by cl.relname ");
-
-        ///////////////////////////////
-
-        //bitacora 
-        if (isset($_SESSION)) {
-            $usuario = $_SESSION['idUsuario'];
-            ini_set('date.timezone', 'America/El_Salvador');
-            $fecha2 = date("Y/m/d");
-            $hora = date("h:i:s");
-            $actividad = "Realizo un Backup";
-            pg_query("BEGIN");
-            $result2 = pg_query($dbconn, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha2','$usuario')");
-
-            if (!$result2) {
-                pg_query("rollback");
-            } else {
-                pg_query("commit");
-            }
-        }
-        //fin bitacora
-
-
-        fwrite($back, $str);
-        fclose($back);
-        dl_file("$dbname.sql");
-        break;
-}
+//fin bitacora*/
 
 ?>
 <!DOCTYPE html>
@@ -190,7 +32,7 @@ clf.relkind = 'r')
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Seguridad-Tabla</title>
+    <title>Seguridad</title>
     <!-- Favicon-->
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
@@ -237,7 +79,7 @@ clf.relkind = 'r')
 
     <script type="text/javascript" class="init">
         function Salir() {
-            document.location.href = "../config/fin.php";
+            document.location.href = "../Config/fin.php";
         }
     </script>
 
@@ -270,12 +112,6 @@ clf.relkind = 'r')
 
 
         }
-
-        function alertaExito() {
-            alertify.message("<p>Datos restaurados sin incovenientes</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
-                transition: 'flipx'
-            });
-        }
     </script>
 
     <script>
@@ -303,23 +139,39 @@ clf.relkind = 'r')
 
                 } else {
                     //para validar que haya un archivo
-
-                    document.getElementById('bandera').value = "Importar Respaldo";
-
-                    document.dataForm.submit();
-                    alertaExito();
+                    $.ajax({
+                        url: "Restaurar.php",
+                        success: function(result) {
+                            if (!result) {
+                                alertify.message("<p>La Base de Datos se recupero Exitosamente.</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
+                                    transition: 'flipx'
+                                });
+                            } else {
+                                alertify.error("<p>La Base de Datos No se pudo recuperar con Exito.</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+                            }
+                        }
+                    })
                 }
 
 
             }
         }
+    </script>
 
-
-        function exportar() {
-
-            document.getElementById('bandera').value = "Exportar Respaldo";
-            document.dataForm.submit();
-            alertaExito();
+    <script>
+        function respaldo() {
+            $.ajax({
+                url: "backup.php",
+                success: function(result) {
+                    if (result != false) {
+                        alertify.error("<p>No se pudo Exportar los datos</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+                    } else {
+                        alertify.message("<p>Datos guardados Exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
+                            transition: 'flipx'
+                        });
+                    }
+                }
+            })
         }
     </script>
 </head>
@@ -329,15 +181,14 @@ clf.relkind = 'r')
     <nav class="navbar">
         <div class="media">
             <div class="media-left media-middle">
-                <img class="media-object" src="../images/logo.png" width="40" height="50">
+                <img class="media-object" src="../images/logo.png" width="60" height="50">
                 </a>
             </div>
             <div class="media-body">
-                <a class="navbar-brand" href="../index.php">SISTEMA INFORMÁTICO PARA EL CONTROL ACADÉMICO DEL CENTRO
-                    ESCOLAR CATÓLICO SAN JOSÉ</a>
+                <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="seguridadA.pdf" title="Ayuda">
+                        <a href="" title="Ayuda">
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <img class="bg-white" src="../images/iconos/help_outline.svg" />
                             </div>
@@ -354,6 +205,7 @@ clf.relkind = 'r')
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
+
                     <figure>
 
                         <!--aqui va la foto del usuario -->
@@ -361,7 +213,7 @@ clf.relkind = 'r')
                         <?php
 
                         if (isset($_SESSION)) {
-                            $sexo = $_SESSION['sexoT'];
+                            $sexo = $_SESSION['sexo_User'];
                             $man = '../images/user.png';
                             $woman = '../images/userWoman.png';
                             $user = 'user-picture';
@@ -384,14 +236,14 @@ clf.relkind = 'r')
                     <li style="color:#fff; cursor:default;">
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
-                                $usu = $_SESSION['nombresT'];
-                                echo "$usu";
+                                $usu = $_SESSION['nombre_User'];
+                                echo "<h5'>CAM: $usu</h5>";
                             }
                             ?>
                         </span>
                     </li>
                     <div class="btn-group user-helper-dropdown">
-                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="../images/iconos/keyboard_arrow_down.svg" />
+                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 36px;" src="../images/iconos/keyboard_arrow_down.svg" />
                         <ul class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target="#ModalCerrar"><img src="../images/iconos/input.svg" />Cerrar Sesión</a></li>
                             <li><a href="perfil.php"><img src="../images/iconos/settings.svg" />Configuración de Cuenta</a></li>
@@ -404,65 +256,63 @@ clf.relkind = 'r')
             <div class="menu">
                 <ul class="list">
                     <li class="header">MENÚ</li>
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/face.svg" />
-                        <span>Alumnos</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="alumno.php">Registro de Alumnos</a>
-                        </li>
-                        <li class="active">
-                            <a href="altaA.php">Dar de Alta</a>
-                        </li>
-                        <li class="active">
-                            <a href="ReportesA.php">Reportes</a>
-                        </li>
-                    </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/assignment_ind.svg" />
-                        <span>Docentes</span>
+                        <span>Gestión de Agentes</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docente.php">Registro de Docente</a>
+                            <a href="agente.php">Registro de Agentes</a>
                         </li>
                         <li class="active">
-                            <a href="altaD.php">Dar de Alta</a>
+                            <a href="listadoAgentes.php">Listado</a>
                         </li>
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/clipboard.svg" />
-                        <span>Notas</span>
+                        <span>Gestión de Armas</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="nota.php">Registro de Notas</a>
+                            <a href="arma.php">Registro de Armas</a>
                         </li>
                         <li class="active">
-                            <a href="ReportesNota.php">Reporte de Notas</a>
+                            <a href="ListadoArma.php">Listado</a>
                         </li>
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/horario.svg" />
-                        <span>Horarios</span>
+                        <span>Gestión de Horarios</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
                             <a href="RegistroHorario.php">Registro de Horarios</a>
                         </li>
+                        <li class="active">
+                            <a href="VerHorario.php">Ver Horarios</a>
+                        </li>
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/materia.svg" />
-                        <span>Materias</span>
+                        <img src="../images/iconos/mundo.svg" width="25px" />
+                        <span>Gestión de Zonas</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="materia.php">Registro de Materias</a>
+                            <a href="Listadozona.php">Listado</a>
+                        </li>
+                    </ul>
+
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <img src="../images/iconos/class.svg" />
+                        <span>Gestión de Usuarios</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li class="active">
+                            <a href="ListadoUser.php">Listado de Usuarios</a>
                         </li>
                     </ul>
 
@@ -483,7 +333,7 @@ clf.relkind = 'r')
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
-                <img src="../images/minerva2.png" width="30" height="50" />
+                <img src="../images/minerva2.png" width="40" height="50" />
                 <div class="copyright">
                     <span>UES-FMP 2019 &copy; Todos Derechos Reservados</span>
                 </div>
@@ -508,19 +358,12 @@ clf.relkind = 'r')
                         <h6 class="m-0 font-weight-bold text-primary"></h6>
                         <!-- Button trigger modal -->
                         <div class="col-md-10">
-                            <button type="button" value="Exportar Respaldo" class="btn btn-primary waves-effect" name="actionButton" id="actionButton" onclick="exportar()">
+                            <button type="button" class="btn btn-primary waves-effect" name="actionButton" id="actionButton" onclick="respaldo()">
                                 <img src="../images/iconos/cloud_upload.svg">
-                                Exportar Información
-                            </button>
+                                Exportar Información</button>
 
-                            <button type="button" value="Importar Respaldo" class="btn btn-success waves-effect" name="actionButton" id="actionButton" onclick="validar()">
+                            <button type="button" class="btn btn-success waves-effect" name="restore" id="restore" onclick="validar()">
                                 <img src="../images/iconos/cloud_download.svg">Importar Infomación</button>
-
-                            <a type="button" class="btn bg-teal waves-effect" href="bitacora.php">
-                                <img src="../images/iconos/class.svg">Bitácora</a>
-
-                            <a type="button" class="btn bg-teal waves-effect" href="listaUsuario.php">
-                                <img src="../images/iconos/class.svg">Listado de Usuarios</a>
                         </div>
                     </div>
             </div>
@@ -590,7 +433,8 @@ clf.relkind = 'r')
                 <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
-                    </button></h5>
+                    </button>
+                </h5>
             </div>
             <div class="modal-body">
                 <div class="envolcentro">

@@ -223,7 +223,7 @@ while ($fila = mysqli_fetch_array($query_s)) {
                 </a>
             </div>
             <div class="media-body">
-                <a class="navbar-brand" href="../index.php">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES</a>
+                <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="" title="Ayuda">
@@ -243,6 +243,7 @@ while ($fila = mysqli_fetch_array($query_s)) {
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
+
                     <figure>
 
                         <!--aqui va la foto del usuario -->
@@ -274,15 +275,16 @@ while ($fila = mysqli_fetch_array($query_s)) {
                         <span class="all-tittles">
                             <?php if (isset($_SESSION)) {
                                 $usu = $_SESSION['nombre_User'];
-                                echo "$usu";
+                                echo "<h5'>CAM: $usu</h5>";
                             }
                             ?>
                         </span>
                     </li>
                     <div class="btn-group user-helper-dropdown">
-                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="../images/iconos/keyboard_arrow_down.svg" />
+                        <img data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 36px;" src="../images/iconos/keyboard_arrow_down.svg" />
                         <ul class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target="#ModalCerrar"><img src="../images/iconos/input.svg" />Cerrar Sesión</a></li>
+                            <li><a href="perfil.php"><img src="../images/iconos/settings.svg" />Configuración de Cuenta</a></li>
                         </ul>
                     </div>
                 </div>
