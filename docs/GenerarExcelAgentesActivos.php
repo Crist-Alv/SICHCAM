@@ -64,8 +64,7 @@ include_once '../Config/Conexion.php';
 			$html .= '</tr>';;
 		}
 		// Configuración en la cabecera
-		header("Expires: Mon, 26 Jul 2227 05:00:00 GMT");
-		header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+		header("Expires: 0");
 		header("Cache-Control: no-cache, must-revalidate");
 		header("Pragma: no-cache");
 		header("Content-type: application/vnd.ms-excel");

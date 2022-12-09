@@ -361,18 +361,8 @@ if (isset($_SESSION)) {
                             <button type="button" class="btn btn-primary waves-effect" name="actionButton" id="actionButton" onclick="respaldo()">
                                 <img src="../images/iconos/cloud_upload.svg">
                                 Exportar Información</button>
-
-                            <button type="button" class="btn btn-success waves-effect" name="restore" id="restore" onclick="validar()">
-                                <img src="../images/iconos/cloud_download.svg">Importar Infomación</button>
                         </div>
                     </div>
-            </div>
-            <br>
-            <div class="row form-group col-md-10 bg-blue">
-                <div class="form-group">
-                    <label for="exampleFormControlFile1">Selecionar el archivo de Recuperación y luego dar click en el boton Importar Información</label>
-                    <input type="file" class="form-control-file" name="path" id="path">
-                </div>
             </div>
             </form>
         </div>
