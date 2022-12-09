@@ -483,6 +483,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                         <th>Correo Electronico</th>
                                                         <th>Ver más</th>
                                                         <th>Editar</th>
+                                                        <th>Eliminar</th>
                                                         <th>Estado</th>
                                                     </tr>
                                                 </thead>
@@ -508,6 +509,9 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                                 <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiUser_<?php echo $rid = $fila['id_User']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
                                                             </td>
                                                             <?php include 'EditarUserModal.php'; ?>
+                                                            <td>
+                                                                <button type="button" name="elim" value="Elim" class="btn btn-danger waves-effect waves-float baja_data" onClick="AlertaElim('<?php echo $fila['id_User']; ?>','<?php echo $fila['nombre_User']; ?>')"><img src="../images/iconos/basura.svg" width="20px" /></button>
+                                                            </td>
                                                             <td>
                                                                 <div class="col-sm-3">
                                                                     <div class="switch">
