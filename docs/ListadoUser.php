@@ -125,7 +125,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     <script src="../js/pages/tables/jquery-datatable.js"></script>
 
     <?php include 'AgregarUserModal.php'; ?>
-    
+
     <style type="text/css">
         .envolcentro {
             display: table-cell;
@@ -148,6 +148,52 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             width: 1px;
         }
     </style>
+
+    <script type="text/javascript" class="init">
+        function AlertaElim(id, nombre) {
+
+            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='100' height='100'></center>" + "<center><h3>¿Desea Eliminar al Usuario?</h3></center>  <center><h4> " + nombre + " </h4></center>",
+
+
+
+                function() {
+                    alertify.success('Ok');
+
+                    document.getElementById('bandera').value = "elim";
+                    document.getElementById('baccion').value = id;
+                    document.sichcam.submit();
+
+                },
+
+                function() {
+                    alertify.error('Ha Cancelado el Eliminar').dismissOthers()
+                }).set('labels', {
+                ok: 'si',
+                cancel: 'no'
+            }).set({
+                transition: 'zoom'
+            });
+
+
+        }
+
+        function r() {
+            location.href = ("listadoUser.php");
+        }
+
+
+        function alertaExito() {
+            alertify.message("<h1>Exito</h1>" + "<p>Se elimino exitosamente</p>" + "<img src='../images/bien1.png'>").set({
+                transition: 'flipx'
+            });
+        }
+
+        function alertaError() {
+            alertify.error("<h1>Error</h1>" + "<p>No se puedo eliminar con exito</p>" + "<img src='../images/error.png'>").dismissOthers();
+
+
+        }
+    </script>
 
     <!-- <script type="text/javascript" class="init">
         var miCheckbox = document.getElementById('user_activo');
@@ -372,7 +418,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane animated active" id="activo_animation_1">
-                                        <h3 style="color: green;" >Usuarios Activos</h3>
+                                        <h3 style="color: green;">Usuarios Activos</h3>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                                 <thead>
@@ -382,6 +428,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                         <th>Correo Electronico</th>
                                                         <th>Ver más</th>
                                                         <th>Editar</th>
+                                                        <th>Eliminar</th>
                                                         <th>Estado</th>
                                                     </tr>
                                                 </thead>
@@ -407,6 +454,9 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                                 <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiUser_<?php echo $rid = $fila['id_User']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
                                                             </td>
                                                             <?php include 'EditarUserModal.php'; ?>
+                                                            <td>
+                                                                <button type="button" name="elim" value="Elim" class="btn btn-danger waves-effect waves-float baja_data" onClick="AlertaElim('<?php echo $fila['id_User']; ?>','<?php echo $fila['nombre_User']; ?>')"><img src="../images/iconos/basura.svg" width="20px" /></button>
+                                                            </td>
                                                             <td>
                                                                 <div class="col-sm-3">
                                                                     <div class="switch">
@@ -512,6 +562,30 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 </div>
 
 <?php
+if (isset($_REQUEST['bandera'])) {
+    $bandera = $_REQUEST['bandera'];
+    $baccion = $_REQUEST['baccion'];
+
+    include '../Config/conexion.php';
+    if ($bandera == 'elim') {
+
+        $result = mysqli_query($conexion, "DELETE from tbl_usuario where id_User='$baccion'");
+
+        if (!$result) {
+            echo "<script language='javascript'>";
+            echo 'alertaError();';
+            echo '</script>';
+        } else {
+
+            echo "<script language='javascript'>";
+            echo 'alertaExito();';
+            echo '</script>';
+            echo "<script language='javascript'>";
+            echo "setTimeout ('r()', 1500);";
+            echo '</script>';
+        }
+    }
+}
 /*if (isset($_REQUEST['bandera'])) {
     $bandera = $_REQUEST['bandera'];
     $baccion = $_REQUEST['baccion'];
@@ -526,29 +600,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             echo "setTimeout ('r()', 1500);";
             echo '</script>';
         } else {
-
-            /bitacora
-            $query_s = pg_query($conexion, "SELECT * from docente where iddocente='$baccion'");
-            while ($fila = pg_fetch_array($query_s)) {
-            $dnombre = $fila[1];
-            $dapellido = $fila[2];
-            }
-            if (isset($_SESSION)) {
-                $usuario = $_SESSION['idUsuario'];
-                ini_set('date.timezone', 'America/El_Salvador');
-                $fecha2 = date("Y/m/d");
-                $hora = date("h:i:s");
-                $actividad = "Dio de Baja al Docente " .$dnombre. " " .$dapellido. "";
-                pg_query("BEGIN");
-                $result2 = pg_query($conexion, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha2','$usuario')");
-
-                if (!$result2) {
-                    pg_query("rollback");
-                } else {
-                    pg_query("commit");
-                }
-            }
-            //fin bitacora
             echo "<script language='javascript'>";
             echo "setTimeout ('r()', 1500);";
             echo '</script>';

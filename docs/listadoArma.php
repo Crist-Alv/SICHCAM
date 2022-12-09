@@ -475,29 +475,6 @@ if (isset($_REQUEST['bandera'])) {
             echo '</script>';
         } else {
 
-            /*/bitacora
-            $query_s = pg_query($conexion, "SELECT * from docente where iddocente='$baccion'");
-            while ($fila = pg_fetch_array($query_s)) {
-                $dnombre = $fila[1];
-                $dapellido = $fila[2];
-            }
-            if (isset($_SESSION)) {
-                $usuario = $_SESSION['idUsuario'];
-                ini_set('date.timezone', 'America/El_Salvador');
-                $fecha2 = date("Y/m/d");
-                $hora = date("h:i:s");
-                $actividad = "Dio de Baja al Docente " . $dnombre . " " . $dapellido . "";
-                pg_query("BEGIN");
-                $result2 = pg_query($conexion, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha2','$usuario')");
-
-                if (!$result2) {
-                    pg_query("rollback");
-                } else {
-                    pg_query("commit");
-                }
-            }
-            //fin bitacora*/
-
             echo "<script language='javascript'>";
             echo 'alertaExito();';
             echo '</script>';
