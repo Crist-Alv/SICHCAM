@@ -150,7 +150,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     <script type="text/javascript" class="init">
         function Alertabaja(id, nombre, apellido) {
 
-            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='30' height='30'></center>" + "<center><h1>¿Desea Dar De Baja A?</h1></center>  <center><h2 style='font-style:arial';> " + nombre + " " + apellido + "  </h2></center>",
+            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='100' height='100'></center>" + "<center><h1>¿Desea Dar De Baja A?</h1></center>  <center><h2 style='font-style:arial';> " + nombre + " " + apellido + "  </h2></center>",
 
 
 
@@ -174,15 +174,53 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
         }
 
+        function AlertaAlta(id, nombre, apellido) {
+
+            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='100' height='100'></center>" + "<center><h1>¿Desea Dar De Alta A?</h1></center>  <center><h2 style='font-style:arial';> " + nombre + " " + apellido + "  </h2></center>",
+
+
+
+                function() {
+                    alertify.success('Ok');
+
+                    document.getElementById('bandera').value = "alta";
+                    document.getElementById('baccion').value = id;
+                    document.sichcam.submit();
+
+                },
+
+                function() {
+                    alertify.error('Ha Cancelado Dar De Alta').dismissOthers()
+                }).set('labels', {
+                ok: 'si',
+                cancel: 'no'
+            }).set({
+                transition: 'zoom'
+            });
+
+        }
+
 
         function alertaExito() {
-            alertify.message("<h1>Exito</h1>" + "<p>Se dio de baja exitosamente</p>" + "<img src='../images/bien1.png'>").set({
+            alertify.message("<h1>Exito</h1>" + "<p>Se dio de baja exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
                 transition: 'flipx'
             });
         }
 
         function alertaError() {
-            alertify.error("<h1>Error</h1>" + "<p>No se puedo dar de baja</p>" + "<img src='../images/error.png'>").dismissOthers();
+            alertify.error("<h1>Error</h1>" + "<p>No se puedo dar de baja</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+
+
+        }
+
+        function alertaExitoAl() {
+            alertify.message("<h1>Exito</h1>" + "<p>Se dio de alta exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
+                transition: 'flipx'
+            });
+        }
+
+        function alertaErrorAl() {
+            alertify.error("<h1>Error</h1>" + "<p>No se puedo dar de alta</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
 
 
         }
@@ -195,6 +233,10 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             alertify.message("<p>Los datos se modificaron exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
                 transition: 'flipx'
             });
+        }
+
+        function r() {
+            location.href = ("listadoAgentes.php");
         }
     </script>
 
@@ -392,8 +434,8 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                     <li role="presentation" class="active"><a href="#activo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Activos</a></li>
                                     <li role="presentation"><a href="#inactivo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Inactivos</a></li>
                                     <ul class="header-dropdown m-r--5">
-                                        <a href="GenerarExcelAgentesActivos.php"><button type='button' style="float: right;" class='btn btn-sm btn-primary'>Generar Excel</button></a>
-                                        <a href="GenerarPDFAgentesActivos.php"><button type='button' style="float: right;" class='btn btn-sm btn-primary'>Generar PDF</button></a>
+                                        <a href="Reportes/GenerarExcelAgentes.php"><img src="../images/xls.png" style="float: right;" width="40px"></a>
+                                        <a href="Reportes/GenerarPDFAgentes.php"><img src="../images/pdf.png" style="float: right;" width="40px"></a>
                                     </ul>
                                 </ul>
 
@@ -534,48 +576,21 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 </div>
 
 <?php
-/*if (isset($_REQUEST['bandera'])) {
+if (isset($_REQUEST['bandera'])) {
     $bandera = $_REQUEST['bandera'];
     $baccion = $_REQUEST['baccion'];
     $estado = 0;
 
-    include '../config/conexion.php';
+    include '../Config/conexion.php';
     if ($bandera == 'baja') {
-        pg_query('BEGIN');
 
-        $result = pg_query($conexion, "UPDATE docente SET estado='$estado' where iddocente='$baccion'");
+        $result = mysqli_query($conexion, "UPDATE tbl_agentes SET activo='$estado' where id_agente='$baccion'");
 
         if (!$result) {
-            pg_query('rollback');
             echo "<script language='javascript'>";
             echo 'alertaError();';
             echo '</script>';
         } else {
-
-            //bitacora
-            $query_s = pg_query($conexion, "SELECT * from docente where iddocente='$baccion'");
-            while ($fila = pg_fetch_array($query_s)) {
-            $dnombre = $fila[1];
-            $dapellido = $fila[2];
-            }
-            if (isset($_SESSION)) {
-                $usuario = $_SESSION['idUsuario'];
-                ini_set('date.timezone', 'America/El_Salvador');
-                $fecha2 = date("Y/m/d");
-                $hora = date("h:i:s");
-                $actividad = "Dio de Baja al Docente " .$dnombre. " " .$dapellido. "";
-                pg_query("BEGIN");
-                $result2 = pg_query($conexion, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha2','$usuario')");
-
-                if (!$result2) {
-                    pg_query("rollback");
-                } else {
-                    pg_query("commit");
-                }
-            }
-            //fin bitacora
-
-            pg_query('commit');
 
             echo "<script language='javascript'>";
             echo 'alertaExito();';
@@ -584,8 +599,27 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             echo "setTimeout ('r()', 2000);";
             echo '</script>';
         }
+    } else {
+        if ($bandera == 'alta') {
+            $estado = 1;
+            $result = mysqli_query($conexion, "UPDATE tbl_agentes SET activo='$estado' where id_agente='$baccion'");
+
+            if (!$result) {
+                echo "<script language='javascript'>";
+                echo 'alertaErrorAl();';
+                echo '</script>';
+            } else {
+
+                echo "<script language='javascript'>";
+                echo 'alertaExitoAl();';
+                echo '</script>';
+                echo "<script language='javascript'>";
+                echo "setTimeout ('r()', 1500);";
+                echo '</script>';
+            }
+        }
     }
-}*/
+}
 ?>
 
 </html>

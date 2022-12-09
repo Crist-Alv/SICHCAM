@@ -121,7 +121,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
         }
     </style>
 
-<script language="javascript">
+    <script language="javascript">
         function verificar() {
             if (
                 document.getElementById('nomzona').value == "" ||
@@ -132,9 +132,9 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
                     $('#enviar').click(function() {
 
-                            document.getElementById('bandera').value = "add";
+                        document.getElementById('bandera').value = "add";
 
-                            document.sichcam.submit();                    
+                        document.sichcam.submit();
 
                     });
                 });
@@ -266,20 +266,20 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                         </li>
                     </ul>
 
-                    
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <img src="../images/iconos/clipboard.svg" />
-                            <span>Gestión de Armas</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li class="active">
-                                <a href="arma.php">Registro de Armas</a>
-                            </li>
-                            <li class="active">
-                                <a href="ListadoArma.php">Listado</a>
-                            </li>
-                        </ul>
-                    
+
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <img src="../images/iconos/clipboard.svg" />
+                        <span>Gestión de Armas</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li class="active">
+                            <a href="arma.php">Registro de Armas</a>
+                        </li>
+                        <li class="active">
+                            <a href="ListadoArma.php">Listado</a>
+                        </li>
+                    </ul>
+
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/horario.svg" />
                         <span>Gestión de Horarios</span>
@@ -294,15 +294,15 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </ul>
 
                     <li class="active">
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/mundo.svg" width="25px"/>
-                        <span>Gestión de Zonas</span>
-                    </a>
-                    <ul class="ml-menu">                        
-                        <li class="active">
-                            <a href="Listadozona.php">Listado</a>
-                        </li>
-                    </ul>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/mundo.svg" width="25px" />
+                            <span>Gestión de Zonas</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="Listadozona.php">Listado</a>
+                            </li>
+                        </ul>
                     </li>
 
                     <a href="javascript:void(0);" class="menu-toggle">
@@ -342,7 +342,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
     <section class="content">
         <div class="container-fluid">
-        <div class="block-header">
+            <div class="block-header">
                 <h1>
                     Zonas
                 </h1>
@@ -350,7 +350,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             <!-- Basic Examples -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card">
+                    <div class="card">
                         <div class="body">
                             <form class="form-horizontal" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
@@ -362,34 +362,39 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                         <div class="col-md-4">
                                             <b>Nombre de la Zona *</b>
                                             <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <img src="../images/iconos/marcador-de-mapa.svg" width="25" height="25">
-                                            </span>
+                                                <span class="input-group-addon">
+                                                    <img src="../images/iconos/marcador-de-mapa.svg" width="25" height="25">
+                                                </span>
                                                 <input type="String" name="nomzona" id="nomzona" autocomplete="off" required autofocus>
                                             </div>
-                                        </div>                        
-                               
-                                    <div class="col-md-5">
-                                        <b>Dirección *</b>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <img src="../images/iconos/marcador-del-mapa.svg" width="25" height="25">
-                                            </span>
-                                            <textarea type="String" name="desczona" id="desczona" cols="60" rows="4" style="resize: both;" autocomplete="off" required></textarea>
                                         </div>
-                                    </div>
+
+                                        <div class="col-md-5">
+                                            <b>Dirección *</b>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <img src="../images/iconos/marcador-del-mapa.svg" width="25" height="25">
+                                                </span>
+                                                <textarea type="String" name="desczona" id="desczona" cols="60" rows="4" style="resize: both;" autocomplete="off" required></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </fieldset>
                                 <div class="modal-footer">
                                     <span>Los campos marcados con * son campos obligatorios</span>
                                     <button type="submit" name="enviar" onclick="verificar()" class="btn btn-primary waves-effect"><img src="../images/iconos/save.svg">Guardar</button>
                                     <button type="reset" name="cancelar" class="btn btn-secondary waves-effect"><img src="../images/iconos/cancel.svg">Cancelar</button>
-                                </div>                                
+                                </div>
                             </form>
                         </div>
-                    </div> 
-                <div class="card">                        
-                        <div class="body">
+                    </div>
+                    <div class="card">
+                        <div class="body">                        
+                            <center>
+                                <a href="Reportes/GenerarExcelZonas.php"><img src="../images/xls.png" style="float: none;" width="40px"></a>
+                                <a href="Reportes/GenerarPDFZonas.php"><img src="../images/pdf.png" style="float: none;" width="40px"></a>
+                            </center>
+                        <div class="modal-footer"></div>
                             <form class="form-horizontal" action="" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
@@ -399,7 +404,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                         <thead>
                                             <tr>
                                                 <th>Nombre de la Zona</th>
-                                                <th>Dirección</th>                                                
+                                                <th>Dirección</th>
                                                 <th>Editar</th>
                                             </tr>
                                         </thead>
@@ -414,12 +419,12 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
                                                 <tr>
                                                     <td><?php echo $fila["nombre_zona"]; ?></td>
-                                                    <td><?php echo $fila["direccion_zona"]; ?></td> 
-                                                    <?php include 'EditarZonaModal.php'; ?>                                                  
+                                                    <td><?php echo $fila["direccion_zona"]; ?></td>
+                                                    <?php include 'EditarZonaModal.php'; ?>
                                                     <td>
                                                         <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiZona_<?php echo $ridzona = $fila['id_zona']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
                                                     </td>
-                                                    <?php include 'EditarZonaModal.php'; ?>                                                    
+                                                    <?php include 'EditarZonaModal.php'; ?>
                                                 </tr>
                                             <?php
                                             }
@@ -496,25 +501,25 @@ if (isset($_REQUEST["enviar"])) {
     $nomzona = $_REQUEST["nomzona"];
     $desczona = $_REQUEST["desczona"];
 
-                $result = mysqli_query($conexion, "INSERT INTO tbl_zonas(nombre_zona, direccion_zona) values(trim('$nomzona'),'$desczona')");
+    $result = mysqli_query($conexion, "INSERT INTO tbl_zonas(nombre_zona, direccion_zona) values(trim('$nomzona'),'$desczona')");
 
-                if (!$result) {
-                    echo "<script language='javascript'>";
-                    echo "alertaError();";
-                    echo "</script>";
+    if (!$result) {
+        echo "<script language='javascript'>";
+        echo "alertaError();";
+        echo "</script>";
 
-                    echo "<script language='javascript'>";
-                    echo "setTimeout ('r()', 1500);";
-                    echo "</script>";
-                } else {
-                    echo "<script language='javascript'>";
-                    echo "alertaExito();";
-                    echo "</script>";
+        echo "<script language='javascript'>";
+        echo "setTimeout ('r()', 1500);";
+        echo "</script>";
+    } else {
+        echo "<script language='javascript'>";
+        echo "alertaExito();";
+        echo "</script>";
 
-                    echo "<script language='javascript'>";
-                    echo "setTimeout ('r()', 1500);";
-                    echo "</script>";
-                }
+        echo "<script language='javascript'>";
+        echo "setTimeout ('r()', 1500);";
+        echo "</script>";
+    }
 }
 ?>
 

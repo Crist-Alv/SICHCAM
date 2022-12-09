@@ -12,7 +12,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Tabla de Agentes</title>
+    <title>Tabla de Usuarios</title>
     <!-- Favicon-->
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
@@ -150,6 +150,83 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     </style>
 
     <script type="text/javascript" class="init">
+        function Alertabaja(id, nombre) {
+
+            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='100' height='100'></center>" + "<center><h1>¿Desea Dar De Baja A?</h1></center>  <center><h2 style='font-style:arial';> " + nombre + " </h2></center>",
+
+
+
+                function() {
+                    alertify.success('Ok');
+
+                    document.getElementById('bandera').value = "baja";
+                    document.getElementById('baccion').value = id;
+                    document.sichcam.submit();
+
+                },
+
+                function() {
+                    alertify.error('Ha Cancelado Dar De Baja').dismissOthers()
+                }).set('labels', {
+                ok: 'si',
+                cancel: 'no'
+            }).set({
+                transition: 'zoom'
+            });
+
+        }
+
+        function AlertaAlta(id, nombre) {
+
+            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='100' height='100'></center>" + "<center><h1>¿Desea Dar De Alta A?</h1></center>  <center><h2 style='font-style:arial';> " + nombre + " </h2></center>",
+
+
+
+                function() {
+                    alertify.success('Ok');
+
+                    document.getElementById('bandera').value = "alta";
+                    document.getElementById('baccion').value = id;
+                    document.sichcam.submit();
+
+                },
+
+                function() {
+                    alertify.error('Ha Cancelado Dar De Alta').dismissOthers()
+                }).set('labels', {
+                ok: 'si',
+                cancel: 'no'
+            }).set({
+                transition: 'zoom'
+            });
+
+        }
+
+
+        function alertaExito() {
+            alertify.message("<h1>Exito</h1>" + "<p>Se dio de baja exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
+                transition: 'flipx'
+            });
+        }
+
+        function alertaError() {
+            alertify.error("<h1>Error</h1>" + "<p>No se puedo dar de baja</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+
+
+        }
+
+        function alertaExitoAl() {
+            alertify.message("<h1>Exito</h1>" + "<p>Se dio de alta exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
+                transition: 'flipx'
+            });
+        }
+
+        function alertaErrorAl() {
+            alertify.error("<h1>Error</h1>" + "<p>No se puedo dar de alta</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
+
+
+        }
+
         function AlertaElim(id, nombre) {
 
             alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='100' height='100'></center>" + "<center><h3>¿Desea Eliminar al Usuario?</h3></center>  <center><h4> " + nombre + " </h4></center>",
@@ -182,38 +259,18 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
         }
 
 
-        function alertaExito() {
-            alertify.message("<h1>Exito</h1>" + "<p>Se elimino exitosamente</p>" + "<img src='../images/bien1.png'>").set({
+        function alertaExitoEli() {
+            alertify.message("<h1>Exito</h1>" + "<p>Se elimino exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
                 transition: 'flipx'
             });
         }
 
-        function alertaError() {
-            alertify.error("<h1>Error</h1>" + "<p>No se puedo eliminar con exito</p>" + "<img src='../images/error.png'>").dismissOthers();
+        function alertaErrorEli() {
+            alertify.error("<h1>Error</h1>" + "<p>No se puedo eliminar con exito</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
 
 
         }
     </script>
-
-    <!-- <script type="text/javascript" class="init">
-        var miCheckbox = document.getElementById('user_activo');
-
-        miCheckbox.addEventListener("change", function() {
-            document.getElementById('bandera').value = "baja";
-            document.getElementById('baccion').value = miCheckbox;
-            document.sichcam.submit();
-        });
-
-        function alertaErrorM() {
-            alertify.error("<p>No se puedieron modificar con exito</p>" + "<img src='../images/error.png' width='80' height='80'>").dismissOthers();
-        }
-
-        function alertaExitoM() {
-            alertify.message("<p>Los datos se modificaron exitosamente</p>" + "<img src='../images/bien1.png' width='80' height='80'>").set({
-                transition: 'flipx'
-            });
-        }
-    </script> -->
 
     <script type="text/javascript" class="init">
         function Salir() {
@@ -413,6 +470,8 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                             Registrar Nuevo Usuario
                                         </button>
                                     </ul>
+                                    <a href="Reportes/GenerarExcelUser.php"><img src="../images/xls.png" width="40px"></a>
+                                    <a href="Reportes/GenerarPDFUser.php"><img src="../images/pdf.png" width="40px"></a>
                                 </ul>
 
                                 <!-- Tab panes -->
@@ -455,14 +514,10 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                             </td>
                                                             <?php include 'EditarUserModal.php'; ?>
                                                             <td>
-                                                                <button type="button" name="elim" value="Elim" class="btn btn-danger waves-effect waves-float baja_data" onClick="AlertaElim('<?php echo $fila['id_User']; ?>','<?php echo $fila['nombre_User']; ?>')"><img src="../images/iconos/basura.svg" width="20px" /></button>
+                                                                <button type="button" name="elim" value="Elim" class="btn btn-danger waves-effect waves-float elim_data" onClick="AlertaElim('<?php echo $fila['id_User']; ?>','<?php echo $fila['nombre_User']; ?>')"><img src="../images/iconos/basura.svg" width="20px" /></button>
                                                             </td>
                                                             <td>
-                                                                <div class="col-sm-3">
-                                                                    <div class="switch">
-                                                                        <label><input type="checkbox" name="user_activo" id="user_activo" value="" checked><span class="lever switch-col-light-blue"></span></label>
-                                                                    </div>
-                                                                </div>
+                                                                <button type="button" name="baja" value="Baja" class="btn btn-danger waves-effect waves-float alta_data" data-toggle="modal" onClick="Alertabaja('<?php echo $fila['id_User']; ?>','<?php echo $fila['nombre_User']; ?>')"><img src="../images/iconos/thumb-down.svg" /></button>
                                                             </td>
                                                         </tr>
                                                     <?php
@@ -513,11 +568,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                                                 <button type="button" name="elim" value="Elim" class="btn btn-danger waves-effect waves-float baja_data" onClick="AlertaElim('<?php echo $fila['id_User']; ?>','<?php echo $fila['nombre_User']; ?>')"><img src="../images/iconos/basura.svg" width="20px" /></button>
                                                             </td>
                                                             <td>
-                                                                <div class="col-sm-3">
-                                                                    <div class="switch">
-                                                                        <label><input type="checkbox" id="user_inactivo"><span class="lever switch-col-light-blue"></span></label>
-                                                                    </div>
-                                                                </div>
+                                                                <button type="button" name="alta" value="Alta" class="btn btn-success waves-effect waves-float alta_data" data-toggle="modal" onClick="AlertaAlta('<?php echo $fila['id_User']; ?>','<?php echo $fila['nombre_User']; ?>')"><img src="../images/iconos/baseline-thumb_up-24px.svg" /></button>
                                                             </td>
                                                         </tr>
                                                     <?php
@@ -577,6 +628,30 @@ if (isset($_REQUEST['bandera'])) {
 
         if (!$result) {
             echo "<script language='javascript'>";
+            echo 'alertaErrorEli();';
+            echo '</script>';
+        } else {
+
+            echo "<script language='javascript'>";
+            echo 'alertaExitoEli();';
+            echo '</script>';
+            echo "<script language='javascript'>";
+            echo "setTimeout ('r()', 1500);";
+            echo '</script>';
+        }
+    }
+}
+if (isset($_REQUEST['bandera'])) {
+    $bandera = $_REQUEST['bandera'];
+    $baccion = $_REQUEST['baccion'];
+
+    include '../Config/conexion.php';
+    if ($bandera == 'baja') {
+
+        $result = mysqli_query($conexion, "UPDATE tbl_usuario SET estado = '0' where id_User='$baccion'");
+
+        if (!$result) {
+            echo "<script language='javascript'>";
             echo 'alertaError();';
             echo '</script>';
         } else {
@@ -588,28 +663,27 @@ if (isset($_REQUEST['bandera'])) {
             echo "setTimeout ('r()', 1500);";
             echo '</script>';
         }
-    }
-}
-/*if (isset($_REQUEST['bandera'])) {
-    $bandera = $_REQUEST['bandera'];
-    $baccion = $_REQUEST['baccion'];
+    } else {
+        if ($bandera == 'alta') {
 
-    include '../Config/conexion.php';
-    if ($bandera == 'baja') {
+            $result = mysqli_query($conexion, "UPDATE tbl_usuario SET estado = '1' where id_User='$baccion'");
 
-        $result = mysqli_query($conexion, "UPDATE tbl_usuario SET estado = '0' where id_User='$baccion'");
+            if (!$result) {
+                echo "<script language='javascript'>";
+                echo 'alertaErrorAl();';
+                echo '</script>';
+            } else {
 
-        if (!$result) {
-            echo "<script language='javascript'>";
-            echo "setTimeout ('r()', 1500);";
-            echo '</script>';
-        } else {
-            echo "<script language='javascript'>";
-            echo "setTimeout ('r()', 1500);";
-            echo '</script>';
+                echo "<script language='javascript'>";
+                echo 'alertaExitoAl();';
+                echo '</script>';
+                echo "<script language='javascript'>";
+                echo "setTimeout ('r()', 1500);";
+                echo '</script>';
+            }
         }
     }
-}*/
+}
 ?>
 
 </html>

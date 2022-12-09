@@ -296,7 +296,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/mundo.svg" width="25px"/>
+                        <img src="../images/iconos/mundo.svg" width="25px" />
                         <span>Gestión de Zonas</span>
                     </a>
                     <ul class="ml-menu">
@@ -355,7 +355,10 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                             <form class="form-horizontal" action="" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
-
+                                <center>
+                                <a href="Reportes/GenerarExcelArmas.php"><img src="../images/xls.png" width="40px"></a>
+                                <a href="Reportes/GenerarPDFArmas.php"><img src="../images/pdf.png" width="40px"></a>
+                                </center>
                                 <div class="table-responsive dataTable">
                                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                         <thead>
