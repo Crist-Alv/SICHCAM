@@ -391,6 +391,10 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                 <ul class="nav nav-tabs tab-nav-right" role="tablist">
                                     <li role="presentation" class="active"><a href="#activo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Activos</a></li>
                                     <li role="presentation"><a href="#inactivo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Inactivos</a></li>
+                                    <ul class="header-dropdown m-r--5">
+                                        <a href="GenerarExcelAgentesActivos.php"><button type='button' style="float: right;" class='btn btn-sm btn-primary'>Generar Excel</button></a>
+                                        <a href="GenerarPDFAgentesActivos.php"><button type='button' style="float: right;" class='btn btn-sm btn-primary'>Generar PDF</button></a>
+                                    </ul>
                                 </ul>
 
                                 <!-- Tab panes -->
