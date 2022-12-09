@@ -386,50 +386,111 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                             <form class="form-horizontal" role="form" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                        <thead>
-                                            <tr>                                                
-                                                <th>Nombre</th>
-                                                <th>Apellido</th>
-                                                <th>Correo</th>
-                                                <th>Teléfono</th>
-                                                <th>Ver más</th>
-                                                <th>Editar</th>
-                                                <th>Dar de Baja</th>
-                                            </tr>
-                                        </thead>
 
-                                        <tbody>
-                                            <?php
-                                            include '../Config/Conexion.php';
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                                    <li role="presentation" class="active"><a href="#activo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Activos</a></li>
+                                    <li role="presentation"><a href="#inactivo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Inactivos</a></li>
+                                </ul>
 
-                                            $query_s = mysqli_query($conexion, 'SELECT * from tbl_agentes where activo=1');
-                                            while ($fila = mysqli_fetch_array($query_s)) {
-                                            ?>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane animated active" id="activo_animation_1">
+                                        <h3 style="color: green;">Agentes Activos</h3>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nombre</th>
+                                                        <th>Apellido</th>
+                                                        <th>Correo</th>
+                                                        <th>Teléfono</th>
+                                                        <th>Ver más</th>
+                                                        <th>Editar</th>
+                                                        <th>Dar de Baja</th>
+                                                    </tr>
+                                                </thead>
 
-                                                <tr>                                                    
-                                                    <td><?php echo $fila["nombre_agente"]; ?></td>
-                                                    <td><?php echo $fila["apellido_agente"]; ?></td>
-                                                    <td><?php echo $fila["correo_agente"]; ?></td>
-                                                    <td><?php echo $fila["telefono_agente"]; ?></td>
-                                                    <td>
-                                                        <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerAg_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
-                                                    </td>
-                                                    <?php include 'VerAgModal.php'; ?>
-                                                    <td>
-                                                        <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiAg_<?php echo $rid = $fila['id_agente']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
-                                                    </td>
-                                                    <?php include 'EditarAgModal.php'; ?>
-                                                    <td>
-                                                        <button type="button" name="baja" value="Baja" class="btn btn-danger waves-effect waves-float baja_data" data-toggle="modal" onClick="Alertabaja('<?php echo $fila['id_agente']; ?>','<?php echo $fila['nombre_agente']; ?>','<?php echo $fila['apellido_agente']; ?>')"><img src="../images/iconos/thumb-down.svg" /></button>
-                                                    </td>
-                                                </tr>
-                                            <?php
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
+                                                <tbody>
+                                                    <?php
+                                                    include '../Config/Conexion.php';
+
+                                                    $query_s = mysqli_query($conexion, 'SELECT * from tbl_agentes where activo=1');
+                                                    while ($fila = mysqli_fetch_array($query_s)) {
+                                                    ?>
+
+                                                        <tr>
+                                                            <td><?php echo $fila["nombre_agente"]; ?></td>
+                                                            <td><?php echo $fila["apellido_agente"]; ?></td>
+                                                            <td><?php echo $fila["correo_agente"]; ?></td>
+                                                            <td><?php echo $fila["telefono_agente"]; ?></td>
+                                                            <td>
+                                                                <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerAg_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
+                                                            </td>
+                                                            <?php include 'VerAgModal.php'; ?>
+                                                            <td>
+                                                                <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiAg_<?php echo $rid = $fila['id_agente']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
+                                                            </td>
+                                                            <?php include 'EditarAgModal.php'; ?>
+                                                            <td>
+                                                                <button type="button" name="baja" value="Baja" class="btn btn-danger waves-effect waves-float baja_data" data-toggle="modal" onClick="Alertabaja('<?php echo $fila['id_agente']; ?>','<?php echo $fila['nombre_agente']; ?>','<?php echo $fila['apellido_agente']; ?>')"><img src="../images/iconos/thumb-down.svg" /></button>
+                                                            </td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane animated" id="inactivo_animation_1">
+                                        <h3 style="color: red;">Agentes Inactivos</h3>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nombre</th>
+                                                        <th>Apellido</th>
+                                                        <th>Correo</th>
+                                                        <th>Teléfono</th>
+                                                        <th>Ver más</th>
+                                                        <th>Editar</th>
+                                                        <th>Dar de Alta</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <?php
+                                                    include '../Config/Conexion.php';
+
+                                                    $query_s = mysqli_query($conexion, 'SELECT * from tbl_agentes where activo=0');
+                                                    while ($fila = mysqli_fetch_array($query_s)) {
+                                                    ?>
+
+                                                        <tr>
+                                                            <td><?php echo $fila["nombre_agente"]; ?></td>
+                                                            <td><?php echo $fila["apellido_agente"]; ?></td>
+                                                            <td><?php echo $fila["correo_agente"]; ?></td>
+                                                            <td><?php echo $fila["telefono_agente"]; ?></td>
+                                                            <td>
+                                                                <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerAg_<?php echo $fila['id_agente']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
+                                                            </td>
+                                                            <?php include 'VerAgModal.php'; ?>
+                                                            <td>
+                                                                <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiAg_<?php echo $rid = $fila['id_agente']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
+                                                            </td>
+                                                            <?php include 'EditarAgModal.php'; ?>
+                                                            <td>
+                                                                <button type="button" name="alta" value="Alta" class="btn btn-success waves-effect waves-float alta_data" data-toggle="modal" onClick="AlertaAlta('<?php echo $fila['id_agente']; ?>','<?php echo $fila['nombre_agente']; ?>','<?php echo $fila['apellido_agente']; ?>')"><img src="../images/iconos/baseline-thumb_up-24px.svg" /></button>
+                                                            </td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
