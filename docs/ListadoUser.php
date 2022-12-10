@@ -471,7 +471,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                         </button>
                                     </ul>
                                     <a href="Reportes/GenerarExcelUser.php"><img src="../images/xls.png" width="40px"></a>
-                                    <a href="Reportes/GenerarPDFUser.php"><img src="../images/pdf.png" width="40px"></a>
+                                    <a href="Reportes/GenerarPDFUser.php" target="_blank"><img src="../images/pdf.png" width="40px"></a>
                                 </ul>
 
                                 <!-- Tab panes -->

@@ -435,7 +435,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                     <li role="presentation"><a href="#inactivo_animation_1" data-toggle="tab"><img src="../images/iconos/group-24px.svg">Usuarios Inactivos</a></li>
                                     <ul class="header-dropdown m-r--5">
                                         <a href="Reportes/GenerarExcelAgentes.php"><img src="../images/xls.png" style="float: right;" width="40px"></a>
-                                        <a href="Reportes/GenerarPDFAgentes.php"><img src="../images/pdf.png" style="float: right;" width="40px"></a>
+                                        <a href="Reportes/GenerarPDFAgentes.php" target="_blank"><img src="../images/pdf.png" style="float: right;" width="40px"></a>
                                     </ul>
                                 </ul>
 

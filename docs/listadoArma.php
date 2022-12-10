@@ -357,7 +357,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
                                 <center>
                                 <a href="Reportes/GenerarExcelArmas.php"><img src="../images/xls.png" width="40px"></a>
-                                <a href="Reportes/GenerarPDFArmas.php"><img src="../images/pdf.png" width="40px"></a>
+                                <a href="Reportes/GenerarPDFArmas.php" target="_blank"><img src="../images/pdf.png" width="40px"></a>
                                 </center>
                                 <div class="table-responsive dataTable">
                                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">

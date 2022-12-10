@@ -9,7 +9,7 @@ class PDF extends FPDF
 function Header()
 {
     // Logo 
-    $this->Image('../../images/logo.png',25,10,33);
+    $this->Image('../../images/logo.png',10,10,33);
     // Arial bold 15
     //                      tipo/tamanio
     $this->SetFont('helvetica', 'B', 13);
@@ -17,8 +17,8 @@ function Header()
     $this->Cell(80);
 
   $this->SetTextColor(30,30,32);
-  $this->Text(96, 15, 'CUERPO DE AGENTES MUNICIPALES - (CAM)');
-  $this->Text(92, 20, 'ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS');
+  $this->Text(60, 15, 'CUERPO DE AGENTES MUNICIPALES - (CAM)');
+  $this->Text(56, 20, 'ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS');
   
   
   /* --- Line --- */
@@ -36,7 +36,7 @@ function Footer()
         $this->SetY(-20);
         $this->SetFont('Arial','B',8);
         $this->Cell(185,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-        $this->Cell(95,5,date('d/m/Y g:i a') ,00,1,'R');
+        $this->Cell(5,5,date('d/m/Y g:i a') ,00,1,'R');
         $this->Line(10,287,200,287);
         $this->Cell(0,5,utf8_decode("Facultad Multidisciplinaria Paracentral - Universidad de El Salvador. © Todos los derechos reservados."),0,0,"C");
         
@@ -90,7 +90,7 @@ function CheckPageBreak($h)
     //If the height h would cause an overflow, add a new page immediately
     if($this->GetY()+$h>$this->PageBreakTrigger)
         $this->AddPage($this->CurOrientation);
-        $this->setX(10);
+        $this->setX(36);
 }
 
 function NbLines($w,$txt)
@@ -215,7 +215,7 @@ function NbLines($w,$txt)
 }
 //------------------------------------------------------------------------------------------------
 include_once '../../Config/conexion.php';
-$pdf = new PDF('L','mm','A4');
+$pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->Ln();
@@ -223,39 +223,30 @@ $pdf->Ln();
 /*-------TITULOS Y ENCABEZADOS -----------*/
 $pdf->Ln(20);
 $pdf->SetFont('Arial','B',12);
-$pdf->Text(120, 50, 'Tabla Listado de Agentes');
+$pdf->Text(80, 50, 'Tabla Listado de Armas');
 $pdf->Ln(5);
 /* --- Tabla --- */
 
-$pdf->SetX(10);
+$pdf->SetX(32);
 $pdf->SetFont('', 'B', 11);
-$pdf->Cell(20, 8, 'DUI', 0, 0, 'C', 0);
-$pdf->Cell(20, 8, utf8_decode('N° de Placa'), 0, 0, 'C', 0);
-$pdf->Cell(30, 8, 'Nombre', 0, 0, 'C', 0);
-$pdf->Cell(30, 8, 'Apellido', 0, 0, 'C', 0);
-$pdf->Cell(50, 8, utf8_decode('Correo Eléctronico'), 0, 0, 'C', 0);
-$pdf->Cell(25, 8, 'Genero', 0, 0, 'C', 0);
-$pdf->Cell(27, 8, utf8_decode('Teléfono'), 0, 0, 'C', 0);
-$pdf->Cell(60, 8, utf8_decode('Dirección'), 0, 0, 'C', 0);
-$pdf->Cell(15, 8, 'Estado', 0, 1, 'C', 0);
+$pdf->Cell(36, 8, 'Modelo', 0, 0, 'C', 0);
+$pdf->Cell(20, 8, utf8_decode('N° de Serie'), 0, 0, 'C', 0);
+$pdf->Cell(36, 8, 'Matricula', 0, 0, 'C', 0);
+$pdf->Cell(54, 8, utf8_decode('Descripción'), 0, 1, 'C', 0);
 /* --- DIVISION --- */
 $pdf->setDrawColor(24,68,104);
-$pdf->Line(10, 62, 287, 62);
+$pdf->Line(36, 62, 181, 62);
 $pdf->SetFillColor(240,240,240);
 $pdf->SetDrawColor(255,255,255);
 /* --- Tabla --- */
 
 $pdf->SetFont('Arial','',10);
-$pdf->SetWidths(array(20,20,30,30,50,25,27,60,15));
-$query_s = mysqli_query($conexion,"SELECT * FROM tbl_agentes ORDER BY activo=1 DESC");
+$pdf->SetWidths(array(28,27,30,60));
+$query_s = mysqli_query($conexion,"SELECT * FROM tbl_armas");
 while($array= mysqli_fetch_array($query_s)){
-    if($array['activo'] == 1){
-        $estado = 'Activo';
-    }else{
-        $estado = 'Inactivo';
-    }
-$pdf->SetX(10);
-$pdf->Row(array(utf8_decode($array['dui_agente']), utf8_decode($array['codigo_cam_agente']), utf8_decode($array['nombre_agente']), utf8_decode($array['apellido_agente']), utf8_decode($array['correo_agente']), utf8_decode($array['sexo_agente']), utf8_decode($array['telefono_agente']), utf8_decode($array['direccion']), $estado));
+
+$pdf->SetX(25);
+$pdf->Row(array(utf8_decode($array['modelo_arma']), utf8_decode($array['serie_arma']), utf8_decode($array['matricula_arma']), utf8_decode($array['descripcion_arma'])));
 }
 
 $pdf->Output();

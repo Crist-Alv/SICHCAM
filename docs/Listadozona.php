@@ -389,12 +389,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                         </div>
                     </div>
                     <div class="card">
-                        <div class="body">                        
-                            <center>
-                                <a href="Reportes/GenerarExcelZonas.php"><img src="../images/xls.png" style="float: none;" width="40px"></a>
-                                <a href="Reportes/GenerarPDFZonas.php"><img src="../images/pdf.png" style="float: none;" width="40px"></a>
-                            </center>
-                        <div class="modal-footer"></div>
+                        <div class="body">
                             <form class="form-horizontal" action="" method="post" class="form-group-sm" id="sichcam" name="sichcam">
                                 <input type="hidden" name="bandera" id="bandera" />
                                 <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
