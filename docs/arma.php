@@ -169,19 +169,19 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
         }
 
         function alertaExitoVacio() {
-            alertify.error("<p>Llene todos los campos solicitados</p>" + "<img src='../images/bien1.png'>").set({
+            alertify.error("<p>Llene todos los campos solicitados</p>" + "<img src='../images/bien1.png'> width='80' height='80'").set({
                 transition: 'flipx'
             });
         }
 
         function alertaExito() {
-            alertify.message("<p>Se guardo exitosamente</p>" + "<img src='../images/bien1.png'>").set({
+            alertify.message("<p>Se guardo exitosamente</p>" + "<img src='../images/bien1.png'> width='80' height='80'").set({
                 transition: 'flipx'
             });
         }
 
         function alertaError() {
-            alertify.error("<p>No se puedo guardar</p>" + "<img src='../images/error.png'>").set({
+            alertify.error("<p>No se puedo guardar</p>" + "<img src='../images/error.png'> width='80' height='80'").set({
                 transition: 'flipx'
             });
 
@@ -313,9 +313,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                     <ul class="ml-menu">
                         <li class="active">
                             <a href="RegistroHorario.php">Registro de Horarios</a>
-                        </li>
-                        <li class="active">
-                            <a href="VerHorario.php">Ver Horarios</a>
                         </li>
                     </ul>
 

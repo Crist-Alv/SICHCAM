@@ -185,73 +185,84 @@
                 <ul class="list">
                     <li class="header">MENÚ</li>
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="images/iconos/assignment_ind.svg" />
-                        <span>Gestión de Agentes</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="docs/agente.php">Registro de Agentes</a>
-                        </li>
-                        <li class="active">
-                            <a href="docs/listadoAgentes.php">Listado</a>
-                        </li>
-                    </ul>
-
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="images/iconos/clipboard.svg" />
-                        <span>Gestión de Armas</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="docs/arma.php">Registro de Armas</a>
-                        </li>
-                        <li class="active">
-                            <a href="docs/ListadoArma.php">Listado</a>
-                        </li>
-                    </ul>
-
-                    <a href="javascript:void(0);" class="menu-toggle">
                         <img src="images/iconos/horario.svg" />
                         <span>Gestión de Horarios</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
-                            <a href="docs/RegistroHorario.php">Registro de Horarios</a>
-                        </li>
-                        <li class="active">
                             <a href="docs/VerHorario.php">Ver Horarios</a>
                         </li>
                     </ul>
+                    <?php
+                    $t = $_SESSION['rol_User'];
+                    if ($t != "Agente") {
+                    ?>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="images/iconos/assignment_ind.svg" />
+                            <span>Gestión de Agentes</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="docs/agente.php">Registro de Agentes</a>
+                            </li>
+                            <li class="active">
+                                <a href="docs/listadoAgentes.php">Listado</a>
+                            </li>
+                        </ul>
 
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="images/iconos/mundo.svg" width="25px" />
-                        <span>Gestión de Zonas</span>
-                    </a>
-                    <ul class="ml-menu">                        
-                        <li class="active">
-                            <a href="docs/Listadozona.php">Listado</a>
-                        </li>
-                    </ul>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="images/iconos/clipboard.svg" />
+                            <span>Gestión de Armas</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="docs/arma.php">Registro de Armas</a>
+                            </li>
+                            <li class="active">
+                                <a href="docs/ListadoArma.php">Listado</a>
+                            </li>
+                        </ul>
 
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="images/iconos/class.svg" />
-                        <span>Gestión de Usuarios</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="docs/ListadoUser.php">Listado de Usuarios</a>
-                        </li>
-                    </ul>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="images/iconos/horario.svg" />
+                            <span>Gestión de Horarios</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="docs/RegistroHorario.php">Registro de Horarios</a>
+                            </li>
+                        </ul>
 
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="images/iconos/security.svg" />
-                        <span>Seguridad</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="docs/seguridad.php">Opciones de Seguridad</a>
-                        </li>
-                    </ul>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="images/iconos/mundo.svg" width="25px" />
+                            <span>Gestión de Zonas</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="docs/Listadozona.php">Listado</a>
+                            </li>
+                        </ul>
+
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="images/iconos/class.svg" />
+                            <span>Gestión de Usuarios</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="docs/ListadoUser.php">Listado de Usuarios</a>
+                            </li>
+                        </ul>
+
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="images/iconos/security.svg" />
+                            <span>Seguridad</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="docs/seguridad.php">Opciones de Seguridad</a>
+                            </li>
+                        </ul>
+                    <?php } ?>
                     <a href="docs/acercade.php">Acerca de</a>
                 </ul>
             </div>

@@ -121,7 +121,6 @@
             </div>
             <hr class="sidebar-divider d-none d-md-block">
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary"><img src="../images/iconos/impresora.svg">Imprimir</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><img src="../images/iconos/close.svg">Cerrar</button>
             </div>
             </form>

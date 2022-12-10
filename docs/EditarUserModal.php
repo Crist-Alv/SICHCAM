@@ -33,7 +33,7 @@
                         <form name="datos2" id="datos2" action="FuncionEditUser.php?rid=<?php echo $rid; ?>" role="form" method="POST" enctype="multipart/form-data" class="form-group">
                             <!--1-->
                             <fieldset>
-                                <legend>Datos del Agente</legend>
+                                <legend>Datos del Usuario</legend>
                                 <div class="row form-group col-md-12">
                                     <p>
                                     <div class="col-md-4">

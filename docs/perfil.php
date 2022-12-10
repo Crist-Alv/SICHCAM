@@ -294,75 +294,85 @@ while ($fila = mysqli_fetch_array($query_s)) {
             <div class="menu">
                 <ul class="list">
                     <li class="header">MENÚ</li>
-
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/assignment_ind.svg" />
-                        <span>Gestión de Agentes</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="agente.php">Registro de Agentes</a>
-                        </li>
-                        <li class="active">
-                            <a href="listadoAgentes.php">Listado</a>
-                        </li>
-                    </ul>
-
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/clipboard.svg" />
-                        <span>Gestión de Armas</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="arma.php">Registro de Armas</a>
-                        </li>
-                        <li class="active">
-                            <a href="ListadoArma.php">Listado</a>
-                        </li>
-                    </ul>
-
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="../images/iconos/horario.svg" />
-                        <span>Gestión de Horarios</span>
+                    <span>Gestión de Horarios</span>
                     </a>
                     <ul class="ml-menu">
-                        <li class="active">
-                            <a href="RegistroHorario.php">Registro de Horarios</a>
-                        </li>
                         <li class="active">
                             <a href="VerHorario.php">Ver Horarios</a>
                         </li>
                     </ul>
+                    <?php
+                    $t = $_SESSION['rol_User'];
+                    if ($t != "Agente") {
+                    ?>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/assignment_ind.svg" />
+                            <span>Gestión de Agentes</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="agente.php">Registro de Agentes</a>
+                            </li>
+                            <li class="active">
+                                <a href="listadoAgentes.php">Listado</a>
+                            </li>
+                        </ul>
 
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/mundo.svg" width="25px" />
-                        <span>Gestión de Zonas</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="Listadozona.php">Listado</a>
-                        </li>
-                    </ul>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/clipboard.svg" />
+                            <span>Gestión de Armas</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="arma.php">Registro de Armas</a>
+                            </li>
+                            <li class="active">
+                                <a href="ListadoArma.php">Listado</a>
+                            </li>
+                        </ul>
 
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/class.svg" />
-                        <span>Gestión de Usuarios</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="ListadoUser.php">Listado de Usuarios</a>
-                        </li>
-                    </ul>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/horario.svg" />
+                            <span>Gestión de Horarios</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="RegistroHorario.php">Registro de Horarios</a>
+                            </li>
+                        </ul>
 
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/security.svg" />
-                        <span>Seguridad</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="seguridad.php">Opciones de Seguridad</a>
-                        </li>
-                    </ul>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/mundo.svg" width="25px" />
+                            <span>Gestión de Zonas</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="Listadozona.php">Listado</a>
+                            </li>
+                        </ul>
+
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/class.svg" />
+                            <span>Gestión de Usuarios</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="ListadoUser.php">Listado de Usuarios</a>
+                            </li>
+                        </ul>
+
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <img src="../images/iconos/security.svg" />
+                            <span>Seguridad</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li class="active">
+                                <a href="seguridad.php">Opciones de Seguridad</a>
+                            </li>
+                        </ul>
+                    <?php } ?>
                     <a href="acercade.php">Acerca de</a>
                 </ul>
             </div>

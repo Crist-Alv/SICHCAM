@@ -1,10 +1,11 @@
 <?php session_start();
 $t = $_SESSION['rol_User'];
 $iddatos = $_SESSION['id_User'];
-if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
+if ($_SESSION['autenticado'] != 'yeah' || $t != "Agente") {
     header('Location: ../index.php');
     exit();
 }
+date_default_timezone_set('America/El_Salvador');
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Tabla de Armas</title>
+    <title>Tabla de Horario</title>
     <!-- Favicon-->
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
@@ -83,6 +84,32 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     <!-- Waves Effect Plugin Js -->
     <script src="../plugins/node-waves/waves.js"></script>
 
+    <!-- Bootstrap Colorpicker Js -->
+    <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+
+    <!-- Dropzone Plugin Js -->
+    <script src="../plugins/dropzone/dropzone.js"></script>
+
+    <!-- Input Mask Plugin Js -->
+    <script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
+
+    <!-- include alertify.css -->
+    <link rel="stylesheet" href="../alertas/build/css/alertify.css">
+
+    <!-- include boostrap theme  -->
+    <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
+
+    <!-- include alertify script -->
+    <script src="../alertas/build/alertify.js"></script>
+
+    <script type="text/javascript">
+        //override defaults
+        alertify.defaults.transition = "slide";
+        alertify.defaults.theme.ok = "btn btn-primary";
+        alertify.defaults.theme.cancel = "btn btn-secondary";
+        alertify.defaults.theme.input = "form-control";
+    </script>
+
     <!-- Jquery DataTable Plugin Js -->
     <script src="../plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
@@ -98,6 +125,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
     <script src="../js/admin.js"></script>
     <script src="../js/pages/tables/jquery-datatable.js"></script>
 
+    <script type="text/javascript" src="../js/cargarComboboxH.js"></script>
     <style type="text/css">
         .envolcentro {
             display: table-cell;
@@ -120,52 +148,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
             width: 1px;
         }
     </style>
-
-    <script type="text/javascript" class="init">
-        function AlertaElim(id, nombre) {
-
-            alertify.confirm("<center>ATENCI&Oacute;N!</center>", "<center><img src='../images/warning.png' width='100' height='100'></center>" + "<center><h3>¿Desea Eliminar el Arma?</h3></center>  <center><h4> Modelo: " + nombre + " </h4></center>",
-
-
-
-                function() {
-                    alertify.success('Ok');
-
-                    document.getElementById('bandera').value = "elim";
-                    document.getElementById('baccion').value = id;
-                    document.sichcam.submit();
-
-                },
-
-                function() {
-                    alertify.error('Ha Cancelado el Eliminar').dismissOthers()
-                }).set('labels', {
-                ok: 'si',
-                cancel: 'no'
-            }).set({
-                transition: 'zoom'
-            });
-
-
-        }
-
-        function r() {
-            location.href = ("listadoArma.php");
-        }
-
-
-        function alertaExito() {
-            alertify.message("<h1>Exito</h1>" + "<p>Se elimino exitosamente</p>" + "<img src='../images/bien1.png'>").set({
-                transition: 'flipx'
-            });
-        }
-
-        function alertaError() {
-            alertify.error("<h1>Error</h1>" + "<p>No se puedo eliminar con exito</p>" + "<img src='../images/error.png'>").dismissOthers();
-
-
-        }
-    </script>
 
     <script type="text/javascript" class="init">
         function Salir() {
@@ -255,79 +237,25 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                 <ul class="list">
                     <li class="header">MENÚ</li>
 
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/assignment_ind.svg" />
-                        <span>Gestión de Agentes</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="agente.php">Registro de Agentes</a>
-                        </li>
-                        <li class="active">
-                            <a href="listadoAgentes.php">Listado</a>
-                        </li>
-                    </ul>
-
                     <li class="active">
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <img src="../images/iconos/clipboard.svg" />
-                            <span>Gestión de Armas</span>
+                            <img src="../images/iconos/horario.svg" />
+                            <span>Gestión de Horarios</span>
                         </a>
                         <ul class="ml-menu">
                             <li class="active">
-                                <a href="arma.php">Registro de Armas</a>
-                            </li>
-                            <li class="active">
-                                <a href="ListadoArma.php">Listado</a>
+                                <a href="VerHorario.php">Ver Horarios</a>
                             </li>
                         </ul>
                     </li>
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/horario.svg" />
-                        <span>Gestión de Horarios</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="RegistroHorario.php">Registro de Horarios</a>
-                        </li>
-                    </ul>
 
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/mundo.svg" width="25px" />
-                        <span>Gestión de Zonas</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="Listadozona.php">Listado</a>
-                        </li>
-                    </ul>
-
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/class.svg" />
-                        <span>Gestión de Usuarios</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="ListadoUser.php">Listado de Usuarios</a>
-                        </li>
-                    </ul>
-
-                    <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/security.svg" />
-                        <span>Seguridad</span>
-                    </a>
-                    <ul class="ml-menu">
-                        <li class="active">
-                            <a href="seguridad.php">Opciones de Seguridad</a>
-                        </li>
-                    </ul>
                     <a href="acercade.php">Acerca de</a>
                 </ul>
             </div>
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
-                <img src="../images/minerva2.png" width="30" height="50" />
+                <img src="../images/minerva2.png" width="40" height="50" />
                 <div class="copyright">
                     <span>UES-FMP 2022 &copy; Todos Derechos Reservados</span>
                 </div>
@@ -339,89 +267,64 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
 
     <section class="content">
         <div class="container-fluid">
+            <div class="block-header">
+                <h1>
+                    Lista de Horarios
+                </h1>
+            </div>
             <!-- Basic Examples -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header">
-                            <h2>
-                                Listado de Armas
-                            </h2>
-                        </div>
                         <div class="body">
-                            <form class="form-horizontal" action="" method="post" class="form-group-sm" id="sichcam" name="sichcam">
-                                <input type="hidden" name="bandera" id="bandera" />
-                                <input type="hidden" name="baccion" id="baccion" value="<?php echo $iddatos; ?>" />
-                                <center>
-                                <a href="Reportes/GenerarExcelArmas.php"><img src="../images/xls.png" width="40px"></a>
-                                <a href="Reportes/GenerarPDFArmas.php" target="_blank"><img src="../images/pdf.png" width="40px"></a>
-                                </center>
-                                <div class="table-responsive dataTable">
-                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                        <thead>
-                                            <tr>
-                                                <th>N° de Serie</th>
-                                                <th>Modelo</th>
-                                                <th>Ver más</th>
-                                                <th>Editar</th>
-                                                <th>Eliminiar</th>
-                                            </tr>
-                                        </thead>
+                            <form class="form-horizontal" role="form" method="post" class="form-group-sm" id="sichcam2" name="sichcam2">
+                                <input type="hidden" name="bandera2" id="bandera2" />
+                                <input type="hidden" name="baccion2" id="baccion2" value="<?php echo $iddatos; ?>" />
 
-                                        <tbody>
-                                            <?php
-                                            include '../Config/Conexion.php';
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane animated active" id="activo_animation_1">
+                                        <a href="Reportes/GenerarExcelHorarioAct.php"><img src="../images/xls.png" width="40px"></a>
+                                        <a href="Reportes/GenerarPDFHorarioAct.php" target="_blank"><img src="../images/pdf.png" width="40px"></a>
 
-                                            $query_s = mysqli_query($conexion, 'SELECT * from tbl_armas');
-                                            while ($fila = mysqli_fetch_array($query_s)) {
-                                            ?>
+                                        <h3 style="color: green;">Horario del Día</h3>
+                                        <div class="table-responsive dataTable">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Fecha Asignada</th>
+                                                        <th>Zona Asignada</th>
+                                                        <th>Agente Asignado</th>
+                                                        <th>Arma Asignada</th>
+                                                        <th>Hora de Entrada</th>
+                                                        <th>Hora de Salida</th>
+                                                    </tr>
+                                                </thead>
 
-                                                <tr>
-                                                    <td><?php echo $fila["serie_arma"]; ?></td>
-                                                    <td><?php echo $fila["modelo_arma"]; ?></td>
-                                                    <td>
-                                                        <button type="button" name="ver" value="Ver" class="btn btn-info waves-effect waves-float ver_data" data-toggle="modal" data-target="#ModalVerAr_<?php echo $fila['id_arma']; ?>"><img src="../images/iconos/baseline-chrome_reader_mode-24px.svg" /></button>
-                                                    </td>
-                                                    <?php include 'VerArModal.php'; ?>
-                                                    <td>
-                                                        <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiAr_<?php echo $rid = $fila['id_arma']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
-                                                    </td>
-                                                    <?php include 'EditarArModal.php'; ?>
-                                                    <td>
-                                                        <button type="button" name="elim" value="Elim" class="btn btn-danger waves-effect waves-float baja_data" onClick="AlertaElim('<?php echo $fila['id_arma']; ?>','<?php echo $fila['modelo_arma']; ?>')"><img src="../images/iconos/basura.svg" width="20px" /></button>
-                                                    </td>
-                                                </tr>
-                                            <?php
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
+                                                <tbody>
+                                                    <?php
+                                                    include '../Config/Conexion.php';
+                                                    $fechacon = date('Y-m-d');
+                                                    $query_s = mysqli_query($conexion, "SELECT * from horario where fecha_horario = '$fechacon'");
+                                                    while ($fila = mysqli_fetch_array($query_s)) {
+                                                    ?>
+
+                                                        <tr>
+                                                            <td><?php echo $fila["dia"] . ' - ' . date("d/m/Y", strtotime($fila["fecha_horario"])); ?></td>
+                                                            <td><?php echo $fila["zonah"]; ?></td>
+                                                            <td><?php echo $fila["agenteh"]; ?></td>
+                                                            <td><?php echo $fila["armah"]; ?></td>
+                                                            <td><?php echo $fila["hora_entrada"]; ?></td>
+                                                            <td><?php echo $fila["hora_salida"]; ?></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- Bootstrap Colorpicker Js -->
-                                <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-
-                                <!-- Dropzone Plugin Js -->
-                                <script src="../plugins/dropzone/dropzone.js"></script>
-
-                                <!-- Input Mask Plugin Js -->
-                                <script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
-
-                                <!-- include alertify.css -->
-                                <link rel="stylesheet" href="../alertas/build/css/alertify.css">
-
-                                <!-- include boostrap theme  -->
-                                <link rel="stylesheet" href="../alertas/build/css/themes/bootstrap.css">
-
-                                <!-- include alertify script -->
-                                <script src="../alertas/build/alertify.js"></script>
-
-                                <script type="text/javascript">
-                                    //override defaults
-                                    alertify.defaults.transition = "slide";
-                                    alertify.defaults.theme.ok = "btn btn-primary";
-                                    alertify.defaults.theme.cancel = "btn btn-secondary";
-                                    alertify.defaults.theme.input = "form-control";
-                                </script>
                             </form>
                         </div>
                     </div>
@@ -458,32 +361,5 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
         </div>
     </div>
 </div>
-
-<?php
-if (isset($_REQUEST['bandera'])) {
-    $bandera = $_REQUEST['bandera'];
-    $baccion = $_REQUEST['baccion'];
-
-    include '../Config/conexion.php';
-    if ($bandera == 'elim') {
-
-        $result = mysqli_query($conexion, "DELETE from tbl_armas where id_arma='$baccion'");
-
-        if (!$result) {
-            echo "<script language='javascript'>";
-            echo 'alertaError();';
-            echo '</script>';
-        } else {
-
-            echo "<script language='javascript'>";
-            echo 'alertaExito();';
-            echo '</script>';
-            echo "<script language='javascript'>";
-            echo "setTimeout ('r()', 1500);";
-            echo '</script>';
-        }
-    }
-}
-?>
 
 </html>

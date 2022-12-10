@@ -59,25 +59,6 @@ if (isset($_POST['editar'])) {
                 echo "setTimeout ('r()', 1500);";
                 echo "</script>";
             } else {
-
-                /*/bitacora 
-         if (isset($_SESSION)) {
-            $usuario = $_SESSION['idUsuario'];
-            ini_set('date.timezone', 'America/El_Salvador');
-            $fecha = date("Y/m/d");
-            $hora = date("h:i:s");
-            $actividad = "Modifico al Docente" . $nombresD . "";
-            pg_query("BEGIN");
-            $result2 = pg_query($conexion, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha','$usuario')");
-
-            if (!$result2) {
-                pg_query("rollback");
-            } else {
-                pg_query("commit");
-            }
-        }
-        //fin bitacora*/
-
                 echo "<script language='javascript'>";
                 echo "alertaExitoM();";
                 echo "</script>";

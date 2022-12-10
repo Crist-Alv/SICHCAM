@@ -363,9 +363,6 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                         <li class="active">
                             <a href="RegistroHorario.php">Registro de Horarios</a>
                         </li>
-                        <li class="active">
-                            <a href="VerHorario.php">Ver Horarios</a>
-                        </li>
                     </ul>
 
                     <a href="javascript:void(0);" class="menu-toggle">

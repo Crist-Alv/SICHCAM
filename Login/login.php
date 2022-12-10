@@ -194,7 +194,7 @@ if (isset($_REQUEST['bandera'])) {
 
     if ($bandera == 'add') {
 
-            $query_s = mysqli_query($conexion, "SELECT * FROM tbl_usuario where correo_User=trim('$usuariox') and pass_User=trim('$clavex')");
+            $query_s = mysqli_query($conexion, "SELECT * FROM tbl_usuario where correo_User=trim('$usuariox') and pass_User=trim('$clavex') and estado=1");
 
             while ($fila = mysqli_fetch_array($query_s)) {
                 $_SESSION['id_User'] = $fila[0];
@@ -206,22 +206,7 @@ if (isset($_REQUEST['bandera'])) {
                 $_SESSION['estado'] = $fila[6];
 
                 $_SESSION['autenticado'] = 'yeah';
-                //bitacora 
-                /*$usuario = $fila[0];
-
-                ini_set('date.timezone', 'America/El_Salvador');
-                $fecha = date("Y/m/d");
-                $hora = date("h:i:s");
-                $actividad = "Inicio de Sesion";
-                pg_query("BEGIN");
-                $result = pg_query($conexion, "INSERT INTO bitacora(actividad,hora,fecha,idusuario) VALUES(trim('$actividad'),'$hora','$fecha','$usuario')");
-
-                if (!$result) {
-                    pg_query("rollback");
-                } else {
-                    pg_query("commit");
-                }*/
-                //fin bitacora
+                
                 echo "<script language='javascript'>";
                 echo "location.href='../index.php';";
                 echo '</script>';
