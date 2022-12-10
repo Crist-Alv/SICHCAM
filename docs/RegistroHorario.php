@@ -580,6 +580,7 @@ date_default_timezone_set('America/El_Salvador');
                                                             <td><?php echo $fila["armah"]; ?></td>
                                                             <td><?php echo $fila["hora_entrada"]; ?></td>
                                                             <td><?php echo $fila["hora_salida"]; ?></td>
+                                                            <?php include 'EditarHoraModal.php'; ?>
                                                             <td>
                                                                 <button type="button" name="edit" value="Edit" class="btn btn-warning waves-effect waves-float edit_data" data-toggle="modal" data-target="#ModalEdiHora_<?php echo $ridhora = $fila['cod_horario']; ?>"><img src="../images/iconos/baseline-edit-24px.svg" /></button>
                                                             </td>
