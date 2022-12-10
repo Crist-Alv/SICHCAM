@@ -245,12 +245,11 @@ if ($_SESSION['autenticado'] != 'yeah') {
                 </h1>
             </div>
             <center>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3 clearfix jsdemo-notification-button">
-                        <h6 class="m-0 font-weight-bold text-primary"></h6>
+                <div class="card shadow">
+                    <div class="card-header py-3 clearfix jsdemo-notification-button">                        
                         <!-- Button trigger modal -->
 
-                        <div class="col-md-10" aria-label="text-center">
+                        <div class="col-md-12" aria-label="text-center">
                             <h3 style="color: darkblue">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES (SICHCAM)</h3><br>
                             <p>
                                 <img src="../images/logo.png" width="200" height="200">
@@ -260,14 +259,43 @@ if ($_SESSION['autenticado'] != 'yeah') {
                             <h4 style="color: black">DESCRIPCIÓN DE LA INSTITUCIÓN:</h4>
                             </p>
                             <p>
-                                ----------
+                            <h5 style="color: black">Objetivo:</h5>
+                            Salvaguardar los intereses y bienes municipales dentro del marco legal establecido.
                             </p>
                             <p>
-                                ---------
+                            <h5 style="color: black">Descripción general:</h5>
+                            Realizar custodia de las instalaciones y bienes de la Municipalidad, y dar seguridad al personal que labora dentro y fuera de la municipalidad.
                             </p>
                             <p>
-                                --------
-                            </p><br>
+                            <h5 style="color: black">Funciones:</h5>
+                            </p>
+                            <p>
+                                - Elaborar su plan de trabajo anual.
+                            </p>
+                            <p>
+                                - Salvaguardar los intereses y bienes Municipales dentro del marco legal establecido.
+                            </p>
+                            <p>
+                                - Velar porque se cumplan las leyes, Ordenanzas y reglamentos emitidos por la Municipalidad.
+                            </p>
+                            <p>
+                                - Velar por la aplicación y cumplimiento de las disposiciones establecidas por el Reglamento de Agentes Municipales CAM.
+                            </p>
+                            <p>
+                                - Aplicar a los infractores las multas correspondientes, por infracción de las regulaciones, restricciones y prohibiciones establecidas, las leyes, ordenanzas y reglamentos Municipales.
+                            </p>
+                            <p>
+                                - Brindar vigilancia a las instalaciones de la Alcaldía y velar por la integridad de los bienes y valores que se encuentren instalados y resguardados en su interior.
+                            </p>
+                            <p>
+                                - Velar por la seguridad personal de la Municipalidad mientras permanece dentro de sus instalaciones desarrollando sus actividades de trabajo.
+                            </p>
+                            <p>
+                                - Velar por el mantenimiento de su equipo de trabajo.
+                            <p>
+                                - Rendir informe al Despacho Municipal cada vez que estos sean requeridos
+                            </p>
+                            <br>
                             <p>
                             <h4 style="color: black">Desarrolladores:</h4>
                             </p>
