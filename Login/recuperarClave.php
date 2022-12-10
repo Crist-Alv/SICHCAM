@@ -154,7 +154,7 @@
             </div>
         </div>
         <footer class="footer full-reset">
-            <div class="copyright text-center"><img src="../images/minerva2.png" width="40" height="60" />
+            <div class="copyright text-center"><img src="../images/minerva2.png" width="50" height="60" />
                 <h6 style="color:white;">UES-FMP 2022 &copy; Todos Derechos Reservados </h6>
             </div>
         </footer>
