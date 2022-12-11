@@ -568,8 +568,7 @@ date_default_timezone_set('America/El_Salvador');
                                                 <tbody>
                                                     <?php
                                                     include '../Config/Conexion.php';
-                                                    $fechacon = date('Y-m-d');
-                                                    $query_s = mysqli_query($conexion, "SELECT * from horario where fecha_horario = '$fechacon'");
+                                                    $query_s = mysqli_query($conexion, "SELECT * from horario where fecha_horario = DATE(NOW())");
                                                     while ($fila = mysqli_fetch_array($query_s)) {
                                                     ?>
 
@@ -618,7 +617,7 @@ date_default_timezone_set('America/El_Salvador');
                                                     <?php
                                                     include '../Config/Conexion.php';
 
-                                                    $query_s = mysqli_query($conexion, "SELECT * from horario ORDER BY fecha_horario ASC");
+                                                    $query_s = mysqli_query($conexion, "SELECT * from horario ORDER BY fecha_horario DESC");
                                                     while ($fila = mysqli_fetch_array($query_s)) {
                                                     ?>
 
