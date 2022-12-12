@@ -1,4 +1,38 @@
-﻿<!DOCTYPE html>
+﻿<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+include_once '../PHPMailer/src/PHPMailer.php';
+include_once '../PHPMailer/src/SMTP.php';
+include_once '../PHPMailer/src/Exception.php';
+
+$phpmail = new PHPMailer(true);
+
+try {
+    $phpmail->isSMTP();
+    $phpmail->Host = 'smtp.gmail.com';
+    $phpmail->SMTPAuth = true;
+    $phpmail->Username = 'sicacecsj2019@gmail.com';
+    $phpmail->Password='Cristian2.00';
+    $phpmail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $phpmail->Port = 587;
+
+    $phpmail->setFrom('sicacecsj2019@gmail.com', 'SICHCAM');
+    
+    $phpmail->addAddress('cristts2.0@gmail.com');
+    
+    $phpmail->isHTML(true);
+    $phpmail->Subject = 'Prueba de correo';
+    $phpmail->Body = 'Esta es una prueba de envio de correo';
+    $phpmail->send();
+
+} catch (Exception $e) {
+    echo 'Mensaje'.$phpmail->ErrorInfo;
+}
+?>
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -178,18 +212,17 @@
 
 </html>
 <?php
-include("../Config/Conexion.php");
+/*include("../Config/Conexion.php");
 if (isset($_REQUEST["bandera"])) {
 
     $bandera = $_REQUEST["bandera"];
     $email = $_REQUEST["email"];
 
     if ($bandera == "add") {
-        pg_query("BEGIN");
 
 
-        $query_s2 = pg_query($conexion, "select * from usuario where email='$email' ");
-        $rows = pg_num_rows($query_s2);
+        $query_s2 = mysqli_query($conexion, "select * from tbl_usuario where correo_User='$email' ");
+        $rows = mysqli_num_rows($query_s2);
 
         if ($rows == 0) {
             echo "<script language='javascript'>";
@@ -197,10 +230,10 @@ if (isset($_REQUEST["bandera"])) {
             echo "</script>";
         } else {
 
-            $query_s = pg_query($conexion, "select * from usuario where email='$email' ");
+            $query_s = mysqli_query($conexion, "select * from tbl_usuario where correo_User='$email' ");
 
 
-            while ($fila = pg_fetch_array($query_s)) {
+            while ($fila = mysqli_fetch_array($query_s)) {
 
                 $nomUsuario = $fila[3];
                 $claveU = $fila[2];
@@ -210,9 +243,9 @@ if (isset($_REQUEST["bandera"])) {
 
             $mensaje = "usuario: ".$nomUsuario."\ncontraseña: ".$claveU;
             //Titulo
-            $titulo = "RECUPERACIÓN DE CONTRASEÑA SISTEMA SICACECSJ";   
+            $titulo = "RECUPERACIÓN DE CONTRASEÑA SISTEMA SICHCAM";   
             //dirección del remitente 
-            $headers = 'From: Sistema SICACECSJ < sicacecsj2019@gmail.com >' . "\r\n";         
+            $headers = 'From: Sistema SICHCAM < sicacecsj2019@gmail.com >' . "\r\n";         
             //cabecera
             $headers .= 'MIME-Version: 1.0' . "\r\n";
             $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -230,5 +263,5 @@ if (isset($_REQUEST["bandera"])) {
             }
         }
     } ///////llave que cierra if de bandera add
-}
+}*/
 ?>

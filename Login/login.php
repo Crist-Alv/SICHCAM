@@ -1,4 +1,4 @@
-﻿<?php 
+﻿<?php
 session_start();
 ?>
 
@@ -134,12 +134,6 @@ session_start();
                             <button type="button" class="btn btn-block bg-blue waves-effect" onClick="verificar()">Iniciar Sesión</button>
                         </div>
                     </div>
-                    <div class="row m-t-10">                        
-                        <div class="col-xs-15 align-center">
-                            <a href="recuperarClave.php">¿Olvidastes tu Contraseña?</a>
-                        </div>
-                    </div>
-
             </div>
             </form>
         </div>
@@ -194,27 +188,27 @@ if (isset($_REQUEST['bandera'])) {
 
     if ($bandera == 'add') {
 
-            $query_s = mysqli_query($conexion, "SELECT * FROM tbl_usuario where correo_User=trim('$usuariox') and pass_User=trim('$clavex') and estado=1");
+        $query_s = mysqli_query($conexion, "SELECT * FROM tbl_usuario where correo_User=trim('$usuariox') and pass_User=trim('$clavex') and estado=1");
 
-            while ($fila = mysqli_fetch_array($query_s)) {
-                $_SESSION['id_User'] = $fila[0];
-                $_SESSION['nombre_User'] = $fila[1];
-                $_SESSION['sexo_User'] = $fila[2];
-                $_SESSION['correo_User'] = $fila[3];
-                $_SESSION['rol_User'] = $fila[4];
-                $_SESSION['pass_User'] = $fila[5];
-                $_SESSION['estado'] = $fila[6];
+        while ($fila = mysqli_fetch_array($query_s)) {
+            $_SESSION['id_User'] = $fila[0];
+            $_SESSION['nombre_User'] = $fila[1];
+            $_SESSION['sexo_User'] = $fila[2];
+            $_SESSION['correo_User'] = $fila[3];
+            $_SESSION['rol_User'] = $fila[4];
+            $_SESSION['pass_User'] = $fila[5];
+            $_SESSION['estado'] = $fila[6];
 
-                $_SESSION['autenticado'] = 'yeah';
-                
-                echo "<script language='javascript'>";
-                echo "location.href='../index.php';";
-                echo '</script>';
-            }
-           
+            $_SESSION['autenticado'] = 'yeah';
+
             echo "<script language='javascript'>";
-            echo 'alertaErrorLogin();';
+            echo "location.href='../index.php';";
             echo '</script>';
+        }
+
+        echo "<script language='javascript'>";
+        echo 'alertaErrorLogin();';
+        echo '</script>';
     }
 }
 ?>
