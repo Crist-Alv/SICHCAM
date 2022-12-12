@@ -154,8 +154,12 @@ if ($_SESSION['autenticado'] != 'yeah') {
             <div class="menu">
                 <ul class="list">
                     <li class="header">MENÚ</li>
+                    <?php
+                    $t = $_SESSION['rol_User'];
+                    if ($t != "Administrador") {
+                    ?>
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/horario.svg" />
+                        <img src="images/iconos/horario.svg" />
                         <span>Gestión de Horarios</span>
                     </a>
                     <ul class="ml-menu">
@@ -163,6 +167,7 @@ if ($_SESSION['autenticado'] != 'yeah') {
                             <a href="VerHorario.php">Ver Horarios</a>
                         </li>
                     </ul>
+                    <?php }?>
                     <?php
                     $t = $_SESSION['rol_User'];
                     if ($t != "Agente") {

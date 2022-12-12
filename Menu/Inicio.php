@@ -184,6 +184,10 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">MENÚ</li>
+                    <?php
+                    $t = $_SESSION['rol_User'];
+                    if ($t != "Administrador") {
+                    ?>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <img src="images/iconos/horario.svg" />
                         <span>Gestión de Horarios</span>
@@ -193,6 +197,7 @@
                             <a href="docs/VerHorario.php">Ver Horarios</a>
                         </li>
                     </ul>
+                    <?php }?>
                     <?php
                     $t = $_SESSION['rol_User'];
                     if ($t != "Agente") {

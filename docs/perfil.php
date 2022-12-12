@@ -294,15 +294,20 @@ while ($fila = mysqli_fetch_array($query_s)) {
             <div class="menu">
                 <ul class="list">
                     <li class="header">MENÚ</li>
+                    <?php
+                    $t = $_SESSION['rol_User'];
+                    if ($t != "Administrador") {
+                    ?>
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="../images/iconos/horario.svg" />
-                    <span>Gestión de Horarios</span>
+                        <img src="images/iconos/horario.svg" />
+                        <span>Gestión de Horarios</span>
                     </a>
                     <ul class="ml-menu">
                         <li class="active">
                             <a href="VerHorario.php">Ver Horarios</a>
                         </li>
                     </ul>
+                    <?php }?>
                     <?php
                     $t = $_SESSION['rol_User'];
                     if ($t != "Agente") {
