@@ -224,12 +224,12 @@ try {
     $phpmail->isSMTP();
     $phpmail->Host = 'smtp.gmail.com';
     $phpmail->SMTPAuth = true;
-    $phpmail->Username = '';
-    $phpmail->Password='';
+    $phpmail->Username = 'ac13055@ues.edu.sv';
+    $phpmail->Password='Cristt';
     $phpmail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $phpmail->Port = 587;
 
-    $phpmail->setFrom('', 'SICHCAM');
+    $phpmail->setFrom('ac13055@ues.edu.sv', 'SICHCAM');
     
     $phpmail->addAddress($email);
     

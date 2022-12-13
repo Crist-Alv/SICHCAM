@@ -266,7 +266,7 @@ if ($_SESSION['autenticado'] != 'yeah') {
                         <!-- Button trigger modal -->
 
                         <div class="col-md-12" aria-label="text-center">
-                            <h3 style="color: darkblue">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS PARA EL CUERPO DE AGENTES MUNICIPALES (SICHCAM)</h3><br>
+                            <h3 style="color: darkblue">SISTEMA INFORMÁTICO PARA EL CONTROL DE HORARIOS DEL CUERPO DE AGENTES MUNICIPALES (SICHCAM)</h3><br>
                             <p>
                                 <img src="../images/logo.png" width="200" height="200">
                             </p>
