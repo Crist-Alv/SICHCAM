@@ -29,7 +29,7 @@
 
                                 <p>
                                 <div class="col-md-4">
-                                    <b>Dirección</b>
+                                    <b>Descripción</b>
                                     <div class="input-group">
                                     <span class="input-group-addon">
                                                 <img src="../images/iconos/marcador-del-mapa.svg" width="25" height="25">

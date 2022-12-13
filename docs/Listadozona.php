@@ -367,10 +367,10 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                         </div>
 
                                         <div class="col-md-5">
-                                            <b>Dirección *</b>
+                                            <b>Descripción *</b>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                    <img src="../images/iconos/marcador-del-mapa.svg" width="25" height="25">
+                                                    <img src="../images/iconos/post_add-24px.svg" width="30" height="30">
                                                 </span>
                                                 <textarea type="String" name="desczona" id="desczona" cols="60" rows="4" style="resize: both;" autocomplete="off" required></textarea>
                                             </div>
@@ -396,7 +396,7 @@ if ($_SESSION['autenticado'] != 'yeah' || $t != "Administrador") {
                                         <thead>
                                             <tr>
                                                 <th>Nombre de la Zona</th>
-                                                <th>Dirección</th>
+                                                <th>Descripción</th>
                                                 <th>Editar</th>
                                             </tr>
                                         </thead>
