@@ -1,38 +1,4 @@
-﻿<?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-include_once '../PHPMailer/src/PHPMailer.php';
-include_once '../PHPMailer/src/SMTP.php';
-include_once '../PHPMailer/src/Exception.php';
-
-$phpmail = new PHPMailer(true);
-
-try {
-    $phpmail->isSMTP();
-    $phpmail->Host = 'smtp.gmail.com';
-    $phpmail->SMTPAuth = true;
-    $phpmail->Username = 'sicacecsj2019@gmail.com';
-    $phpmail->Password='Cristian2.00';
-    $phpmail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $phpmail->Port = 587;
-
-    $phpmail->setFrom('sicacecsj2019@gmail.com', 'SICHCAM');
-    
-    $phpmail->addAddress('cristts2.0@gmail.com');
-    
-    $phpmail->isHTML(true);
-    $phpmail->Subject = 'Prueba de correo';
-    $phpmail->Body = 'Esta es una prueba de envio de correo';
-    $phpmail->send();
-
-} catch (Exception $e) {
-    echo 'Mensaje'.$phpmail->ErrorInfo;
-}
-?>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -212,7 +178,15 @@ try {
 
 </html>
 <?php
-/*include("../Config/Conexion.php");
+include("../Config/Conexion.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+include_once '../PHPMailer/src/PHPMailer.php';
+include_once '../PHPMailer/src/SMTP.php';
+include_once '../PHPMailer/src/Exception.php';
+
 if (isset($_REQUEST["bandera"])) {
 
     $bandera = $_REQUEST["bandera"];
@@ -235,33 +209,55 @@ if (isset($_REQUEST["bandera"])) {
 
             while ($fila = mysqli_fetch_array($query_s)) {
 
-                $nomUsuario = $fila[3];
-                $claveU = $fila[2];
+                $nomUsuario = $fila['correo_User'];
+                $claveU = $fila['pass_User'];
             }
             
             $claveU = base64_decode($claveU);
 
-            $mensaje = "usuario: ".$nomUsuario."\ncontraseña: ".$claveU;
+            $mensaje = utf8_decode("<h3>Usuario: ".$nomUsuario."</h3><br><h3>Contraseña: ".$claveU.'</h3>');
             //Titulo
-            $titulo = "RECUPERACIÓN DE CONTRASEÑA SISTEMA SICHCAM";   
-            //dirección del remitente 
-            $headers = 'From: Sistema SICHCAM < sicacecsj2019@gmail.com >' . "\r\n";         
-            //cabecera
-            $headers .= 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-            
-            //Enviamos el mensaje a tu_dirección_email 
-            $success = mail($email, $titulo, $mensaje, $headers);
-            if (!$success) {
-                echo "<script language='javascript'>";
+            $titulo = utf8_decode("RECUPERACIÓN DE CONTRASEÑA SISTEMA SICHCAM");
+            $phpmail = new PHPMailer(true);
+
+try {
+    $phpmail->isSMTP();
+    $phpmail->Host = 'smtp.gmail.com';
+    $phpmail->SMTPAuth = true;
+    $phpmail->Username = '';
+    $phpmail->Password='';
+    $phpmail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $phpmail->Port = 587;
+
+    $phpmail->setFrom('', 'SICHCAM');
+    
+    $phpmail->addAddress($email);
+    
+    $phpmail->isHTML(true);
+    $phpmail->Subject = $titulo;
+    $phpmail->Body = utf8_decode('<h2>Esta es un mensaje de recupereción de contraseña para el Sistema SICHCAM</h2><br>'.$mensaje.'</br>');
+    $phpmail->send();
+
+} catch (Exception $e) {
+    echo 'Mensaje'.$phpmail->ErrorInfo;
+    echo "<script language='javascript'>";
                 echo "alertaError();";                
                 echo "</script>";
-            } else {
+}   
+            //dirección del remitente 
+            //$headers = 'From: Sistema SICHCAM < sicacecsj2019@gmail.com >' . "\r\n";         
+            //cabecera
+            //$headers .= 'MIME-Version: 1.0' . "\r\n";
+            //$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+            
+            //Enviamos el mensaje a tu_dirección_email 
+            //$success = mail($email, $titulo, $mensaje, $headers);
+            
                 echo "<script language='javascript'>";
                 echo "alertaExito();";
                 echo "</script>";
-            }
+            
         }
     } ///////llave que cierra if de bandera add
-}*/
+}
 ?>

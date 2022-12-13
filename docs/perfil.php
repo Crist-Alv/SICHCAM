@@ -226,7 +226,7 @@ while ($fila = mysqli_fetch_array($query_s)) {
                 <a class="navbar-brand" href="../index.php">ALCALDIA MUNICIPAL DE SAN RAFAEL CEDROS</a>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="" title="Ayuda">
+                        <a href="include/ayuda/Perfil.pdf" target="_blank" title="Ayuda">
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <img class="bg-white" src="../images/iconos/help_outline.svg" />
                             </div>

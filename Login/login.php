@@ -91,7 +91,7 @@ session_start();
     <div class="media-body">
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <a href="#" title="Ayuda">
+                <a href="../docs/include/ayuda/Login.pdf" target="_blank" title="Ayuda">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <img class="bg-white" src="../images/iconos/help_outline.svg" />
                     </div>
@@ -132,6 +132,11 @@ session_start();
                         </div>
                         <div class="col-xs-5">
                             <button type="button" class="btn btn-block bg-blue waves-effect" onClick="verificar()">Iniciar Sesión</button>
+                        </div>
+                    </div>
+                    <div class="row m-t-15">
+                        <div class="align-center">
+                            <a href="recuperarClave.php">¿Olvidastes tu Contraseña?</a>
                         </div>
                     </div>
             </div>
