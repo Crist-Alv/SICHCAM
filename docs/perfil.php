@@ -299,7 +299,7 @@ while ($fila = mysqli_fetch_array($query_s)) {
                     if ($t != "Administrador") {
                     ?>
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <img src="images/iconos/horario.svg" />
+                        <img src="../images/iconos/horario.svg" />
                         <span>Gestión de Horarios</span>
                     </a>
                     <ul class="ml-menu">
